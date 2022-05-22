@@ -13,22 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('frontend.index');
+});
 
 /*
  * Frontend Routes
  */
-Route::group(['as' => 'frontend.'], function () {
-    includeRouteFiles(__DIR__ . '/frontend/');
-});
+// Route::group(['as' => 'frontend.'], function () {
+//     includeRouteFiles(__DIR__ . '/frontend/');
+// });
 
 /*
  * Backend Routes
  *
  * These routes can only be accessed by users with type `admin`
  */
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
-    includeRouteFiles(__DIR__ . '/backend/');
-});
+// Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
+//     includeRouteFiles(__DIR__ . '/backend/');
+// });
