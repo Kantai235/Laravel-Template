@@ -7,6 +7,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class RedirectIfAuthenticated.
+ */
 class RedirectIfAuthenticated
 {
     /**

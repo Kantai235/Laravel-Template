@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
+/**
+ * Class HelperServiceProvider.
+ */
 class HelperServiceProvider extends ServiceProvider
 {
     /**
