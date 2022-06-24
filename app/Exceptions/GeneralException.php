@@ -11,7 +11,7 @@ use Throwable;
 class GeneralException extends Exception
 {
     /**
-     * @var
+     * @var string
      */
     public $message;
 
@@ -29,6 +29,8 @@ class GeneralException extends Exception
 
     /**
      * Report the exception.
+     *
+     * @return void
      */
     public function report()
     {

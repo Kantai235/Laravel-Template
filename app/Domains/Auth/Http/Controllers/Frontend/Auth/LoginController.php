@@ -68,7 +68,7 @@ class LoginController
 
     /**
      * Overidden for 2FA
-     * https://github.com/DarkGhostHunter/Laraguard#protecting-the-login.
+     * https://github.com/Laragear/TwoFactor#logging-in
      *
      * Attempt to log the user into the application.
      *

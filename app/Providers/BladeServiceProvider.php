@@ -34,16 +34,16 @@ class BladeServiceProvider extends ServiceProvider
             $html = new HtmlString('<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>');
             $html .= new HtmlString('<div id="_g-recaptcha"></div>');
 
-            if (config('boilerplate.access.captcha.configs.options.hidden')) {
+            if (config('template.access.captcha.configs.options.hidden')) {
                 $html .= new HtmlString('<style>.grecaptcha-badge{display:none;!important}</style>');
             }
 
             $html .= new HtmlString('
                 <div class="g-recaptcha"
-                    data-sitekey="'.config('boilerplate.access.captcha.configs.site_key').'"
+                    data-sitekey="'.config('template.access.captcha.configs.site_key').'"
                     data-size="invisible"
                     data-callback="_submitForm"
-                    data-badge="'.config('boilerplate.access.captcha.configs.options.location').'">
+                    data-badge="'.config('template.access.captcha.configs.options.location').'">
                 </div>');
 
             $html .= new HtmlString('<script src="'.($lang ? 'https://www.google.com/recaptcha/api.js'.'?hl='.$lang : 'https://www.google.com/recaptcha/api.js').'" async defer></script>');
@@ -51,7 +51,7 @@ class BladeServiceProvider extends ServiceProvider
             $html .= new HtmlString("<script>window.addEventListener('load', _loadCaptcha);");
             $html .= new HtmlString('function _loadCaptcha(){');
 
-            if (config('boilerplate.access.captcha.configs.options.hidden')) {
+            if (config('template.access.captcha.configs.options.hidden')) {
                 $html .= new HtmlString("document.querySelector('.grecaptcha-badge').style = 'display:none;!important';");
             }
 
