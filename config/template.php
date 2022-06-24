@@ -20,7 +20,7 @@ return [
     | Locale
     |--------------------------------------------------------------------------
     |
-    | Configurations related to the boilerplate's locale system
+    | Configurations related to the template's locale system
     */
     'locale' => [
         /*

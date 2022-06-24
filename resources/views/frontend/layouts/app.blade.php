@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ htmlLang() }}" @langrtl dir="rtl" @endlangrtl data-theme="dark">
+<html lang="{{ htmlLang() }}" @langrtl dir="rtl" @endlangrtl>
 
 <head>
     <meta charset="utf-8">
