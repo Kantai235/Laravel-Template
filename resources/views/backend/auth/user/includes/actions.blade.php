@@ -9,7 +9,7 @@
         @lang('Restore')
     </x-utils.form-button>
 
-    @if (config('boilerplate.access.user.permanently_delete'))
+    @if (config('template.access.user.permanently_delete'))
         <x-utils.delete-button
             :href="route('admin.auth.user.permanently-delete', $user)"
             :text="__('Permanently Delete')" />

@@ -11,7 +11,7 @@ return [
     | Access
     |--------------------------------------------------------------------------
     |
-    | Configurations related to the boilerplate's access/authorization options
+    | Configurations related to the template's access/authorization options
     */
     'access' => [
         'captcha' => [
@@ -102,7 +102,7 @@ return [
     | Avatar
     |--------------------------------------------------------------------------
     |
-    | Configurations related to the boilerplate's avatar system
+    | Configurations related to the template's avatar system
     */
     'avatar' => [
 
@@ -127,7 +127,7 @@ return [
     | Locale
     |--------------------------------------------------------------------------
     |
-    | Configurations related to the boilerplate's locale system
+    | Configurations related to the template's locale system
     */
     'locale' => [
         /*

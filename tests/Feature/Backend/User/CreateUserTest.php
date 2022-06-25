@@ -67,7 +67,7 @@ class CreateUserTest extends TestCase
             'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
             'active' => '1',
             'roles' => [
-                Role::whereName(config('boilerplate.access.role.admin'))->first()->id,
+                Role::whereName(config('template.access.role.admin'))->first()->id,
             ],
         ]);
 
@@ -82,7 +82,7 @@ class CreateUserTest extends TestCase
         );
 
         $this->assertDatabaseHas('model_has_roles', [
-            'role_id' => Role::whereName(config('boilerplate.access.role.admin'))->first()->id,
+            'role_id' => Role::whereName(config('template.access.role.admin'))->first()->id,
             'model_type' => User::class,
             'model_id' => User::whereEmail('john@example.com')->first()->id,
         ]);
@@ -107,7 +107,7 @@ class CreateUserTest extends TestCase
             'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
             'send_confirmation_email' => '1',
             'roles' => [
-                Role::whereName(config('boilerplate.access.role.admin'))->first()->id,
+                Role::whereName(config('template.access.role.admin'))->first()->id,
             ],
         ]);
 

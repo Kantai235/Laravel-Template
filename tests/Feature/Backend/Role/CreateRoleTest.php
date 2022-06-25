@@ -40,7 +40,7 @@ class CreateRoleTest extends TestCase
     {
         $this->loginAsAdmin();
 
-        $response = $this->post('/admin/auth/role', ['name' => config('boilerplate.access.role.admin')]);
+        $response = $this->post('/admin/auth/role', ['name' => config('template.access.role.admin')]);
 
         $response->assertSessionHasErrors('name');
     }

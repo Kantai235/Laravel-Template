@@ -56,7 +56,7 @@
                                 </div>
                             </div><!--form-group-->
 
-                            @if(config('boilerplate.access.captcha.registration'))
+                            @if(config('template.access.captcha.registration'))
                                 <div class="row">
                                     <div class="col">
                                         @captcha

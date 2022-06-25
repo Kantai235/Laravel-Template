@@ -82,7 +82,7 @@
                 @else
                     <a href="{{ route('frontend.auth.login') }}">@lang('Login')</a>
 
-                    @if (config('boilerplate.access.user.registration'))
+                    @if (config('template.access.user.registration'))
                         <a href="{{ route('frontend.auth.register') }}">@lang('Register')</a>
                     @endif
                 @endauth
@@ -96,8 +96,8 @@
                 </div><!--title-->
 
                 <div class="links">
-                    <a href="http://laravel-boilerplate.com" target="_blank"><i class="fa fa-book"></i> @lang('Docs')</a>
-                    <a href="https://github.com/rappasoft/laravel-boilerplate" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://github.com/Kantai235/Laravel-Template/wiki" target="_blank"><i class="fa fa-book"></i> @lang('Docs')</a>
+                    <a href="https://github.com/Kantai235/Laravel-Template" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                 </div><!--links-->
             </div><!--content-->
         </div><!--app-->

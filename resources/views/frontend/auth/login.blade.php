@@ -41,7 +41,7 @@
                                 </div>
                             </div><!--form-group-->
 
-                            @if(config('boilerplate.access.captcha.login'))
+                            @if(config('template.access.captcha.login'))
                                 <div class="row">
                                     <div class="col">
                                         @captcha

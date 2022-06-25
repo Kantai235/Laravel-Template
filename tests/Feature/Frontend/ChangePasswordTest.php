@@ -41,7 +41,7 @@ class ChangePasswordTest extends TestCase
     /** @test */
     public function a_user_can_use_the_same_password_when_history_is_off_on_account_change_password()
     {
-        config(['boilerplate.access.user.password_history' => false]);
+        config(['template.access.user.password_history' => false]);
 
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
@@ -59,7 +59,7 @@ class ChangePasswordTest extends TestCase
     /** @test */
     public function a_user_can_not_use_the_same_password_when_history_is_on_on_account_change_password()
     {
-        config(['boilerplate.access.user.password_history' => 3]);
+        config(['template.access.user.password_history' => 3]);
 
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
@@ -90,7 +90,7 @@ class ChangePasswordTest extends TestCase
     /** @test */
     public function a_user_can_reuse_a_password_after_it_surpasses_the_limit()
     {
-        config(['boilerplate.access.user.password_history' => 2]);
+        config(['template.access.user.password_history' => 2]);
 
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 

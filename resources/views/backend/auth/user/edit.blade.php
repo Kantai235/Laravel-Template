@@ -49,7 +49,7 @@
                     @if (!$user->isMasterAdmin())
                         @include('backend.auth.includes.roles')
 
-                        @if (!config('boilerplate.access.user.only_roles'))
+                        @if (!config('template.access.user.only_roles'))
                             @include('backend.auth.includes.permissions')
                         @endif
                     @endif

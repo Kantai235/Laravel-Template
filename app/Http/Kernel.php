@@ -53,7 +53,7 @@ class Kernel extends HttpKernel
 
         'admin' => [
             /*
-             * This is configurable, disable boilerplate.access.user.admin_requires_2fa instead of removing this
+             * This is configurable, disable template.access.user.admin_requires_2fa instead of removing this
              */
             '2fa:enabled',
             'auth',

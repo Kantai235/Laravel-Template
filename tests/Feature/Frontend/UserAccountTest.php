@@ -25,13 +25,13 @@ class UserAccountTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
 
-        config(['boilerplate.access.user.change_email' => true]);
+        config(['template.access.user.change_email' => true]);
 
         $response = $this->patch('/profile/update');
 
         $response->assertSessionHasErrors(['name', 'email']);
 
-        config(['boilerplate.access.user.change_email' => false]);
+        config(['template.access.user.change_email' => false]);
 
         $response = $this->patch('/profile/update');
 
@@ -41,7 +41,7 @@ class UserAccountTest extends TestCase
     /** @test */
     public function a_user_can_update_their_profile()
     {
-        config(['boilerplate.access.user.change_email' => false]);
+        config(['template.access.user.change_email' => false]);
 
         $user = User::factory()->create([
             'name' => 'Jane Doe',
@@ -68,7 +68,7 @@ class UserAccountTest extends TestCase
     /** @test */
     public function a_user_can_update_their_email_address()
     {
-        config(['boilerplate.access.user.change_email' => true]);
+        config(['template.access.user.change_email' => true]);
 
         $user = User::factory()->create([
             'email' => 'jane@doe.com',

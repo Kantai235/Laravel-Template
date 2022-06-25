@@ -1,11 +1,11 @@
 <template>
-    <span>Laravel Boilerplate</span>
+    <span>{{ title }}</span>
 </template>
 
 <script>
 export default {
-    mounted() {
-        console.log('Component mounted.')
-    }
+    setup: () => ({
+        title: 'Hello World!',
+    })
 }
 </script>

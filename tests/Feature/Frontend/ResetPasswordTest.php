@@ -93,7 +93,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function a_user_can_use_the_same_password_when_history_is_off_on_password_reset()
     {
-        config(['boilerplate.access.user.password_history' => false]);
+        config(['template.access.user.password_history' => false]);
 
         $user = User::factory()->create(['email' => 'john@example.com', 'password' => ']EqZL4}zBT']);
 
@@ -114,7 +114,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function a_user_can_not_use_the_same_password_when_history_is_on_on_password_reset()
     {
-        config(['boilerplate.access.user.password_history' => 3]);
+        config(['template.access.user.password_history' => 3]);
 
         $user = User::factory()->create(['email' => 'john@example.com', 'password' => ']EqZL4}zBT']);
 

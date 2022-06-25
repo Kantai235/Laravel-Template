@@ -57,7 +57,7 @@ class DeleteUserTest extends TestCase
     {
         Event::fake();
 
-        config(['boilerplate.access.user.permanently_delete' => true]);
+        config(['template.access.user.permanently_delete' => true]);
 
         $this->loginAsAdmin();
 
@@ -77,7 +77,7 @@ class DeleteUserTest extends TestCase
     /** @test */
     public function a_user_cant_be_permanently_deleted_if_the_option_is_off()
     {
-        config(['boilerplate.access.user.permanently_delete' => false]);
+        config(['template.access.user.permanently_delete' => false]);
 
         $this->loginAsAdmin();
 

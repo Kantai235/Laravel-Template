@@ -81,8 +81,8 @@ class ChangeUserPasswordTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
-            'password' => 'Boilerplate',
-            'password_confirmation' => 'Boilerplate01',
+            'password' => 'template',
+            'password_confirmation' => 'template01',
         ]);
 
         $response->assertSessionHasErrors('password');
@@ -140,7 +140,7 @@ class ChangeUserPasswordTest extends TestCase
     /** @test */
     public function an_admin_can_use_the_same_password_when_history_is_off_on_backend_user_password_change()
     {
-        config(['boilerplate.access.user.password_history' => false]);
+        config(['template.access.user.password_history' => false]);
 
         $this->loginAsAdmin();
 
@@ -158,7 +158,7 @@ class ChangeUserPasswordTest extends TestCase
     /** @test */
     public function an_admin_can_not_use_the_same_password_when_history_is_on_on_backend_user_password_change()
     {
-        config(['boilerplate.access.user.password_history' => 3]);
+        config(['template.access.user.password_history' => 3]);
 
         $this->loginAsAdmin();
 

@@ -49,7 +49,7 @@ class UpdateUserTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'roles' => [
-                Role::whereName(config('boilerplate.access.role.admin'))->first()->id,
+                Role::whereName(config('template.access.role.admin'))->first()->id,
             ],
         ]);
 
@@ -61,7 +61,7 @@ class UpdateUserTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('model_has_roles', [
-            'role_id' => Role::whereName(config('boilerplate.access.role.admin'))->first()->id,
+            'role_id' => Role::whereName(config('template.access.role.admin'))->first()->id,
             'model_type' => User::class,
             'model_id' => User::whereEmail('john@example.com')->first()->id,
         ]);
@@ -79,7 +79,7 @@ class UpdateUserTest extends TestCase
         $this->logout();
 
         $otherAdmin = User::factory()->admin()->create();
-        $otherAdmin->assignRole(config('boilerplate.access.role.admin'));
+        $otherAdmin->assignRole(config('template.access.role.admin'));
 
         $this->actingAs($otherAdmin);
 
@@ -115,7 +115,7 @@ class UpdateUserTest extends TestCase
         // Make sure other admins can not update the master admin
 
         $otherAdmin = User::factory()->admin()->create();
-        $otherAdmin->assignRole(config('boilerplate.access.role.admin'));
+        $otherAdmin->assignRole(config('template.access.role.admin'));
 
         $this->actingAs($otherAdmin);
 

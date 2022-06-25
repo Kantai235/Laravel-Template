@@ -64,7 +64,7 @@ class UpdateRoleTest extends TestCase
     {
         $this->loginAsAdmin();
 
-        $role = Role::whereName(config('boilerplate.access.role.admin'))->first();
+        $role = Role::whereName(config('template.access.role.admin'))->first();
 
         $response = $this->patch("/admin/auth/role/{$role->id}", [
             'name' => 'new name',
@@ -92,7 +92,7 @@ class UpdateRoleTest extends TestCase
     {
         $this->loginAsAdmin();
 
-        $role = Role::whereName(config('boilerplate.access.role.admin'))->first();
+        $role = Role::whereName(config('template.access.role.admin'))->first();
 
         $response = $this->get("/admin/auth/role/{$role->id}/edit");
 
