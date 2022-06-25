@@ -11,7 +11,7 @@ use Closure;
 class UserCheck
 {
     /**
-     * @param $request
+     * @param  $request
      * @param  Closure  $next
      * @return mixed
      */
@@ -21,6 +21,8 @@ class UserCheck
             return $next($request);
         }
 
-        return redirect()->route('frontend.index')->withFlashDanger(__('You do not have access to do that.'));
+        return redirect()
+            ->route('frontend.index')
+            ->withFlashDanger(__('You do not have access to do that.'));
     }
 }

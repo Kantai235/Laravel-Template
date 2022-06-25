@@ -17,7 +17,7 @@ use Illuminate\Auth\Events\PasswordReset;
 class UserEventListener
 {
     /**
-     * @param $event
+     * @param  $event
      */
     public function onLoggedIn($event)
     {
@@ -29,7 +29,7 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onPasswordReset($event)
     {
@@ -39,7 +39,7 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onCreated($event)
     {
@@ -60,7 +60,7 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onUpdated($event)
     {
@@ -79,7 +79,7 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onDeleted($event)
     {
@@ -89,7 +89,7 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onRestored($event)
     {
@@ -99,7 +99,7 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onDestroyed($event)
     {
@@ -109,13 +109,13 @@ class UserEventListener
     }
 
     /**
-     * @param $event
+     * @param  $event
      */
     public function onStatusChanged($event)
     {
         activity('user')
             ->performedOn($event->user)
-            ->log(':causer.name '.($event->status === 0 ? 'deactivated' : 'reactivated').' user :subject.name');
+            ->log(':causer.name ' . ($event->status === 0 ? 'deactivated' : 'reactivated') . ' user :subject.name');
     }
 
     /**

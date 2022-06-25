@@ -10,8 +10,8 @@ use App\Domains\Auth\Models\User;
 trait UserScope
 {
     /**
-     * @param $query
-     * @param $term
+     * @param  $query
+     * @param  $term
      * @return mixed
      */
     public function scopeSearch($query, $term)
@@ -23,7 +23,7 @@ trait UserScope
     }
 
     /**
-     * @param $query
+     * @param  $query
      * @return mixed
      */
     public function scopeOnlyDeactivated($query)
@@ -32,7 +32,7 @@ trait UserScope
     }
 
     /**
-     * @param $query
+     * @param  $query
      * @return mixed
      */
     public function scopeOnlyActive($query)
@@ -41,8 +41,8 @@ trait UserScope
     }
 
     /**
-     * @param $query
-     * @param $type
+     * @param  $query
+     * @param  $type
      * @return mixed
      */
     public function scopeByType($query, $type)
@@ -51,7 +51,7 @@ trait UserScope
     }
 
     /**
-     * @param $query
+     * @param  $query
      * @return mixed
      */
     public function scopeAllAccess($query)
@@ -62,7 +62,7 @@ trait UserScope
     }
 
     /**
-     * @param $query
+     * @param  $query
      * @return mixed
      */
     public function scopeAdmins($query)
@@ -71,7 +71,7 @@ trait UserScope
     }
 
     /**
-     * @param $query
+     * @param  $query
      * @return mixed
      */
     public function scopeUsers($query)

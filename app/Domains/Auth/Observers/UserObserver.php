@@ -11,6 +11,7 @@ class UserObserver
 {
     /**
      * @param  User  $user
+     * @return void
      */
     public function created(User $user): void
     {
@@ -19,6 +20,7 @@ class UserObserver
 
     /**
      * @param  User  $user
+     * @return void
      */
     public function updated(User $user): void
     {
@@ -30,6 +32,7 @@ class UserObserver
 
     /**
      * @param  User  $user
+     * @return void
      */
     private function logPasswordHistory(User $user): void
     {

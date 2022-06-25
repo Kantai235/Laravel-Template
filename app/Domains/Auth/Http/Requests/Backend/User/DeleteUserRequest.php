@@ -17,13 +17,13 @@ class DeleteUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return ! $this->user->isMasterAdmin();
+        return !$this->user->isMasterAdmin();
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {

@@ -24,7 +24,7 @@ class StoreRoleRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
@@ -37,7 +37,9 @@ class StoreRoleRequest extends FormRequest
     }
 
     /**
-     * @return array
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, mixed>
      */
     public function messages()
     {

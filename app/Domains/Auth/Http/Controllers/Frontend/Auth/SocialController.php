@@ -12,7 +12,7 @@ use Laravel\Socialite\Facades\Socialite;
 class SocialController
 {
     /**
-     * @param $provider
+     * @param  $provider
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function redirect($provider)
@@ -21,7 +21,7 @@ class SocialController
     }
 
     /**
-     * @param $provider
+     * @param  $provider
      * @param  UserService  $userService
      * @return \Illuminate\Http\RedirectResponse
      *
@@ -31,10 +31,12 @@ class SocialController
     {
         $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider);
 
-        if (! $user->isActive()) {
+        if (!$user->isActive()) {
             auth()->logout();
 
-            return redirect()->route('frontend.auth.login')->withFlashDanger(__('Your account has been deactivated.'));
+            return redirect()
+                ->route('frontend.auth.login')
+                ->withFlashDanger(__('Your account has been deactivated.'));
         }
 
         auth()->login($user);

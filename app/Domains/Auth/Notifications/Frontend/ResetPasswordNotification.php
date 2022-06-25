@@ -32,11 +32,13 @@ class ResetPasswordNotification extends Notification
      * Get the notification's channels.
      *
      * @param  mixed  $notifiable
-     * @return array|string
+     * @return array<int, string>|string
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return [
+            'mail',
+        ];
     }
 
     /**

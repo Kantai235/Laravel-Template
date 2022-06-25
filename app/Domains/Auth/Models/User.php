@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'type',
@@ -66,7 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     ];
 
     /**
-     * @var array
+     * @var array<int, string>
      */
     protected $dates = [
         'last_login_at',
@@ -85,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'active' => 'boolean',
@@ -95,14 +95,14 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     ];
 
     /**
-     * @var array
+     * @var array<int, string>
      */
     protected $appends = [
         'avatar',
     ];
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $with = [
         'permissions',
@@ -122,6 +122,8 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
 
     /**
      * Send the registration verification email.
+     *
+     * @return void
      */
     public function sendEmailVerificationNotification(): void
     {
@@ -131,7 +133,6 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     /**
      * Return true or false if the user can impersonate an other user.
      *
-     * @param void
      * @return bool
      */
     public function canImpersonate(): bool
@@ -142,12 +143,11 @@ class User extends Authenticatable implements MustVerifyEmail, TwoFactorAuthenti
     /**
      * Return true or false if the user can be impersonate.
      *
-     * @param void
      * @return bool
      */
     public function canBeImpersonated(): bool
     {
-        return ! $this->isMasterAdmin();
+        return !$this->isMasterAdmin();
     }
 
     /**

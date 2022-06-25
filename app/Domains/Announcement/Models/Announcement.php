@@ -30,7 +30,7 @@ class Announcement extends Model
     protected static $logOnlyDirty = true;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = [
         'area',
@@ -42,7 +42,7 @@ class Announcement extends Model
     ];
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $dates = [
         'starts_at',
@@ -50,7 +50,7 @@ class Announcement extends Model
     ];
 
     /**
-     * @var string[]
+     * @var array<string, string>
      */
     protected $casts = [
         'enabled' => 'boolean',

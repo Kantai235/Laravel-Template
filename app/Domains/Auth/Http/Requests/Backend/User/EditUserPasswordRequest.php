@@ -17,13 +17,13 @@ class EditUserPasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return ! ($this->user->isMasterAdmin() && ! $this->user()->isMasterAdmin());
+        return !($this->user->isMasterAdmin() && !$this->user()->isMasterAdmin());
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {

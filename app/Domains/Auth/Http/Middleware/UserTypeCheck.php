@@ -10,9 +10,9 @@ use Closure;
 class UserTypeCheck
 {
     /**
-     * @param $request
+     * @param  $request
      * @param  Closure  $next
-     * @param $type
+     * @param  $type
      * @return mixed
      */
     public function handle($request, Closure $next, $type)
@@ -31,6 +31,8 @@ class UserTypeCheck
             }
         }
 
-        return redirect()->route('frontend.index')->withFlashDanger(__('You do not have access to do that.'));
+        return redirect()
+            ->route('frontend.index')
+            ->withFlashDanger(__('You do not have access to do that.'));
     }
 }

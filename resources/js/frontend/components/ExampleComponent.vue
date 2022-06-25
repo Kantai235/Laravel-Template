@@ -1,11 +1,11 @@
 <template>
-  <span>Laravel Template</span>
+    <span>Laravel Boilerplate</span>
 </template>
 
 <script>
 export default {
-  mounted() {
-    console.log("Component mounted.");
-  },
-};
+    mounted() {
+        console.log('Component mounted.')
+    }
+}
 </script>

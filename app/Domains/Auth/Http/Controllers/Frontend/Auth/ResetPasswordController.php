@@ -44,7 +44,7 @@ class ResetPasswordController
     /**
      * Get the password reset validation rules.
      *
-     * @return array
+     * @return array<string, array<int, string>>
      */
     protected function rules()
     {
@@ -73,7 +73,7 @@ class ResetPasswordController
     public function showResetForm(Request $request, $token = null)
     {
         return view('frontend.auth.passwords.reset')
-            ->withToken($token)
-            ->withEmail($request->email);
+            ->with('token', $token)
+            ->with('email', $request->email);
     }
 }

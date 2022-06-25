@@ -19,7 +19,9 @@ class PasswordHistory extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
-    protected $fillable = ['password'];
+    protected $fillable = [
+        'password',
+    ];
 }

@@ -31,7 +31,7 @@ class UserService extends BaseService
     }
 
     /**
-     * @param $type
+     * @param  $type
      * @param  bool|int  $perPage
      * @return mixed
      */
@@ -68,8 +68,8 @@ class UserService extends BaseService
     }
 
     /**
-     * @param $info
-     * @param $provider
+     * @param  $info
+     * @param  $provider
      * @return mixed
      *
      * @throws GeneralException
@@ -78,7 +78,7 @@ class UserService extends BaseService
     {
         $user = $this->model::where('provider_id', $info->id)->first();
 
-        if (! $user) {
+        if (!$user) {
             DB::beginTransaction();
 
             try {
@@ -124,7 +124,7 @@ class UserService extends BaseService
 
             $user->syncRoles($data['roles'] ?? []);
 
-            if (! config('template.access.user.only_roles')) {
+            if (!config('template.access.user.only_roles')) {
                 $user->syncPermissions($data['permissions'] ?? []);
             }
         } catch (Exception $e) {
@@ -138,7 +138,7 @@ class UserService extends BaseService
         DB::commit();
 
         // They didn't want to auto verify the email, but do they want to send the confirmation email to do so?
-        if (! isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
+        if (!isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
             $user->sendEmailVerificationNotification();
         }
 
@@ -158,16 +158,16 @@ class UserService extends BaseService
 
         try {
             $user->update([
-                'type' => $user->isMasterAdmin() ? $this->model::TYPE_ADMIN : $data['type'] ?? $user->type,
+                'type' => $user->isMasterAdmin() ? User::TYPE_ADMIN : $data['type'] ?? $user->type,
                 'name' => $data['name'],
                 'email' => $data['email'],
             ]);
 
-            if (! $user->isMasterAdmin()) {
+            if (!$user->isMasterAdmin()) {
                 // Replace selected roles/permissions
                 $user->syncRoles($data['roles'] ?? []);
 
-                if (! config('template.access.user.only_roles')) {
+                if (!config('template.access.user.only_roles')) {
                     $user->syncPermissions($data['permissions'] ?? []);
                 }
             }
@@ -205,7 +205,7 @@ class UserService extends BaseService
 
     /**
      * @param  User  $user
-     * @param $data
+     * @param  $data
      * @param  bool  $expired
      * @return User
      *
@@ -215,7 +215,7 @@ class UserService extends BaseService
     {
         if (isset($data['current_password'])) {
             throw_if(
-                ! Hash::check($data['current_password'], $user->password),
+                !Hash::check($data['current_password'], $user->password),
                 new GeneralException(__('That is not your old password.'))
             );
         }
@@ -232,7 +232,7 @@ class UserService extends BaseService
 
     /**
      * @param  User  $user
-     * @param $status
+     * @param  $status
      * @return User
      *
      * @throws GeneralException
@@ -320,7 +320,7 @@ class UserService extends BaseService
     protected function createUser(array $data = []): User
     {
         return $this->model::create([
-            'type' => $data['type'] ?? $this->model::TYPE_USER,
+            'type' => $data['type'] ?? User::TYPE_USER,
             'name' => $data['name'] ?? null,
             'email' => $data['email'] ?? null,
             'password' => $data['password'] ?? null,

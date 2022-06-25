@@ -13,12 +13,12 @@ class UserDeleted
     use SerializesModels;
 
     /**
-     * @var
+     * @var User
      */
     public $user;
 
     /**
-     * @param $user
+     * @param  User  $user
      */
     public function __construct(User $user)
     {

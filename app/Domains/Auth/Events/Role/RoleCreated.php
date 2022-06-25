@@ -13,12 +13,12 @@ class RoleCreated
     use SerializesModels;
 
     /**
-     * @var
+     * @var Role
      */
     public $role;
 
     /**
-     * @param $role
+     * @param  Role  $role
      */
     public function __construct(Role $role)
     {

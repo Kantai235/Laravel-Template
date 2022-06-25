@@ -33,7 +33,7 @@ class AnnouncementService extends BaseService
     public function getForFrontend()
     {
         return $this->model::enabled()
-            ->forArea($this->model::TYPE_FRONTEND)
+            ->forArea(Announcement::AREA_FRONTEND)
             ->inTimeFrame()
             ->get();
     }
@@ -51,7 +51,7 @@ class AnnouncementService extends BaseService
     public function getForBackend()
     {
         return $this->model::enabled()
-            ->forArea($this->model::TYPE_BACKEND)
+            ->forArea(Announcement::AREA_BACKEND)
             ->inTimeFrame()
             ->get();
     }

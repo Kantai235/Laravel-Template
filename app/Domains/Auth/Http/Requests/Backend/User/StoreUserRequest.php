@@ -25,12 +25,15 @@ class StoreUserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'type' => ['required', Rule::in([User::TYPE_ADMIN, User::TYPE_USER])],
+            'type' => ['required', Rule::in([
+                User::TYPE_ADMIN,
+                User::TYPE_USER,
+            ])],
             'name' => ['required', 'max:100'],
             'email' => ['required', 'max:255', 'email', Rule::unique('users')],
             'password' => ['max:100', PasswordRules::register($this->email)],
@@ -45,7 +48,9 @@ class StoreUserRequest extends FormRequest
     }
 
     /**
-     * @return array
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, mixed>
      */
     public function messages()
     {

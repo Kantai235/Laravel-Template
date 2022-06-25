@@ -20,7 +20,7 @@ class Role extends SpatieRole
         RoleScope;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $with = [
         'permissions',
