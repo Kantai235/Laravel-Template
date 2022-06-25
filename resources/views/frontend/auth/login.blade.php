@@ -13,50 +13,52 @@
 
                     <x-slot name="body">
                         <x-forms.post :action="route('frontend.auth.login')">
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">@lang('E-mail Address')</label>
+                            <!-- E-mail input -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label mb-1">@lang('E-mail Address')</label>
+                                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" maxlength="255" aria-describedby="emailHelp" required autofocus autocomplete="email" />
+                                <div id="emailHelp" class="form-text">@lang('We\'ll never share your email with anyone else.')</div>
+                            </div>
 
-                                <div class="col-md-6">
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('E-mail Address') }}" value="{{ old('email') }}" maxlength="255" required autofocus autocomplete="email" />
-                                </div>
-                            </div><!--form-group-->
+                            <!-- Password input -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label mb-1">@lang('Password')</label>
+                                <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelpBlock" maxlength="100" required autocomplete="current-password" />
+                                <div id="passwordHelpBlock" class="form-text">@lang('Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.')</div>
+                            </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">@lang('Password')</label>
-
-                                <div class="col-md-6">
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="current-password" />
-                                </div>
-                            </div><!--form-group-->
-
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
+                            <!-- 2 column grid layout for inline styling -->
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <!-- Remember Me -->
                                     <div class="form-check">
                                         <input name="remember" id="remember" class="form-check-input" type="checkbox" {{ old('remember') ? 'checked' : '' }} />
-
-                                        <label class="form-check-label" for="remember">
-                                            @lang('Remember Me')
-                                        </label>
-                                    </div><!--form-check-->
+                                        <label class="form-check-label" for="remember">@lang('Remember Me')</label>
+                                    </div>
                                 </div>
-                            </div><!--form-group-->
 
-                            @if(config('template.access.captcha.login'))
-                                <div class="row">
-                                    <div class="col">
-                                        @captcha
-                                        <input type="hidden" name="captcha_status" value="true" />
-                                    </div><!--col-->
-                                </div><!--row-->
-                            @endif
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button class="btn btn-primary" type="submit">@lang('Login')</button>
-
+                                <div class="col d-flex justify-content-end">
+                                    <!-- Forgot Password Link -->
                                     <x-utils.link :href="route('frontend.auth.password.request')" class="btn btn-link" :text="__('Forgot Your Password?')" />
                                 </div>
-                            </div><!--form-group-->
+                            </div>
+
+                            @if(config('template.access.captcha.login'))
+                                @captcha
+                                <input type="hidden" name="captcha_status" value="true" />
+                            @endif
+
+                            <!-- Sign in button -->
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <span>
+                                    @lang('Don\'t have an account?')
+                                    <x-utils.link :href="route('frontend.auth.register')" class="btn btn-link" :text="__('Register here')" />
+                                </span>
+                            </div>
 
                             <div class="text-center">
                                 @include('frontend.auth.includes.social')

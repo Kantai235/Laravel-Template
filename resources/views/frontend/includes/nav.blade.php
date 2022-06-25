@@ -1,30 +1,40 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white shadow-sm">
+    <div class="container-fluid">
         <x-utils.link
             :href="route('frontend.index')"
             :text="appName()"
             class="navbar-brand" />
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="@lang('Toggle navigation')">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="@lang('Toggle navigation')">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <x-utils.link
+                        :href="route('frontend.index')"
+                        :active="activeClass(Route::is('frontend.index'))"
+                        :text="__('Home')"
+                        class="nav-link" />
+                </li>
+
                 @if(config('template.locale.status') && count(config('template.locale.languages')) > 1)
                     <li class="nav-item dropdown">
                         <x-utils.link
                             :text="__(getLocaleName(app()->getLocale()))"
                             class="nav-link dropdown-toggle"
                             id="navbarDropdownLanguageLink"
-                            data-toggle="dropdown"
+                            data-bs-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false" />
 
                         @include('includes.partials.lang')
                     </li>
                 @endif
+            </ul>
 
+            <ul class="navbar-nav d-flex">
                 @guest
                     <li class="nav-item">
                         <x-utils.link
