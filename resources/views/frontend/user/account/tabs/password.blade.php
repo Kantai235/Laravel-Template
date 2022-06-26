@@ -1,31 +1,26 @@
 <x-forms.patch :action="route('frontend.auth.password.change')">
-    <div class="form-group row">
-        <label for="current_password" class="col-md-3 col-form-label text-md-right">@lang('Current Password')</label>
+    <!-- Password input -->
+    <div class="mb-3">
+        <label for="current_password" class="form-label mb-1">@lang('Current Password')</label>
+        <input type="password" name="current_password" id="current_password" class="form-control" aria-describedby="passwordHelpBlock" maxlength="100" required autofocus autocomplete="current-password" />
+    </div>
 
-        <div class="col-md-9">
-            <input type="password" name="current_password" class="form-control" placeholder="{{ __('Current Password') }}" maxlength="100" required autofocus />
-        </div>
-    </div><!--form-group-->
+    <!-- Password input -->
+    <div class="mb-3">
+        <label for="password" class="form-label mb-1">@lang('New Password')</label>
+        <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelpBlock" maxlength="100" required autocomplete="new-password" />
+        <div id="passwordHelpBlock" class="form-text">@lang('Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.')</div>
+    </div>
 
-    <div class="form-group row">
-        <label for="password" class="col-md-3 col-form-label text-md-right">@lang('New Password')</label>
+    <!-- Password Confirmation input -->
+    <div class="mb-3">
+        <label for="password_confirmation" class="form-label mb-1">@lang('Password Confirmation')</label>
+        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" aria-describedby="passwordConfirmationHelpBlock" maxlength="100" required autocomplete="new-password" />
+        <div id="passwordConfirmationHelpBlock" class="form-text">@lang('Please confirm your password before continuing.')</div>
+    </div>
 
-        <div class="col-md-9">
-            <input type="password" name="password" class="form-control" placeholder="{{ __('New Password') }}" maxlength="100" required />
-        </div>
-    </div><!--form-group-->
-
-    <div class="form-group row">
-        <label for="password_confirmation" class="col-md-3 col-form-label text-md-right">@lang('New Password Confirmation')</label>
-
-        <div class="col-md-9">
-            <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('New Password Confirmation') }}" maxlength="100" required />
-        </div>
-    </div><!--form-group-->
-
-    <div class="form-group row mb-0">
-        <div class="col-md-12 text-right">
-            <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Update Password')</button>
-        </div>
-    </div><!--form-group-->
+    <!-- Update button -->
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">@lang('Update Password')</button>
+    </div>
 </x-forms.patch>

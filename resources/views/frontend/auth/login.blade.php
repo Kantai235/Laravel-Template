@@ -50,7 +50,7 @@
 
                             <!-- Sign in button -->
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" class="btn btn-primary">@lang('Login')</button>
                             </div>
 
                             <div class="mb-3">

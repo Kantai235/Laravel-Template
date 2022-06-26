@@ -61,7 +61,7 @@
                             id="navbarDropdown"
                             class="nav-link dropdown-toggle"
                             role="button"
-                            data-toggle="dropdown"
+                            data-bs-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false"
                             v-pre
@@ -72,7 +72,7 @@
                             </x-slot>
                         </x-utils.link>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-end pl-5" aria-labelledby="navbarDropdown">
                             @if ($logged_in_user->isAdmin())
                                 <x-utils.link
                                     :href="route('admin.dashboard')"

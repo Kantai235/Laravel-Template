@@ -13,19 +13,16 @@
 
                     <x-slot name="body">
                         <x-forms.post :action="route('frontend.auth.password.confirm')">
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">@lang('Password')</label>
+                            <!-- Password input -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label mb-1">@lang('Password')</label>
+                                <input type="password" name="password" id="password" class="form-control" maxlength="100" required autocomplete="current-password" />
+                            </div>
 
-                                <div class="col-md-6">
-                                    <input type="password" name="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="current-password" />
-                                </div>
-                            </div><!--form-group-->
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button class="btn btn-primary" type="submit">@lang('Confirm Password')</button>
-                                </div>
-                            </div><!--form-group-->
+                            <!-- Confirm Password button -->
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">@lang('Confirm Password')</button>
+                            </div>
                         </x-forms.post>
                     </x-slot>
                 </x-frontend.card>

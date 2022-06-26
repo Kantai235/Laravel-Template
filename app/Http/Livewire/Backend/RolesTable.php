@@ -13,6 +13,25 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 class RolesTable extends DataTableComponent
 {
     /**
+     * @var string
+     */
+    protected $model = Role::class;
+
+    /**
+     * You must implement the configure method on your component.
+     * The only configuration method that is required is setPrimaryKey.
+     * The primary key is a field on your model that acts as a unique identifier for the row. I.e. an ID, a UUID, etc.
+     *
+     * https://rappasoft.com/docs/laravel-livewire-tables/v2/usage/configuration
+     *
+     * @return void
+     */
+    public function configure(): void
+    {
+        $this->setPrimaryKey('id');
+    }
+
+    /**
      * @return Builder
      */
     public function query(): Builder

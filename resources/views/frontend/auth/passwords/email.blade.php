@@ -13,19 +13,16 @@
 
                     <x-slot name="body">
                         <x-forms.post :action="route('frontend.auth.password.email')">
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">@lang('E-mail Address')</label>
+                            <!-- E-mail input -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label mb-1">@lang('E-mail Address')</label>
+                                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" maxlength="255" required autofocus autocomplete="email" />
+                            </div>
 
-                                <div class="col-md-6">
-                                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="{{ __('E-mail Address') }}" maxlength="255" required autofocus autocomplete="email" />
-                                </div>
-                            </div><!--form-group-->
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button class="btn btn-primary" type="submit">@lang('Send Password Reset Link')</button>
-                                </div>
-                            </div><!--form-group-->
+                            <!-- Send Password Reset Link button -->
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">@lang('Send Password Reset Link')</button>
+                            </div>
                         </x-forms.post>
                     </x-slot>
                 </x-frontend.card>

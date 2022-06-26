@@ -6,26 +6,15 @@
     @enderror
 
     <form wire:submit.prevent="validateCode" class="form-horizontal">
-        <div class="form-group row">
-            <label for="code" class="col-md-4 col-form-label text-md-right">@lang('Authorization Code')</label>
+        <!-- Authorization Code input -->
+        <div class="mb-3">
+            <label for="code" class="form-label mb-1">@lang('Authorization Code')</label>
+            <input type="text" name="code" id="code" class="form-control" wire:model.lazy="code" minlength="6" required autofocus />
+        </div>
 
-            <div class="col-md-6">
-                <input
-                    type="text"
-                    id="code"
-                    wire:model.lazy="code"
-                    minlength="6"
-                    class="form-control"
-                    placeholder="{{ __('Authorization Code') }}"
-                    required
-                    autofocus />
-            </div>
-        </div><!--form-group-->
-
-        <div class="form-group row mb-0">
-            <div class="col-md-6 offset-md-4">
-                <button class="btn btn-primary" type="submit">@lang('Enable Two Factor Authentication')</button>
-            </div>
-        </div><!--form-group-->
+        <!-- Submit button -->
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">@lang('Enable Two Factor Authentication')</button>
+        </div>
     </form>
 </div>

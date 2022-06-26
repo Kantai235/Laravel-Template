@@ -1,5 +1,5 @@
 @if (Breadcrumbs::has() && !Route::is('frontend.index'))
-    <nav id="breadcrumbs" aria-label="breadcrumb">
+    <nav class="p-2" id="breadcrumbs" aria-label="breadcrumb">
         <ol class="container breadcrumb mb-0">
             @foreach (Breadcrumbs::current() as $crumb)
                 @if ($crumb->url() && !$loop->last)
