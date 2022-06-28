@@ -4,12 +4,12 @@
             @if ($crumb->url() && !$loop->last)
                 <li class="breadcrumb-item">
                     <x-utils.link :href="$crumb->url()" :text="$crumb->title()" />
-                </li>
+                </li><!--breadcrumb-item-->
             @else
                 <li class="breadcrumb-item active">
                     {{ $crumb->title() }}
-                </li>
+                </li><!--breadcrumb-item-->
             @endif
         @endforeach
-    </ol>
+    </ol><!--breadcrumb-->
 @endif

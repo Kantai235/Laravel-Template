@@ -1,11 +1,11 @@
-<div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+<div class="sidebar sidebar-dark sidebar-fixed sidebar-self-hiding-xl" id="sidebar">
     <div class="sidebar-brand d-none d-md-flex">
         <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
             <use xlink:href="{{ asset('img/brand/coreui.svg#full') }}"></use>
-        </svg>
-        <svg class="sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
+        </svg><!--sidebar-brand-full-->
+        <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
             <use xlink:href="{{ asset('img/brand/coreui.svg#signet') }}"></use>
-        </svg>
+        </svg><!--sidebar-brand-narrow-->
     </div><!--sidebar-brand-->
 
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
@@ -16,7 +16,7 @@
                 :active="activeClass(Route::is('admin.dashboard'), 'active')"
                 icon="nav-icon cil-speedometer"
                 :text="__('Dashboard')" />
-        </li>
+        </li><!--nav-item-->
 
         @if (
             $logged_in_user->hasAllAccess() ||
@@ -29,7 +29,7 @@
                 $logged_in_user->can('admin.access.user.change-password')
             )
         )
-            <li class="nav-title">@lang('System')</li>
+            <li class="nav-title">@lang('System')</li><!--nav-title-->
 
             <li class="nav-group {{ activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*'), 'open show') }}">
                 <x-utils.link
@@ -56,7 +56,7 @@
                                 class="nav-link"
                                 :text="__('User Management')"
                                 :active="activeClass(Route::is('admin.auth.user.*'), 'active')" />
-                        </li>
+                        </li><!--nav-item-->
                     @endif
 
                     @if ($logged_in_user->hasAllAccess())
@@ -66,10 +66,10 @@
                                 class="nav-link"
                                 :text="__('Role Management')"
                                 :active="activeClass(Route::is('admin.auth.role.*'), 'active')" />
-                        </li>
+                        </li><!--nav-item-->
                     @endif
-                </ul>
-            </li>
+                </ul><!--nav-group-items-->
+            </li><!--nav-group-->
         @endif
 
         @if ($logged_in_user->hasAllAccess())
@@ -86,17 +86,17 @@
                             :href="route('log-viewer::dashboard')"
                             class="nav-link"
                             :text="__('Dashboard')" />
-                    </li>
+                    </li><!--nav-item-->
                     <li class="nav-item">
                         <x-utils.link
                             :href="route('log-viewer::logs.list')"
                             class="nav-link"
                             :text="__('Logs')" />
-                    </li>
-                </ul>
-            </li>
+                    </li><!--nav-item-->
+                </ul><!--nav-group-item-->
+            </li><!--nav-group-->
         @endif
-    </ul>
+    </ul><!--sidebar-nav-->
 
-    <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
+    <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button><!--sidebar-toggler-->
 </div><!--sidebar-->
