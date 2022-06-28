@@ -1,10 +1,15 @@
 import 'alpinejs'
 
-window.$ = window.jQuery = require('jquery');
 window.Swal = require('sweetalert2');
 
-// CoreUI
+/**
+ * CoreUI at:
+ * https://coreui.io/
+ */
 require('@coreui/coreui');
 
-// Plugins
+/**
+ * Plugins at:
+ * /resources/js/plugins.js
+ */
 require('../plugins');
