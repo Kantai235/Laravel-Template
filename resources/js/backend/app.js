@@ -6,7 +6,7 @@ window.Swal = require('sweetalert2');
  * CoreUI at:
  * https://coreui.io/
  */
-require('@coreui/coreui');
+window.Coreui = require('@coreui/coreui');
 
 /**
  * Plugins at:
