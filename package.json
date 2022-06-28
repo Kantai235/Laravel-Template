@@ -10,15 +10,14 @@
         "production": "mix --production"
     },
     "dependencies": {
-        "@coreui/coreui": "^3.0.0",
-        "@coreui/icons": "^1.0.1",
+        "@coreui/coreui": "^4.1.6",
+        "@coreui/icons": "^2.1.0",
         "@fortawesome/fontawesome-free": "^6.1.1",
         "@popperjs/core": "^2.5.1",
         "alpinejs": "^2.3.5",
         "axios": "^0.25.0",
         "bootstrap": "^5.2.0-beta1",
         "cross-env": "^7.0",
-        "jquery": "^3.5.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "perfect-scrollbar": "^1.5.0",
