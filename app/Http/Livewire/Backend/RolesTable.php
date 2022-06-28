@@ -34,11 +34,11 @@ class RolesTable extends DataTableComponent
     /**
      * @return Builder
      */
-    public function query(): Builder
+    public function builder(): Builder
     {
         return Role::with('permissions:id,name,description')
             ->withCount('users')
-            ->when($this->getFilter('search'), fn ($query, $term) => $query->search($term));
+            ->when(null, fn ($query, $term) => $query->search($term));
     }
 
     public function columns(): array
@@ -46,12 +46,22 @@ class RolesTable extends DataTableComponent
         return [
             Column::make(__('Type'))
                 ->sortable(),
-            Column::make(__('Name'))
-                ->sortable(),
-            Column::make(__('Permissions')),
+            Column::make('Name')
+                ->sortable()
+                ->searchable(),
+            Column::make(__('Permissions'))
+                ->label(
+                    fn($row, Column $column) => $row->permissions_label
+                ),
             Column::make(__('Number of Users'), 'users_count')
-                ->sortable(),
-            Column::make(__('Actions')),
+                ->sortable()
+                ->label(
+                    fn($row, Column $column) => $row->users_count
+                ),
+            Column::make(__('Actions'))
+                ->label(
+                    fn($row, Column $column) => view('backend.auth.role.includes.actions')->with('model', $row)
+                ),
         ];
     }
 
