@@ -2,7 +2,8 @@
 <html lang="{{ htmlLang() }}" @langrtl dir="rtl" @endlangrtl>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ appName() }} | @yield('title')</title>
     <meta name="description" content="@yield('meta_description', appName())">
@@ -14,28 +15,24 @@
     <livewire:styles />
     @stack('after-styles')
 </head>
-<body class="c-app">
+<body>
     @include('backend.includes.sidebar')
 
-    <div class="c-wrapper c-fixed-components">
+    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         @include('backend.includes.header')
         @include('includes.partials.read-only')
         @include('includes.partials.logged-in-as')
         @include('includes.partials.announcements')
 
-        <div class="c-body">
-            <main class="c-main">
-                <div class="container-fluid">
-                    <div class="fade-in">
-                        @include('includes.partials.messages')
-                        @yield('content')
-                    </div><!--fade-in-->
-                </div><!--container-fluid-->
-            </main>
-        </div><!--c-body-->
+        <div class="body flex-grow-1 px-3">
+            <div class="container-fluid fade-in">
+                @include('includes.partials.messages')
+                @yield('content')
+            </div><!--container-fluid-->
+        </div><!--body-->
 
         @include('backend.includes.footer')
-    </div><!--c-wrapper-->
+    </div><!--wrapper-->
 
     @stack('before-scripts')
     <script src="{{ mix('js/manifest.js') }}"></script>
