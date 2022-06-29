@@ -9,7 +9,9 @@
         </x-slot>
 
         <x-slot name="headerActions">
-            <x-utils.link class="card-header-action" :href="route('admin.auth.user.index')" :text="__('Back')" />
+            <li class="nav-item">
+                <x-utils.link class="nav-link" :href="route('admin.auth.user.index')" :text="__('Back')" />
+            </li><!--nav-item-->
         </x-slot>
 
         <x-slot name="body">

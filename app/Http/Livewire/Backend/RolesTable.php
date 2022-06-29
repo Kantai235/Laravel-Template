@@ -45,7 +45,10 @@ class RolesTable extends DataTableComponent
     {
         return [
             Column::make(__('Type'))
-                ->sortable(),
+                ->sortable()
+                ->label(
+                    fn($row, Column $column) => view('backend.auth.role.includes.type')->with('model', $row)
+                ),
             Column::make('Name')
                 ->sortable()
                 ->searchable(),

@@ -1,14 +1,14 @@
 <div class="card">
     @if (isset($header))
-        <div class="card-header">
-            {{ $header }}
+        <header class="header mx-2">
+            <a class="header-brand">{{ $header }}</a>
 
             @if (isset($headerActions))
-                <div class="card-header-actions">
+                <ul class="header-nav">
                     {{ $headerActions }}
-                </div><!--card-header-actions-->
+                </ul><!--header-nav-->
             @endif
-        </div><!--card-header-->
+        </header><!--header-->
     @endif
 
     @if (isset($body))

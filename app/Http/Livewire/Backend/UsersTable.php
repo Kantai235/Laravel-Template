@@ -81,20 +81,6 @@ class UsersTable extends DataTableComponent
                 ->filter(function(Builder $builder, string $value) {
                     $builder->where('type', $value);
                 }),
-            SelectFilter::make('E-mail Verified', 'email_verified_at')
-                ->setFilterPillTitle('Verified')
-                ->options([
-                    ''    => 'Any',
-                    'yes' => 'Yes',
-                    'no'  => 'No',
-                ])
-                ->filter(function(Builder $builder, string $value) {
-                    if ($value === 'yes') {
-                        $builder->whereNotNull('email_verified_at');
-                    } elseif ($value === 'no') {
-                        $builder->whereNull('email_verified_at');
-                    }
-                }),
             SelectFilter::make('Active')
                 ->setFilterPillTitle('User Status')
                 ->setFilterPillValues([
@@ -140,17 +126,18 @@ class UsersTable extends DataTableComponent
             Column::make('E-mail', 'email')
                 ->sortable()
                 ->searchable(),
-            Column::make(__('2FA'))
-                ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.2fa')->with('user', $row)
-                ),
             Column::make('Active')
                 ->label(
                     fn($row, Column $column) => view('backend.auth.user.includes.status')->with('user', $row)
                 ),
-            Column::make('Verified', 'email_verified_at')
-                ->sortable()
-                ->collapseOnTablet(),
+            Column::make('Verified')
+                ->label(
+                    fn($row, Column $column) => view('backend.auth.user.includes.verified')->with('user', $row)
+                ),
+            Column::make(__('2FA'))
+                ->label(
+                    fn($row, Column $column) => view('backend.auth.user.includes.2fa')->with('user', $row)
+                ),
             Column::make(__('Roles'))
                 ->label(
                     fn($row, Column $column) => $row->roles_label

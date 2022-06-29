@@ -1,5 +1,5 @@
 @if ($user->hasTwoFactorEnabled())
-    <span class="badge badge-success" data-toggle="tooltip" title="{{ timezone()->convertToLocal($user->twoFactorAuth->enabled_at) }}">@lang('Yes')</span>
+    <span class="badge bg-success" data-coreui-toggle="tooltip" title="{{ timezone()->convertToLocal($user->twoFactorAuth->enabled_at) }}">@lang('Yes')</span>
 @else
-    <span class="badge badge-danger">@lang('No')</span>
+    <span class="badge bg-danger">@lang('No')</span>
 @endif
