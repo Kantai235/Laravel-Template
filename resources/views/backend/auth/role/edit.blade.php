@@ -25,7 +25,7 @@
                             <option value="{{ $model::TYPE_ADMIN }}" {{ $role->type === $model::TYPE_ADMIN ? 'selected' : '' }}>@lang('Administrator')</option>
                         </select>
 
-                        <label for="type">Please select user type</label>
+                        <label for="type">@lang('Please select user type')</label>
                     </div><!--form-floating-->
 
                     <div class="form-floating mb-3">
