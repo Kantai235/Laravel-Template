@@ -19,93 +19,58 @@
 
             <x-slot name="body">
                 <div x-data="{userType : '{{ $model::TYPE_USER }}'}">
-                    <div class="form-group row">
-                        <label for="name" class="col-md-2 col-form-label">@lang('Type')</label>
+                    <div class="form-floating mb-3">
+                        <select name="type" id="type" class="form-control" x-on:change="userType = $event.target.value">
+                            <option value="{{ $model::TYPE_USER }}">@lang('User')</option>
+                            <option value="{{ $model::TYPE_ADMIN }}">@lang('Administrator')</option>
+                        </select>
 
-                        <div class="col-md-10">
-                            <select name="type" class="form-control" required x-on:change="userType = $event.target.value">
-                                <option value="{{ $model::TYPE_USER }}">@lang('User')</option>
-                                <option value="{{ $model::TYPE_ADMIN }}">@lang('Administrator')</option>
-                            </select>
-                        </div>
-                    </div><!--form-group-->
+                        <label for="type">Please select user type</label>
+                    </div><!--form-floating-->
 
-                    <div class="form-group row">
-                        <label for="name" class="col-md-2 col-form-label">@lang('Name')</label>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Name') }}" value="{{ old('name') }}" maxlength="100" required />
 
-                        <div class="col-md-10">
-                            <input type="text" name="name" class="form-control" placeholder="{{ __('Name') }}" value="{{ old('name') }}" maxlength="100" required />
-                        </div>
-                    </div><!--form-group-->
+                        <label for="name">@lang('Name')</label>
+                    </div><!--form-floating-->
 
-                    <div class="form-group row">
-                        <label for="email" class="col-md-2 col-form-label">@lang('E-mail Address')</label>
+                    <div class="form-floating mb-3">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="{{ __('E-mail Address') }}" value="{{ old('email') }}" maxlength="255" required />
 
-                        <div class="col-md-10">
-                            <input type="email" name="email" class="form-control" placeholder="{{ __('E-mail Address') }}" value="{{ old('email') }}" maxlength="255" required />
-                        </div>
-                    </div><!--form-group-->
+                        <label for="email">@lang('E-mail Address')</label>
+                    </div><!--form-floating-->
 
-                    <div class="form-group row">
-                        <label for="password" class="col-md-2 col-form-label">@lang('Password')</label>
+                    <div class="form-floating mb-3">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="new-password" />
 
-                        <div class="col-md-10">
-                            <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="new-password" />
-                        </div>
-                    </div><!--form-group-->
+                        <label for="password">@lang('Password')</label>
+                    </div><!--form-floating-->
 
-                    <div class="form-group row">
-                        <label for="password_confirmation" class="col-md-2 col-form-label">@lang('Password Confirmation')</label>
+                    <div class="form-floating mb-3">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="{{ __('Password Confirmation') }}" maxlength="100" required autocomplete="new-password" />
 
-                        <div class="col-md-10">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="{{ __('Password Confirmation') }}" maxlength="100" required autocomplete="new-password" />
-                        </div>
-                    </div><!--form-group-->
+                        <label for="password_confirmation">@lang('Password Confirmation')</label>
+                    </div><!--form-floating-->
 
-                    <div class="form-group row">
-                        <label for="active" class="col-md-2 col-form-label">@lang('Active')</label>
+                    <div class="form-check form-switch form-switch-xl mb-3 mx-2">
+                        <input name="active" id="active" class="form-check-input" type="checkbox" role="switch" value="1" {{ old('active', true) ? 'checked' : '' }} />
 
-                        <div class="col-md-10">
-                            <div class="form-check">
-                                <input name="active" id="active" class="form-check-input" type="checkbox" value="1" {{ old('active', true) ? 'checked' : '' }} />
-                            </div><!--form-check-->
-                        </div>
-                    </div><!--form-group-->
+                        <label for="active" class="form-check-label">@lang('Active')</label>
+                    </div><!--form-check-->
 
                     <div x-data="{ emailVerified : false }">
-                        <div class="form-group row">
-                            <label for="email_verified" class="col-md-2 col-form-label">@lang('E-mail Verified')</label>
+                        <div class="form-check form-switch form-switch-xl mb-3 mx-2">
+                            <input name="email_verified" id="email_verified" class="form-check-input" type="checkbox" role="switch" value="1" x-on:click="emailVerified = !emailVerified" {{ old('email_verified') ? 'checked' : '' }} />
 
-                            <div class="col-md-10">
-                                <div class="form-check">
-                                    <input
-                                        type="checkbox"
-                                        name="email_verified"
-                                        id="email_verified"
-                                        value="1"
-                                        class="form-check-input"
-                                        x-on:click="emailVerified = !emailVerified"
-                                        {{ old('email_verified') ? 'checked' : '' }} />
-                                </div><!--form-check-->
-                            </div>
-                        </div><!--form-group-->
+                            <label for="email_verified" class="form-check-label">@lang('E-mail Verified')</label>
+                        </div><!--form-check-->
 
                         <div x-show="!emailVerified">
-                            <div class="form-group row">
-                                <label for="send_confirmation_email" class="col-md-2 col-form-label">@lang('Send Confirmation E-mail')</label>
+                            <div class="form-check form-switch form-switch-xl mb-3 mx-2">
+                                <input name="send_confirmation_email" id="send_confirmation_email" class="form-check-input" type="checkbox" role="switch" value="1" {{ old('send_confirmation_email') ? 'checked' : '' }} />
 
-                                <div class="col-md-10">
-                                    <div class="form-check">
-                                        <input
-                                            type="checkbox"
-                                            name="send_confirmation_email"
-                                            id="send_confirmation_email"
-                                            value="1"
-                                            class="form-check-input"
-                                            {{ old('send_confirmation_email') ? 'checked' : '' }} />
-                                    </div><!--form-check-->
-                                </div>
-                            </div><!--form-group-->
+                                <label for="send_confirmation_email" class="form-check-label">@lang('Send Confirmation E-mail')</label>
+                            </div><!--form-check-->
                         </div>
                     </div>
 
@@ -117,8 +82,8 @@
                 </div>
             </x-slot>
 
-            <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Create User')</button>
+            <x-slot name="footer" class="text-end">
+                <button class="btn btn-lg btn-primary" type="submit">@lang('Create User')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.post>

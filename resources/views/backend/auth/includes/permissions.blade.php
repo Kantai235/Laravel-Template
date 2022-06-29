@@ -1,4 +1,4 @@
-<div class="form-group row">
+<div class="form-group row mb-3">
     <label for="permissions" class="col-md-2 col-form-label">@lang('Additional Permissions')</label>
 
     <div class="col-md-10">

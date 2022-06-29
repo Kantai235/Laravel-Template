@@ -16,25 +16,21 @@
             </x-slot>
 
             <x-slot name="body">
-                <div class="form-group row">
-                    <label for="password" class="col-md-2 col-form-label">@lang('Password')</label>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="new-password" />
 
-                    <div class="col-md-10">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password') }}" maxlength="100" required autocomplete="new-password" />
-                    </div>
-                </div><!--form-group-->
+                    <label for="password">@lang('Password')</label>
+                </div><!--form-floating-->
 
-                <div class="form-group row">
-                    <label for="password_confirmation" class="col-md-2 col-form-label">@lang('Password Confirmation')</label>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="{{ __('Password Confirmation') }}" maxlength="100" required autocomplete="new-password" />
 
-                    <div class="col-md-10">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="{{ __('Password Confirmation') }}" maxlength="100" required autocomplete="new-password" />
-                    </div>
-                </div><!--form-group-->
+                    <label for="password_confirmation">@lang('Password Confirmation')</label>
+                </div><!--form-floating-->
             </x-slot>
 
             <x-slot name="footer">
-                <button class="btn btn-sm btn-primary float-right" type="submit">@lang('Update')</button>
+                <button class="btn btn-lg btn-primary float-right" type="submit">@lang('Update')</button>
             </x-slot>
         </x-backend.card>
     </x-forms.patch>
