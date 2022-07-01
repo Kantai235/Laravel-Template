@@ -67,7 +67,7 @@ class UsersTable extends DataTableComponent
     }
 
     /**
-     * @return array
+     * @return array<int, mixed>
      */
     public function filters(): array
     {
@@ -103,7 +103,7 @@ class UsersTable extends DataTableComponent
     }
 
     /**
-     * @return array
+     * @return array<int, mixed>
      */
     public function columns(): array
     {
@@ -118,7 +118,7 @@ class UsersTable extends DataTableComponent
                         'style' => 'max-width: 32px; max-height: 32px;',
                     ];
                 }),
-            Column::make(__('Type'))
+            Column::make('Type')
                 ->sortable(),
             Column::make('Name')
                 ->sortable()
