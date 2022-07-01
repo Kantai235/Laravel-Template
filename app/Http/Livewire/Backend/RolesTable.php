@@ -41,6 +41,9 @@ class RolesTable extends DataTableComponent
             ->when(null, fn ($query, $term) => $query->search($term));
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function columns(): array
     {
         return [
@@ -66,10 +69,5 @@ class RolesTable extends DataTableComponent
                     fn($row, Column $column) => view('backend.auth.role.includes.actions')->with('model', $row)
                 ),
         ];
-    }
-
-    public function rowView(): string
-    {
-        return 'backend.auth.role.includes.row';
     }
 }
