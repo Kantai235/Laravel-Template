@@ -80,6 +80,33 @@ class PermissionRoleSeeder extends Seeder
             ]),
         ]);
 
+        // Announcements category
+        $announcements = Permission::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'admin.announcement',
+            'description' => 'All Announcement Permissions',
+        ]);
+
+        $announcements->children()->saveMany([
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.announcement.list',
+                'description' => 'View Announcements',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.announcement.deactivate',
+                'description' => 'Deactivate Announcements',
+                'sort' => 2,
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.announcement.reactivate',
+                'description' => 'Reactivate Announcements',
+                'sort' => 3,
+            ]),
+        ]);
+
         // Assign Permissions to other Roles
         //
 

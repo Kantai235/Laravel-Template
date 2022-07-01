@@ -21,10 +21,14 @@ return new class extends Migration
                 Announcement::AREA_BACKEND,
             ])->nullable();
             $table->enum('type', [
-                Announcement::TYPE_INFO,
+                Announcement::TYPE_PRIMARY,
+                Announcement::TYPE_SECONDARY,
+                Announcement::TYPE_SUCCESS,
                 Announcement::TYPE_DANGER,
                 Announcement::TYPE_WARNING,
-                Announcement::TYPE_SUCCESS,
+                Announcement::TYPE_INFO,
+                Announcement::TYPE_LIGHT,
+                Announcement::TYPE_DARK,
             ])->default('info');
             $table->text('message');
             $table->boolean('enabled')->default(true);

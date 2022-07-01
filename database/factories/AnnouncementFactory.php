@@ -25,8 +25,20 @@ class AnnouncementFactory extends Factory
     public function definition(): array
     {
         return [
-            'area' => $this->faker->randomElement(['frontend', 'backend']),
-            'type' => $this->faker->randomElement(['info', 'danger', 'warning', 'success']),
+            'area' => $this->faker->randomElement([
+                Announcement::AREA_FRONTEND,
+                Announcement::AREA_BACKEND,
+            ]),
+            'type' => $this->faker->randomElement([
+                Announcement::TYPE_PRIMARY,
+                Announcement::TYPE_SECONDARY,
+                Announcement::TYPE_SUCCESS,
+                Announcement::TYPE_DANGER,
+                Announcement::TYPE_WARNING,
+                Announcement::TYPE_INFO,
+                Announcement::TYPE_LIGHT,
+                Announcement::TYPE_DARK,
+            ]),
             'message' => $this->faker->text,
             'enabled' => $this->faker->boolean,
             'starts_at' => $this->faker->dateTime(),
@@ -65,7 +77,7 @@ class AnnouncementFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'area' => 'frontend',
+                'area' => Announcement::AREA_FRONTEND,
             ];
         });
     }
@@ -77,7 +89,7 @@ class AnnouncementFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'area' => 'backend',
+                'area' => Announcement::AREA_BACKEND,
             ];
         });
     }

@@ -12,7 +12,8 @@ use Illuminate\Database\Seeder;
  */
 class AnnouncementSeeder extends Seeder
 {
-    use DisableForeignKeys, TruncateTable;
+    use DisableForeignKeys,
+        TruncateTable;
 
     /**
      * Run the database seeds.
