@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ mix('css/frontend.css') }}" rel="stylesheet">
-    <livewire:styles />
+    @livewireStyles()
     @stack('after-styles')
 </head>
 <body>
@@ -33,7 +33,7 @@
     @stack('before-scripts')
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
-    <livewire:scripts />
+    @livewireScripts()
     <script src="{{ mix('js/frontend.js') }}"></script>
     @stack('after-scripts')
 </body>
