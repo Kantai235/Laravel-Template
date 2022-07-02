@@ -24,7 +24,7 @@
         @include('includes.partials.logged-in-as')
         @include('includes.partials.announcements')
 
-        <div class="body flex-grow-1 px-3">
+        <div class="body flex-grow-1 px-3 mt-4">
             <div class="container-fluid fade-in">
                 @include('includes.partials.messages')
                 @yield('content')
