@@ -5,38 +5,33 @@ window.onload = function () {
     /**
      * Checkbox tree for permission selecting
      */
-    let permissionTree = document.querySelector('.permission-tree :checkbox');
-
-    this.addListenerMulti(permissionTree, 'click change', function (e) {
-        /**
-         * @type {HTMLElement}
-         */
-        const target = e.target;
-
-        if (target.matches(':checked')) {
-            target.siblings('ul')
-                .find('input[type="checkbox"]')
-                .setAttribute('checked', true)
-                .setAttribute('disabled', true);
-        } else {
-            target.siblings('ul')
-                .find('input[type="checkbox"]')
-                .removeAttribute('checked')
-                .removeAttribute('disabled');
-        }
+    let permissionTree = document.querySelectorAll(
+        ".permission-tree input[type='checkbox']"
+    );
+    permissionTree.forEach(function (perm) {
+        addListenerMulti(perm, "click change", function (e) {
+            /** @type {HTMLElement} */
+            const target = e.target;
+            if (target.matches(":checked")) {
+                target.nextElementSibling
+                    ?.setAttribute("checked", true)
+                    ?.setAttribute("disabled", true);
+            } else {
+                target.nextElementSibling
+                    ?.removeAttribute("checked")
+                    ?.removeAttribute("disabled");
+            }
+        });
     });
 
-    permissionTree.each(function (e) {
-        /**
-         * @type {HTMLElement}
-         */
-        const target = e.target;
+    permissionTree.forEach(function (e) {
+        /** @type {HTMLElement} */
+        const target = e;
 
-        if (target.matches(':checked')) {
-            target.siblings('ul')
-                .find('input[type="checkbox"]')
-                .setAttribute('checked', true)
-                .setAttribute('disabled', true);
+        if (target.matches(":checked")) {
+            target.nextElementSibling
+                ?.setAttribute("checked", true)
+                ?.setAttribute("disabled", true);
         }
     });
 
@@ -46,10 +41,8 @@ window.onload = function () {
      * @param form
      */
     function disableSubmitButtons(form) {
-        form.find('input[type="submit"]')
-            .setAttribute('disabled', true);
-        form.find('button[type="submit"]')
-            .setAttribute('disabled', true);
+        form.querySelectorAll('input[type="submit"]').forEach(function (el) { el.setAttribute("disabled", true); });
+        form.querySelectorAll('button[type="submit"]').forEach(function (el) { el.setAttribute("disabled", true); });
     }
 
     /**
@@ -58,103 +51,59 @@ window.onload = function () {
      * @param form
      */
     function enableSubmitButtons(form) {
-        form.find('input[type="submit"]')
-            .removeAttribute('disabled');
-        form.find('button[type="submit"]')
-            .removeAttribute('disabled');
+        form.querySelectorAll('input[type="submit"]').forEach(function (el) { el.removeAttribute("disabled"); });
+        form.querySelectorAll('button[type="submit"]').forEach(function (el) { el.removeAttribute("disabled"); });
     }
 
     /**
      * Disable all submit buttons once clicked
      */
-    document.querySelector('form').addEventListener('submit', function () {
-        disableSubmitButtons($(this));
-
-        return true;
-    });
-
-    /**
-     * Add a confirmation to a delete button/form
-     */
-    document.querySelector('body')
-        .addEventListener('submit', function (e) {
-            /**
-             * @type {HTMLElement}
-             */
-            const target = e.target;
-
-            if (target.getAttribute('name') !== 'delete-item') {
-
-            }
-
-        });
-
-    document.querySelectorAll('body')
-        .addEventListener('form[name="delete-item"]', function (e) {
-            e.preventDefault();
-
-            Swal.fire({
-                title: 'Are you sure you want to delete this item?',
-                showCancelButton: true,
-                confirmButtonText: 'Confirm Delete',
-                cancelButtonText: 'Cancel',
-                icon: 'warning'
-            }).then((result) => {
-                if (result.value) {
-                    this.submit()
-                } else {
-                    enableSubmitButtons($(this));
-                }
+    document.querySelectorAll("form")
+        .forEach(function (el) {
+            el.addEventListener("submit", function () {
+                disableSubmitButtons(this);
+                return true;
             });
         })
-        .addEventListener('form[name="confirm-item"]', function (e) {
-            e.preventDefault();
 
-            Swal.fire({
-                title: 'Are you sure you want to do this?',
-                showCancelButton: true,
-                confirmButtonText: 'Continue',
-                cancelButtonText: 'Cancel',
-                icon: 'warning'
-            }).then((result) => {
-                if (result.value) {
-                    this.submit()
-                } else {
-                    enableSubmitButtons($(this));
-                }
-            });
-        })
-        .addEventListener('a[name="confirm-item"]', function (e) {
-            /**
-             * Add an 'are you sure' pop-up to any button/link
-             */
-            e.preventDefault();
-
-            Swal.fire({
-                title: 'Are you sure you want to do this?',
-                showCancelButton: true,
-                confirmButtonText: 'Continue',
-                cancelButtonText: 'Cancel',
-                icon: 'info',
-            }).then((result) => {
-                result.value && window.location.assign($(this).attr('href'));
-            });
+    document.querySelectorAll("body")
+        .forEach(function (body) {
+            body.querySelectorAll('form[name="delete-item"] *').forEach(function (el) {
+                el.addEventListener('click', deleteConfirmHandler());
+            })
+            body.querySelectorAll('form[name="confirm-item"] *').forEach(function (el) {
+                el.addEventListener('click', submitConfirmHandler());
+            })
+            body.querySelectorAll('a[name="confirm-item]').forEach(function (el) {
+                el.addEventListener('click', redirectToUrlHandler());
+            })
         });
 
     // Remember tab on page load
-    $('a[data-bs-toggle="tab"], a[data-bs-toggle="pill"]').on('shown.bs.tab', function (e) {
-        let hash = $(e.target).attr('href');
-        history.pushState ? history.pushState(null, null, hash) : location.hash = hash;
-    });
+    document.querySelectorAll('a[data-bs-toggle="tab"], a[data-bs-toggle="pill"]')
+        .forEach(function (el) {
+            el.addEventListener("shown.bs.tab", function (e) {
+                let hash = e.target.setAttribute("href");
+                history.pushState
+                    ? history.pushState(null, null, hash)
+                    : (location.hash = hash);
+            });
+        });
 
+
+    // TODO: bootstrap related, needs to rewrite after jQuery is completely removed.
     let hash = window.location.hash;
     if (hash) {
-        $('.nav-link[href="' + hash + '"]').tab('show');
+        $('.nav-link[href="' + hash + '"]').tab("show"); 
     }
 
     // Enable tooltips everywhere
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+    );
+    const tooltipList = [...tooltipTriggerList].map(
+        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    );
 
     /**
      * Add one or more listeners to an element.
@@ -164,6 +113,42 @@ window.onload = function () {
      * @param  {Function}  listener   -  function to attach for each event as a listener
      */
     function addListenerMulti(el, s, fn) {
-        s.split(' ').forEach(e => el.addEventListener(e, fn, false));
+        s.split(" ").forEach((e) => el.addEventListener(e, fn, false));
     }
+
+    function deleteConfirmHandler() {
+        return actionConfirmHandler("Are you sure you want to delete this item?", "Confirm Delete", "Cancel", "warning");
+    }
+
+    function submitConfirmHandler() {
+        return actionConfirmHandler("Are you sure you want to do this?", "Confirm", "Cancel", "warning");
+    }
+
+    function redirectToUrlHandler() {
+        return actionConfirmHandler("Are you sure you want to do this?", "Confirm", "Cancel", "info");
+    }
+
+    function actionConfirmHandler(title, confirmButtonText, cancelButtonText, icon) {
+        let isDone = false;
+        return function (e) {
+            const showCancelButton = true;
+            if (isDone === true) {
+                isDone === false;
+                return;
+            }
+            e.preventDefault();
+            Swal.fire({
+                title, showCancelButton, confirmButtonText, cancelButtonText, icon
+            }).then((result) => {
+                if (result.value) {
+                    isDone = true;
+                    this.dispatchEvent(new e.constructor(e.type, e));
+                } else {
+                    enableSubmitButtons(e.target);
+                }
+            });
+        }
+    }
+
+
 };
