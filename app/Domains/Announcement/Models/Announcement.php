@@ -7,6 +7,7 @@ use App\Domains\Announcement\Models\Traits\Scope\AnnouncementScope;
 use Database\Factories\AnnouncementFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -18,7 +19,8 @@ class Announcement extends Model
     use AnnouncementMethod,
         AnnouncementScope,
         HasFactory,
-        LogsActivity;
+        LogsActivity,
+        SoftDeletes;
 
     /**
      * 列舉 area 作用區域
