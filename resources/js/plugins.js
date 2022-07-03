@@ -94,7 +94,7 @@ window.onload = function () {
     // TODO: bootstrap related, needs to rewrite after jQuery is completely removed.
     let hash = window.location.hash;
     if (hash) {
-        $('.nav-link[href="' + hash + '"]').tab("show"); 
+        $('.nav-link[href="' + hash + '"]').tab("show");
     }
 
     // Enable tooltips everywhere
@@ -149,6 +149,4 @@ window.onload = function () {
             });
         }
     }
-
-
 };
