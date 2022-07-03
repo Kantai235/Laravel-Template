@@ -5,21 +5,41 @@ window.onload = function () {
     /**
      * Checkbox tree for permission selecting
      */
-    let permissionTree = $('.permission-tree :checkbox');
+    let permissionTree = document.querySelectorAll('.permission-tree input[type=checkbox]');
 
-    permissionTree.on('click change', function () {
-        if ($(this).is(':checked')) {
-            $(this).siblings('ul').find('input[type="checkbox"]').attr('checked', true).attr('disabled', true);
-        } else {
-            $(this).siblings('ul').find('input[type="checkbox"]').removeAttr('checked').removeAttr('disabled');
-        }
+    permissionTree.forEach(function (perm) {
+        addListenerMulti(perm, "click change", function (e) {
+            const target = e.target;
+            if (target.checked) {
+                target.parentElement.querySelectorAll("input[type=checkbox]").forEach(function (el) {
+                    if (el === target) {
+                        return true;
+                    }
+                    el.setAttribute("disabled", true);
+                    el.checked = true;
+                });
+            } else {
+                target.parentElement.querySelectorAll("input[type=checkbox]").forEach(function (el) {
+                    el.removeAttribute("disabled");
+                    el.checked = false;
+                });
+            }
+        })
+
+
     });
 
-    permissionTree.each(function () {
-        if ($(this).is(':checked')) {
-            $(this).siblings('ul').find('input[type="checkbox"]').attr('checked', true).attr('disabled', true);
+    permissionTree.forEach(function (perm) {
+        if (perm.checked) {
+            perm.parentElement.querySelectorAll("input[type=checkbox]").forEach(function (el) {
+                if (el === perm) {
+                    return true;
+                }
+                el.setAttribute("disabled", true);
+                el.checked = true;
+            });
         }
-    });
+    })
 
     /**
      * Disable submit inputs in the given form
