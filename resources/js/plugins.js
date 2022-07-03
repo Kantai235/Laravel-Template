@@ -5,33 +5,19 @@ window.onload = function () {
     /**
      * Checkbox tree for permission selecting
      */
-    let permissionTree = document.querySelectorAll(
-        ".permission-tree input[type='checkbox']"
-    );
-    permissionTree.forEach(function (perm) {
-        addListenerMulti(perm, "click change", function (e) {
-            /** @type {HTMLElement} */
-            const target = e.target;
-            if (target.matches(":checked")) {
-                target.nextElementSibling
-                    ?.setAttribute("checked", true)
-                    ?.setAttribute("disabled", true);
-            } else {
-                target.nextElementSibling
-                    ?.removeAttribute("checked")
-                    ?.removeAttribute("disabled");
-            }
-        });
+    let permissionTree = $('.permission-tree :checkbox');
+
+    permissionTree.on('click change', function () {
+        if ($(this).is(':checked')) {
+            $(this).siblings('ul').find('input[type="checkbox"]').attr('checked', true).attr('disabled', true);
+        } else {
+            $(this).siblings('ul').find('input[type="checkbox"]').removeAttr('checked').removeAttr('disabled');
+        }
     });
 
-    permissionTree.forEach(function (e) {
-        /** @type {HTMLElement} */
-        const target = e;
-
-        if (target.matches(":checked")) {
-            target.nextElementSibling
-                ?.setAttribute("checked", true)
-                ?.setAttribute("disabled", true);
+    permissionTree.each(function () {
+        if ($(this).is(':checked')) {
+            $(this).siblings('ul').find('input[type="checkbox"]').attr('checked', true).attr('disabled', true);
         }
     });
 
@@ -64,7 +50,7 @@ window.onload = function () {
                 disableSubmitButtons(this);
                 return true;
             });
-        })
+        });
 
     document.querySelectorAll("body")
         .forEach(function (body) {
