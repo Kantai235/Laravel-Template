@@ -28,7 +28,13 @@ class PermissionRoleSeeder extends Seeder
         Role::create([
             'id' => 1,
             'type' => User::TYPE_ADMIN,
-            'name' => 'Administrator',
+            'name' => config('template.access.role.admin'),
+        ]);
+
+        Role::create([
+            'id' => 2,
+            'type' => User::TYPE_ADMIN,
+            'name' => config('template.access.role.announcement'),
         ]);
 
         // Non Grouped Permissions
