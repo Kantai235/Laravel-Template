@@ -20,7 +20,7 @@
         <x-utils.edit-button :href="route('admin.auth.user.edit', $user)" />
     @endif
 
-    @if (! $user->isActive())
+    @if (!$user->isActive())
         <x-utils.form-button
             :action="route('admin.auth.user.mark', [$user, 1])"
             method="patch"

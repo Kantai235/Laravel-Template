@@ -29,6 +29,10 @@ class RolesTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setTableWrapperAttributes([
+            'default' => false,
+            'class' => 'table-responsive-xl'
+        ]);
     }
 
     /**

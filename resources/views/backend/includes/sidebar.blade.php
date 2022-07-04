@@ -26,11 +26,26 @@
                 $logged_in_user->can('admin.access.user.reactivate') ||
                 $logged_in_user->can('admin.access.user.clear-session') ||
                 $logged_in_user->can('admin.access.user.impersonate') ||
-                $logged_in_user->can('admin.access.user.change-password')
+                $logged_in_user->can('admin.access.user.change-password') ||
+                $logged_in_user->can('admin.announcement.list') ||
+                $logged_in_user->can('admin.announcement.deactivate') ||
+                $logged_in_user->can('admin.announcement.reactivate')
             )
         )
             <li class="nav-title">@lang('System')</li><!--nav-title-->
+        @endif
 
+        @if (
+            $logged_in_user->hasAllAccess() ||
+            (
+                $logged_in_user->can('admin.access.user.list') ||
+                $logged_in_user->can('admin.access.user.deactivate') ||
+                $logged_in_user->can('admin.access.user.reactivate') ||
+                $logged_in_user->can('admin.access.user.clear-session') ||
+                $logged_in_user->can('admin.access.user.impersonate') ||
+                $logged_in_user->can('admin.access.user.change-password')
+            )
+        )
             <li class="nav-group {{ activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*'), 'open show') }}">
                 <x-utils.link
                     href="#"
@@ -70,6 +85,24 @@
                     @endif
                 </ul><!--nav-group-items-->
             </li><!--nav-group-->
+        @endif
+
+        @if (
+            $logged_in_user->hasAllAccess() ||
+            (
+                $logged_in_user->can('admin.announcement.list') ||
+                $logged_in_user->can('admin.announcement.deactivate') ||
+                $logged_in_user->can('admin.announcement.reactivate')
+            )
+        )
+            <li class="nav-item">
+                <x-utils.link
+                    class="nav-link"
+                    :href="route('admin.announcement.index')"
+                    :active="activeClass(Route::is('admin.announcement.*'), 'active')"
+                    icon="nav-icon cil-bullhorn"
+                    :text="__('Announcement')" />
+            </li><!--nav-item-->
         @endif
 
         @if ($logged_in_user->hasAllAccess())

@@ -8,9 +8,8 @@ namespace App\Domains\Announcement\Models\Traits\Scope;
 trait AnnouncementScope
 {
     /**
-     * @param $query
-     * @param $term
-     *
+     * @param  $query
+     * @param  $term
      * @return mixed
      */
     public function scopeSearch($query, $term)
