@@ -35,3 +35,4 @@ output.txt
 package-lock.json
 Thumbs.db
 yarn-error.log
+.phplint-cache
