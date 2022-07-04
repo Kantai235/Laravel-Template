@@ -20,7 +20,7 @@ class UsersTable extends DataTableComponent
     protected $model = User::class;
 
     /**
-     * @var
+     * @var string
      */
     public $status;
 
@@ -44,6 +44,7 @@ class UsersTable extends DataTableComponent
 
     /**
      * @param  string  $status
+     * @return void
      */
     public function mount($status = 'active'): void
     {
