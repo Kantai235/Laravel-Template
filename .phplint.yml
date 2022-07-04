@@ -4,4 +4,3 @@ extensions:
   - php
 exclude:
   - vendor
-warning: false
