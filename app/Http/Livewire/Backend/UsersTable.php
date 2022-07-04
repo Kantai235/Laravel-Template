@@ -36,7 +36,10 @@ class UsersTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setTableWrapperAttributes(['class' => 'overflow-visible']);
+        $this->setTableWrapperAttributes([
+            'default' => false,
+            'class' => 'table-responsive-xl'
+        ]);
     }
 
     /**
