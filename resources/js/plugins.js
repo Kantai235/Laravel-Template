@@ -1,3 +1,15 @@
+import i18next from "i18next";
+
+/**
+ * Translate text via i18next
+ * 
+ * @param {string} text 
+ * @returns translated string
+ */
+function __(text) {
+    return i18next.t(text);
+}
+
 /**
  * Place any helper plugins in here.
  */
@@ -123,15 +135,15 @@ window.onload = function () {
     }
 
     function deleteConfirmHandler() {
-        return actionConfirmHandler("Are you sure you want to delete this item?", "Confirm Delete", "Cancel", "warning");
+        return actionConfirmHandler(__("Are you sure you want to delete this item?"), __("Confirm Delete"), __("Cancel"), "warning");
     }
 
     function submitConfirmHandler() {
-        return actionConfirmHandler("Are you sure you want to do this?", "Confirm", "Cancel", "warning");
+        return actionConfirmHandler(__("Are you sure you want to do this?"), __("Confirm"), __("Cancel"), "warning");
     }
 
     function redirectToUrlHandler() {
-        return actionConfirmHandler("Are you sure you want to do this?", "Confirm", "Cancel", "info");
+        return actionConfirmHandler(__("Are you sure you want to do this?"), __("Confirm"), __("Cancel"), "info");
     }
 
     function actionConfirmHandler(title, confirmButtonText, cancelButtonText, icon) {
@@ -156,3 +168,4 @@ window.onload = function () {
         }
     }
 };
+
