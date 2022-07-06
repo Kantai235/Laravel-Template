@@ -14,4 +14,12 @@ trait AnnouncementMethod
     {
         return $this->enabled;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDismissable(): bool
+    {
+        return $this->dismissable;
+    }
 }

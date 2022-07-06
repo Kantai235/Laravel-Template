@@ -55,7 +55,7 @@ class AnnouncementTable extends DataTableComponent
      */
     public function builder(): Builder
     {
-        $query = Announcement::select('id', 'area', 'type', 'message', 'enabled', 'starts_at', 'ends_at');
+        $query = Announcement::select('id', 'area', 'type', 'message', 'enabled', 'dismissable', 'starts_at', 'ends_at');
 
         if ($this->status === 'deleted') {
             $query = $query->onlyTrashed();
@@ -117,6 +117,24 @@ class AnnouncementTable extends DataTableComponent
                         $builder->where('enabled', false);
                     }
                 }),
+            SelectFilter::make('Dismissable')
+                ->setFilterPillTitle('Dismissable Status')
+                ->setFilterPillValues([
+                    '1' => 'Dismissable',
+                    '0' => 'Undismissable',
+                ])
+                ->options([
+                    '' => 'All',
+                    '1' => 'Yes',
+                    '0' => 'No',
+                ])
+                ->filter(function(Builder $builder, string $value) {
+                    if ($value === '1') {
+                        $builder->where('dismissable', true);
+                    } elseif ($value === '0') {
+                        $builder->where('dismissable', false);
+                    }
+                }),
         ];
     }
 
@@ -136,7 +154,7 @@ class AnnouncementTable extends DataTableComponent
             Column::make(__('Area'), 'area')
                 ->sortable()
                 ->label(
-                    fn($row, Column $column) => view('backend.announcement.includes.area')->with('announcement', $row)
+                    fn($row, Column $column) => view('backend.announcement.includes.area')->with('announcement', $row)->with('block', true)
                 ),
             Column::make(__('Type'), 'type')
                 ->sortable()
@@ -146,7 +164,11 @@ class AnnouncementTable extends DataTableComponent
                 ->html(),
             Column::make(__('Enabled Status'), 'enabled')
                 ->label(
-                    fn($row, Column $column) => view('backend.announcement.includes.status')->with('announcement', $row)
+                    fn($row, Column $column) => view('backend.announcement.includes.status')->with('announcement', $row)->with('block', true)
+                ),
+            Column::make(__('Dismissable Status'), 'dismissable')
+                ->label(
+                    fn($row, Column $column) => view('backend.announcement.includes.dismissable')->with('announcement', $row)->with('block', true)
                 ),
             Column::make(__('Starts At'), 'starts_at')
                 ->sortable()

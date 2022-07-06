@@ -120,6 +120,7 @@ class Announcement extends Model
         'type',
         'message',
         'enabled',
+        'dismissable',
         'starts_at',
         'ends_at',
     ];
@@ -137,6 +138,7 @@ class Announcement extends Model
      */
     protected $casts = [
         'enabled' => 'boolean',
+        'dismissable' => 'boolean',
     ];
 
     /**

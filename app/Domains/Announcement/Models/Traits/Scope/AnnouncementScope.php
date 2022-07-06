@@ -30,6 +30,15 @@ trait AnnouncementScope
 
     /**
      * @param  $query
+     * @return mixed
+     */
+    public function scopeDismissable($query)
+    {
+        return $query->whereDismissable(true);
+    }
+
+    /**
+     * @param  $query
      * @param  $area
      * @return mixed
      */

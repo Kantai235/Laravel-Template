@@ -98,6 +98,12 @@
                     <label for="enabled" class="form-check-label">@lang('Enabled')</label>
                 </div><!--form-check-->
 
+                <div class="form-check form-switch form-switch-xl mb-3 mx-2">
+                    <input name="dismissable" id="dismissable" class="form-check-input" type="checkbox" role="switch" value="1" {{ old('dismissable', false) ? 'checked' : '' }} />
+
+                    <label for="dismissable" class="form-check-label">@lang('Dismissable')</label>
+                </div><!--form-check-->
+
                 <div class="form-check">
                     <input class="form-check-input p-2 mt-4" type="radio" name="type" id="type_primary" value="{{ $model::TYPE_PRIMARY }}" checked />
                     <label class="alert alert-primary w-100 m-1 message-demo" for="type_primary" role="alert">Message</label>

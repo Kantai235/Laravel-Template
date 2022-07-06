@@ -32,6 +32,7 @@ return new class extends Migration
             ])->default('info');
             $table->text('message');
             $table->boolean('enabled')->default(true);
+            $table->boolean('dismissable')->default(false);
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();
