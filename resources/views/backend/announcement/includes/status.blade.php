@@ -1,5 +1,5 @@
 @if($announcement->isEnabled())
-    <span class='badge bg-success w-100'>@lang('Enabled')</span>
+    <span class='badge bg-success {{ isset($block) && $block ? "w-100" : null }}'>@lang('Enabled')</span>
 @else
-    <span class='badge bg-danger w-100'>@lang('Inenabled')</span>
+    <span class='badge bg-danger {{ isset($block) && $block ? "w-100" : null }}'>@lang('Inenabled')</span>
 @endif
