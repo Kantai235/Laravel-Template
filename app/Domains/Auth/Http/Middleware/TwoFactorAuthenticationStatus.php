@@ -27,8 +27,7 @@ class TwoFactorAuthenticationStatus
         }
 
         // Page requires 2fa, but user is not enabled or page does not require 2fa, but it is enabled
-        if (
-            ($status === 'enabled' && !$request->user()->hasTwoFactorEnabled()) ||
+        if (($status === 'enabled' && !$request->user()->hasTwoFactorEnabled()) ||
             ($status === 'disabled' && $request->user()->hasTwoFactorEnabled())
         ) {
             return redirect()

@@ -59,7 +59,7 @@ class AnnouncementTable extends DataTableComponent
 
         if ($this->status === 'deleted') {
             $query = $query->onlyTrashed();
-        } else if ($this->status === 'deactivated') {
+        } elseif ($this->status === 'deactivated') {
             $query = $query->where('enabled', false);
         } else {
             $query = $query->where('enabled', true);
@@ -81,7 +81,7 @@ class AnnouncementTable extends DataTableComponent
                     Announcement::AREA_BACKEND => 'Backend',
                     Announcement::AREA_FRONTEND => 'Frontend',
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     $builder->where('area', $value);
                 }),
             SelectFilter::make('Type')
@@ -96,7 +96,7 @@ class AnnouncementTable extends DataTableComponent
                     Announcement::TYPE_LIGHT => 'Light',
                     Announcement::TYPE_DARK => 'Dark',
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     $builder->where('type', $value);
                 }),
             SelectFilter::make('Enabled')
@@ -110,7 +110,7 @@ class AnnouncementTable extends DataTableComponent
                     '1' => 'Yes',
                     '0' => 'No',
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     if ($value === '1') {
                         $builder->where('enabled', true);
                     } elseif ($value === '0') {
@@ -128,7 +128,7 @@ class AnnouncementTable extends DataTableComponent
                     '1' => 'Yes',
                     '0' => 'No',
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     if ($value === '1') {
                         $builder->where('dismissable', true);
                     } elseif ($value === '0') {

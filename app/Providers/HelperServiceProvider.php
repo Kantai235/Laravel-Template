@@ -22,8 +22,7 @@ class HelperServiceProvider extends ServiceProvider
         $it = new RecursiveIteratorIterator($rdi);
 
         while ($it->valid()) {
-            if (
-                !$it->isDot() &&
+            if (!$it->isDot() &&
                 $it->isFile() &&
                 $it->isReadable() &&
                 $it->current()->getExtension() === 'php' &&

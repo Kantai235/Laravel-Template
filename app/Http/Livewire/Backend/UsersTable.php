@@ -83,7 +83,7 @@ class UsersTable extends DataTableComponent
                     User::TYPE_ADMIN => 'Administrators',
                     User::TYPE_USER => 'Users',
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     $builder->where('type', $value);
                 }),
             SelectFilter::make('Active')
@@ -97,7 +97,7 @@ class UsersTable extends DataTableComponent
                     '1' => 'Yes',
                     '0' => 'No',
                 ])
-                ->filter(function(Builder $builder, string $value) {
+                ->filter(function (Builder $builder, string $value) {
                     if ($value === '1') {
                         $builder->where('active', true);
                     } elseif ($value === '0') {
@@ -114,10 +114,10 @@ class UsersTable extends DataTableComponent
     {
         return [
             ImageColumn::make(__('Avatar'))
-                ->location(function($row) {
+                ->location(function ($row) {
                     return asset($row->getAvatar());
                 })
-                ->attributes(function($row) {
+                ->attributes(function ($row) {
                     return [
                         'class' => 'img-fluid rounded',
                         'style' => 'max-width: 32px; max-height: 32px;',

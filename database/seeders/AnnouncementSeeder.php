@@ -37,52 +37,52 @@ class AnnouncementSeeder extends Seeder
                 'enabled' => true,
             ]);
 
-           Announcement::create([
+            Announcement::create([
                'area' => Announcement::AREA_FRONTEND,
                'type' => Announcement::TYPE_WARNING,
                'message' => 'This is a <strong>Frontend</strong> announcement that will not show on the backend.',
                'enabled' => true,
-           ]);
+            ]);
 
-           Announcement::create([
+            Announcement::create([
                'area' => Announcement::AREA_BACKEND,
                'type' => Announcement::TYPE_DANGER,
                'message' => 'This is a <strong>Backend</strong> announcement that will not show on the frontend.',
                'enabled' => true,
-           ]);
+            ]);
 
-           Announcement::create([
+            Announcement::create([
                'area' => null,
                'type' => Announcement::TYPE_DANGER,
                'message' => 'This announcement will be shown because the current time falls between the start and end dates.' ,
                'enabled' => true,
                'starts_at' => now()->subWeek(),
                'ends_at' => now()->addWeek()
-           ]);
+            ]);
 
-           Announcement::create([
+            Announcement::create([
                'area' => null,
                'type' => Announcement::TYPE_DANGER,
                'message' => 'This announcement will not be shown because it is disabled.' ,
                'enabled' => false,
-           ]);
+            ]);
 
-           Announcement::create([
+            Announcement::create([
                'area' => null,
                'type' => Announcement::TYPE_DANGER,
                'message' => 'This announcement will not be shown because the end date has passed.' ,
                'enabled' => true,
                'ends_at' => now()->subDay()
-           ]);
+            ]);
 
-           Announcement::create([
+            Announcement::create([
                'area' => null,
                'type' => Announcement::TYPE_DANGER,
                'message' => 'This announcement will not be shown because the current time does not fall between the start and end dates.' ,
                'enabled' => true,
                'starts_at' => now()->subWeek(),
                'ends_at' => now()->subDay()
-           ]);
+            ]);
         }
 
         $this->enableForeignKeys();
