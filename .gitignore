@@ -19,6 +19,7 @@ _ide_helper.php
 .env.backup
 .idea
 .php_cs.cache
+.phplint-cache
 .phpunit.result.cache
 .phpstorm.meta.php
 .rnd
@@ -35,4 +36,3 @@ output.txt
 package-lock.json
 Thumbs.db
 yarn-error.log
-.phplint-cache
