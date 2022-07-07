@@ -18,7 +18,7 @@ class UpdateRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function the_name_is_required()
+    public function theNameIsRequired()
     {
         $role = Role::factory()->create();
 
@@ -30,7 +30,7 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function a_role_name_can_be_updated()
+    public function aRoleNameCanBeUpdated()
     {
         Event::fake();
 
@@ -60,7 +60,7 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function the_admin_role_can_not_be_updated()
+    public function theAdminRoleCanNotBeUpdated()
     {
         $this->loginAsAdmin();
 
@@ -78,7 +78,7 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_edit_roles()
+    public function onlyAdminCanEditRoles()
     {
         $this->loginAsAdmin();
 
@@ -88,7 +88,7 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function the_admin_role_can_not_be_edited()
+    public function theAdminRoleCanNotBeEdited()
     {
         $this->loginAsAdmin();
 
@@ -100,7 +100,7 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function a_non_admin_can_not_edit_roles()
+    public function aNonAdminCanNotEditRoles()
     {
         $this->actingAs(User::factory()->create());
 
@@ -112,7 +112,7 @@ class UpdateRoleTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_update_roles()
+    public function onlyAdminCanUpdateRoles()
     {
         $this->actingAs(User::factory()->admin()->create());
 

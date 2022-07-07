@@ -13,13 +13,13 @@ use Tests\TestCase;
 class RegistrationTest extends TestCase
 {
     /** @test */
-    public function the_register_route_exists()
+    public function theRegisterRouteExists()
     {
         $this->get('/register')->assertOk();
     }
 
     /** @test */
-    public function registration_requires_validation()
+    public function registrationRequiresValidation()
     {
         $response = $this->post('/register');
 
@@ -27,7 +27,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function email_must_be_unique()
+    public function emailMustBeUnique()
     {
         User::factory()->create(['email' => 'john@example.com']);
 
@@ -42,7 +42,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function password_must_be_confirmed()
+    public function passwordMustBeConfirmed()
     {
         $response = $this->post('/register', [
             'name' => 'John Doe',
@@ -54,7 +54,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function passwords_must_be_equivalent()
+    public function passwordsMustBeEquivalent()
     {
         $response = $this->post('/register', [
             'name' => 'John Doe',
@@ -67,7 +67,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function user_registration_can_be_disabled()
+    public function userRegistrationCanBeDisabled()
     {
         config(['template.access.user.registration' => false]);
 
@@ -75,7 +75,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_register_an_account()
+    public function aUserCanRegisterAnAccount()
     {
         $this->post('/register', [
             'name' => 'John Doe',
@@ -94,7 +94,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cant_register_an_account_if_they_dont_accept_the_terms()
+    public function aUserCantRegisterAnAccountIfTheyDontAcceptTheTerms()
     {
         $response = $this->post('/register', [
             'name' => 'John Doe',

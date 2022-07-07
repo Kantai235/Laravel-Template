@@ -14,13 +14,13 @@ use Tests\TestCase;
 class ResetPasswordTest extends TestCase
 {
     /** @test */
-    public function the_password_reset_route_exists()
+    public function thePasswordResetRouteExists()
     {
         $this->get('password/reset')->assertOk();
     }
 
     /** @test */
-    public function password_reset_requires_validation()
+    public function passwordResetRequiresValidation()
     {
         $response = $this->post('/password/email');
 
@@ -28,7 +28,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function a_notification_gets_sent_if_password_reset_is_requested()
+    public function aNotificationGetsSentIfPasswordResetIsRequested()
     {
         Notification::fake();
 
@@ -40,7 +40,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function the_reset_password_form_has_required_fields()
+    public function theResetPasswordFormHasRequiredFields()
     {
         $response = $this->post('password/reset', [
             'token' => '',
@@ -53,7 +53,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function a_password_can_be_reset()
+    public function aPasswordCanBeReset()
     {
         $user = User::factory()->create(['email' => 'john@example.com']);
 
@@ -70,7 +70,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function the_password_can_be_validated()
+    public function thePasswordCanBeValidated()
     {
         $user = User::factory()->create(['email' => 'john@example.com']);
 
@@ -91,7 +91,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_use_the_same_password_when_history_is_off_on_password_reset()
+    public function aUserCanUseTheSamePasswordWhenHistoryIsOffOnPasswordReset()
     {
         config(['template.access.user.password_history' => false]);
 
@@ -112,7 +112,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_not_use_the_same_password_when_history_is_on_on_password_reset()
+    public function aUserCanNotUseTheSamePasswordWhenHistoryIsOnOnPasswordReset()
     {
         config(['template.access.user.password_history' => 3]);
 
@@ -141,7 +141,10 @@ class ResetPasswordTest extends TestCase
 
         $response->assertSessionHasErrors();
         $errors = session('errors');
-        $this->assertSame($errors->get('password')[0], __('You can not set a password that you have previously used within the last 3 times.'));
+        $this->assertSame(
+            $errors->get('password')[0],
+            __('You can not set a password that you have previously used within the last 3 times.')
+        );
         $this->assertTrue(Hash::check(':ZqD~57}1t', $user->fresh()->password));
     }
 }

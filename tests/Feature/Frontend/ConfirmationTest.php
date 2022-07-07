@@ -11,7 +11,7 @@ use Tests\TestCase;
 class ConfirmationTest extends TestCase
 {
     /** @test */
-    public function a_user_can_access_the_confirm_password_page()
+    public function aUserCanAccessTheConfirmPasswordPage()
     {
         $user = User::factory()->create();
 

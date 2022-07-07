@@ -22,6 +22,7 @@ trait DisableForeignKeys
             'disable' => 'PRAGMA foreign_keys = OFF;',
         ],
         'sqlsrv' => [
+            // phpcs:disable
             'enable' => 'EXEC sp_msforeachtable @command1="print \'?\'", @command2="ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all";',
             'disable' => 'EXEC sp_msforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all";',
         ],

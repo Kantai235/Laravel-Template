@@ -17,19 +17,19 @@ class UpdateUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_admin_can_access_the_edit_user_page()
+    public function anAdminCanAccessTheEditUserPage()
     {
         $this->loginAsAdmin();
 
         $user = User::factory()->create();
 
-        $response = $this->get('/admin/auth/user/'.$user->id.'/edit');
+        $response = $this->get('/admin/auth/user/' . $user->id . '/edit');
 
         $response->assertOk();
     }
 
     /** @test */
-    public function a_user_can_be_updated()
+    public function aUserCanBeUpdated()
     {
         Event::fake();
 
@@ -70,7 +70,7 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function only_the_master_admin_can_edit_themselves()
+    public function onlyTheMasterAdminCanEditThemselves()
     {
         $admin = $this->loginAsAdmin();
 
@@ -89,7 +89,7 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function only_the_master_admin_can_update_themselves()
+    public function onlyTheMasterAdminCanUpdateThemselves()
     {
         $admin = $this->loginAsAdmin();
 
@@ -135,7 +135,7 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function the_master_admins_abilities_can_not_be_modified()
+    public function theMasterAdminsAbilitiesCanNotBeModified()
     {
         $admin = $this->loginAsAdmin();
 
@@ -161,7 +161,7 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_update_roles()
+    public function onlyAdminCanUpdateRoles()
     {
         $this->actingAs(User::factory()->admin()->create());
 

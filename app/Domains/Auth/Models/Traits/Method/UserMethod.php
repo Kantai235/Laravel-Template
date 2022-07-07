@@ -99,6 +99,10 @@ trait UserMethod
      */
     public function getAvatar($size = null)
     {
-        return 'https://gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?s=' . config('template.avatar.size', $size) . '&d=mp';
+        return sprintf(
+            'https://www.gravatar.com/avatar/%s?s=%s&d=mp',
+            md5(strtolower(trim($this->email))),
+            config('template.avatar.size', $size)
+        );
     }
 }

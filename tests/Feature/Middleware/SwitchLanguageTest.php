@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SwitchLanguageTest extends TestCase
 {
     /** @test */
-    public function the_language_can_be_switched()
+    public function theLanguageCanBeSwitched()
     {
         $response = $this->get('/lang/de');
 

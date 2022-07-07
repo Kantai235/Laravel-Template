@@ -14,7 +14,7 @@ class ListUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function only_a_user_with_correct_permissions_can_list_users()
+    public function onlyAUserWithCorrectPermissionsCanListUsers()
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
@@ -30,7 +30,7 @@ class ListUserTest extends TestCase
     }
 
     /** @test */
-    public function only_a_user_with_correct_permissions_can_view_an_individual_user()
+    public function onlyAUserWithCorrectPermissionsCanViewAnIndividualUser()
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
@@ -38,11 +38,11 @@ class ListUserTest extends TestCase
 
         $newUser = User::factory()->create();
 
-        $this->get('/admin/auth/user/'.$newUser->id)->assertOk();
+        $this->get('/admin/auth/user/' . $newUser->id)->assertOk();
 
         $user->syncPermissions([]);
 
-        $response = $this->get('/admin/auth/user/'.$newUser->id);
+        $response = $this->get('/admin/auth/user/' . $newUser->id);
 
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
     }

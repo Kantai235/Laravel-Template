@@ -19,7 +19,7 @@ class CreateUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_admin_can_access_the_create_user_page()
+    public function anAdminCanAccessTheCreateUserPage()
     {
         $this->loginAsAdmin();
 
@@ -29,7 +29,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function create_user_requires_validation()
+    public function createUserRequiresValidation()
     {
         $this->loginAsAdmin();
 
@@ -39,7 +39,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function user_email_needs_to_be_unique()
+    public function userEmailNeedsToBeUnique()
     {
         $this->loginAsAdmin();
 
@@ -53,7 +53,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_create_new_user()
+    public function adminCanCreateNewUser()
     {
         Event::fake();
 
@@ -93,7 +93,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function when_an_unconfirmed_user_is_created_a_notification_will_be_sent()
+    public function whenAnUnconfirmedUserIsCreatedANotificationWillBeSent()
     {
         Notification::fake();
 
@@ -119,7 +119,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_create_users()
+    public function onlyAdminCanCreateUsers()
     {
         $this->actingAs(User::factory()->admin()->create());
 

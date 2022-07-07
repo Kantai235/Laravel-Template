@@ -15,7 +15,7 @@ class ChangeUserPasswordTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function only_a_user_with_correct_permissions_can_visit_the_change_user_password_page()
+    public function onlyAUserWithCorrectPermissionsCanVisitTheChangeUserPasswordPage()
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
@@ -23,17 +23,17 @@ class ChangeUserPasswordTest extends TestCase
 
         $newUser = User::factory()->create();
 
-        $this->get('/admin/auth/user/'.$newUser->id.'/password/change')->assertOk();
+        $this->get('/admin/auth/user/' . $newUser->id . '/password/change')->assertOk();
 
         $user->syncPermissions([]);
 
-        $response = $this->get('/admin/auth/user/'.$newUser->id.'/password/change');
+        $response = $this->get('/admin/auth/user/' . $newUser->id . '/password/change');
 
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
     }
 
     /** @test */
-    public function only_a_user_with_correct_permissions_can_change_a_users_password()
+    public function onlyAUserWithCorrectPermissionsCanChangeAUsersPassword()
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
@@ -41,7 +41,7 @@ class ChangeUserPasswordTest extends TestCase
 
         $newUser = User::factory()->create();
 
-        $response = $this->patch('/admin/auth/user/'.$newUser->id.'/password/change', [
+        $response = $this->patch('/admin/auth/user/' . $newUser->id . '/password/change', [
             'password' => 'OC4Nzu270N!QBVi%U%qX',
             'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
@@ -50,7 +50,7 @@ class ChangeUserPasswordTest extends TestCase
 
         $user->syncPermissions([]);
 
-        $response = $this->patch('/admin/auth/user/'.$newUser->id.'/password/change', [
+        $response = $this->patch('/admin/auth/user/' . $newUser->id . '/password/change', [
             'password' => 'OC4Nzu270N!QBVi%U%qX',
             'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
@@ -59,7 +59,7 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function the_password_can_be_validated()
+    public function thePasswordCanBeValidated()
     {
         $this->loginAsAdmin();
 
@@ -74,7 +74,7 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function the_passwords_must_match()
+    public function thePasswordsMustMatch()
     {
         $this->loginAsAdmin();
 
@@ -89,7 +89,7 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function only_the_master_admin_can_view_the_change_password_screen()
+    public function onlyTheMasterAdminCanViewTheChangePasswordScreen()
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
@@ -97,7 +97,7 @@ class ChangeUserPasswordTest extends TestCase
 
         $admin = $this->getMasterAdmin();
 
-        $response = $this->get('/admin/auth/user/'.$admin->id.'/password/change');
+        $response = $this->get('/admin/auth/user/' . $admin->id . '/password/change');
 
         $response->assertSessionHas('flash_danger', __('Only the administrator can change their password.'));
 
@@ -105,11 +105,11 @@ class ChangeUserPasswordTest extends TestCase
 
         $this->loginAsAdmin();
 
-        $this->get('/admin/auth/user/'.$admin->id.'/password/change')->assertOk();
+        $this->get('/admin/auth/user/' . $admin->id . '/password/change')->assertOk();
     }
 
     /** @test */
-    public function only_the_master_admin_can_change_their_password()
+    public function onlyTheMasterAdminCanChangeTheirPassword()
     {
         $this->actingAs($user = User::factory()->admin()->create());
 
@@ -117,7 +117,7 @@ class ChangeUserPasswordTest extends TestCase
 
         $admin = $this->getMasterAdmin();
 
-        $response = $this->patch('/admin/auth/user/'.$admin->id.'/password/change', [
+        $response = $this->patch('/admin/auth/user/' . $admin->id . '/password/change', [
             'password' => 'OC4Nzu270N!QBVi%U%qX',
             'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
@@ -128,7 +128,7 @@ class ChangeUserPasswordTest extends TestCase
 
         $this->loginAsAdmin();
 
-        $response = $this->patch('/admin/auth/user/'.$admin->id.'/password/change', [
+        $response = $this->patch('/admin/auth/user/' . $admin->id . '/password/change', [
             'password' => 'OC4Nzu270N!QBVi%U%qX',
             'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
@@ -138,7 +138,7 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_use_the_same_password_when_history_is_off_on_backend_user_password_change()
+    public function anAdminCanUseTheSamePasswordWhenHistoryIsOffOnBackendUserPasswordChange()
     {
         config(['template.access.user.password_history' => false]);
 
@@ -156,7 +156,7 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function an_admin_can_not_use_the_same_password_when_history_is_on_on_backend_user_password_change()
+    public function anAdminCanNotUseTheSamePasswordWhenHistoryIsOnOnBackendUserPasswordChange()
     {
         config(['template.access.user.password_history' => 3]);
 
@@ -176,7 +176,10 @@ class ChangeUserPasswordTest extends TestCase
 
         $response->assertSessionHasErrors();
         $errors = session('errors');
-        $this->assertSame($errors->get('password')[0], __('You can not set a password that you have previously used within the last 3 times.'));
+        $this->assertSame(
+            $errors->get('password')[0],
+            __('You can not set a password that you have previously used within the last 3 times.')
+        );
         $this->assertTrue(Hash::check('OC4Nzu270N!QBVi%U%qX_02', $user->fresh()->password));
     }
 }

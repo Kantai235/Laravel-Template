@@ -11,7 +11,7 @@ use Tests\TestCase;
 class DashboardTest extends TestCase
 {
     /** @test */
-    public function only_authenticated_users_can_access_their_account()
+    public function onlyAuthenticatedUsersCanAccessTheirAccount()
     {
         $this->get('/dashboard')->assertRedirect('/login');
 

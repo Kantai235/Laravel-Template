@@ -34,7 +34,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAllAccess() ? true : null;
         });
 
-        // Learn when to use this instead: https://docs.spatie.be/laravel-permission/v3/basic-usage/super-admin/#gate-after
+        // Learn when to use this instead:
+        // https://docs.spatie.be/laravel-permission/v3/basic-usage/super-admin/#gate-after
         // Gate::after(function ($user) {
         //     return $user->hasAllAccess();
         // });
