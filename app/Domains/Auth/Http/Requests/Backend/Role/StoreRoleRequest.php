@@ -44,7 +44,9 @@ class StoreRoleRequest extends FormRequest
     public function messages()
     {
         return [
-            'permissions.*.exists' => __('One or more permissions were not found or are not allowed to be associated with this role type.'),
+            'permissions.*.exists' => __(
+                'One or more permissions were not found or are not allowed to be associated with this role type.'
+            ),
         ];
     }
 }

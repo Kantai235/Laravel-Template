@@ -38,8 +38,11 @@ class UserController
      * @param  RoleService  $roleService
      * @param  PermissionService  $permissionService
      */
-    public function __construct(UserService $userService, RoleService $roleService, PermissionService $permissionService)
-    {
+    public function __construct(
+        UserService $userService,
+        RoleService $roleService,
+        PermissionService $permissionService
+    ) {
         $this->userService = $userService;
         $this->roleService = $roleService;
         $this->permissionService = $permissionService;

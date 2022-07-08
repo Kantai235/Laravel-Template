@@ -40,25 +40,31 @@ class BladeServiceProvider extends ServiceProvider
 
             $html .= new HtmlString('
                 <div class="g-recaptcha"
-                    data-sitekey="'.config('template.access.captcha.configs.site_key').'"
+                    data-sitekey="' . config('template.access.captcha.configs.site_key') . '"
                     data-size="invisible"
                     data-callback="_submitForm"
-                    data-badge="'.config('template.access.captcha.configs.options.location').'">
+                    data-badge="' . config('template.access.captcha.configs.options.location') . '">
                 </div>');
-
-            $html .= new HtmlString('<script src="'.($lang ? 'https://www.google.com/recaptcha/api.js'.'?hl='.$lang : 'https://www.google.com/recaptcha/api.js').'" async defer></script>');
+            $html .= new HtmlString(sprintf(
+                '<script src="%s" async defer></script>',
+                $lang ? sprintf('https://www.google.com/recaptcha/api.js?hl=%s', $lang)
+                    : 'https://www.google.com/recaptcha/api.js'
+            ));
             $html .= new HtmlString('<script>var _submitForm,_captchaForm,_captchaSubmit,_execute=true;</script>');
             $html .= new HtmlString("<script>window.addEventListener('load', _loadCaptcha);");
             $html .= new HtmlString('function _loadCaptcha(){');
 
             if (config('template.access.captcha.configs.options.hidden')) {
-                $html .= new HtmlString("document.querySelector('.grecaptcha-badge').style = 'display:none;!important';");
+                $html .= new HtmlString(
+                    "document.querySelector('.grecaptcha-badge').style = 'display:none;!important';"
+                );
             }
 
             $html .= new HtmlString('
                 _captchaForm=document.querySelector("#_g-recaptcha").closest("form");
                 _captchaSubmit=_captchaForm.querySelector(\'[type=submit]\');
-                _submitForm=function(){if(typeof _submitEvent==="function"){_submitEvent();grecaptcha.reset();}else{_captchaForm.submit();}};
+                _submitForm=function(){if(typeof _submitEvent==="function")
+                {_submitEvent();grecaptcha.reset();}else{_captchaForm.submit();}};
                 _captchaForm.addEventListener(\'submit\',function(e){e.preventDefault();
                 if(typeof _beforeSubmit===\'function\'){_execute=_beforeSubmit(e);}
                 if(_execute){grecaptcha.execute();}});}</script>

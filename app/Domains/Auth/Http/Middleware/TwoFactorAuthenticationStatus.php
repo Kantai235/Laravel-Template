@@ -32,7 +32,12 @@ class TwoFactorAuthenticationStatus
         ) {
             return redirect()
                 ->route('frontend.auth.account.2fa.create')
-                ->withFlashDanger(__('Two-factor Authentication must be :status to view this page.', ['status' => $status]));
+                ->withFlashDanger(
+                    __(
+                        'Two-factor Authentication must be :status to view this page.',
+                        ['status' => $status]
+                    )
+                );
         }
 
         return $next($request);

@@ -17,6 +17,7 @@ use Tabuna\Breadcrumbs\Trail;
  * Frontend Access Controllers
  * All route names are prefixed with 'frontend.auth'.
  */
+
 Route::group(['as' => 'auth.'], function () {
     Route::group(['middleware' => 'auth'], function () {
         // Authentication
@@ -40,7 +41,10 @@ Route::group(['as' => 'auth.'], function () {
             // These routes require the users email to be verified
             Route::group(['middleware' => config('template.access.middleware.verified')], function () {
                 // Passwords
-                Route::get('password/confirm', [ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
+                Route::get(
+                    'password/confirm',
+                    [ConfirmPasswordController::class, 'showConfirmForm']
+                )->name('password.confirm');
                 Route::post('password/confirm', [ConfirmPasswordController::class, 'confirm']);
 
                 Route::patch('password/update', [UpdatePasswordController::class, 'update'])->name('password.change');
@@ -52,7 +56,10 @@ Route::group(['as' => 'auth.'], function () {
                             ->name('create')
                             ->breadcrumbs(function (Trail $trail) {
                                 $trail->parent('frontend.user.account')
-                                    ->push(__('Enable Two Factor Authentication'), route('frontend.auth.account.2fa.create'));
+                                    ->push(
+                                        __('Enable Two Factor Authentication'),
+                                        route('frontend.auth.account.2fa.create')
+                                    );
                             });
                     });
 
@@ -64,16 +71,25 @@ Route::group(['as' => 'auth.'], function () {
                                     ->push(__('Two Factor Recovery Codes'), route('frontend.auth.account.2fa.show'));
                             });
 
-                        Route::patch('recovery/generate', [TwoFactorAuthenticationController::class, 'update'])->name('update');
+                        Route::patch(
+                            'recovery/generate',
+                            [TwoFactorAuthenticationController::class, 'update']
+                        )->name('update');
 
                         Route::get('disable', [DisableTwoFactorAuthenticationController::class, 'show'])
                             ->name('disable')
                             ->breadcrumbs(function (Trail $trail) {
                                 $trail->parent('frontend.user.account')
-                                    ->push(__('Disable Two Factor Authentication'), route('frontend.auth.account.2fa.disable'));
+                                    ->push(
+                                        __('Disable Two Factor Authentication'),
+                                        route('frontend.auth.account.2fa.disable')
+                                    );
                             });
 
-                        Route::delete('/', [DisableTwoFactorAuthenticationController::class, 'destroy'])->name('destroy');
+                        Route::delete('/', [
+                            DisableTwoFactorAuthenticationController::class,
+                            'destroy'
+                        ])->name('destroy');
                     });
                 });
             });
@@ -90,7 +106,8 @@ Route::group(['as' => 'auth.'], function () {
         Route::post('register', [RegisterController::class, 'register']);
 
         // Password Reset
-        Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])
+            ->name('password.request');
         Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
         Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
         Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');

@@ -53,8 +53,12 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'roles.*.exists' => __('One or more roles were not found or are not allowed to be associated with this user type.'),
-            'permissions.*.exists' => __('One or more permissions were not found or are not allowed to be associated with this user type.'),
+            'roles.*.exists' => __(
+                'One or more roles were not found or are not allowed to be associated with this user type.'
+            ),
+            'permissions.*.exists' => __(
+                'One or more permissions were not found or are not allowed to be associated with this user type.'
+            ),
         ];
     }
 

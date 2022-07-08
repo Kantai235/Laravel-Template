@@ -92,7 +92,9 @@ class UserService extends BaseService
             } catch (Exception $e) {
                 DB::rollBack();
 
-                throw new GeneralException(__('There was a problem connecting to :provider', ['provider' => $provider]));
+                throw new GeneralException(__('There was a problem connecting to :provider', [
+                    'provider' => $provider
+                ]));
             }
 
             DB::commit();
@@ -138,6 +140,7 @@ class UserService extends BaseService
         DB::commit();
 
         // They didn't want to auto verify the email, but do they want to send the confirmation email to do so?
+        // phpcs:disable
         if (!isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
             $user->sendEmailVerificationNotification();
         }

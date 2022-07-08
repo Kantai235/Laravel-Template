@@ -58,7 +58,10 @@ Route::group([
 
             Route::group(['prefix' => '{deletedUser}'], function () {
                 Route::patch('restore', [DeletedUserController::class, 'update'])->name('restore');
-                Route::delete('permanently-delete', [DeletedUserController::class, 'destroy'])->name('permanently-delete');
+                Route::delete(
+                    'permanently-delete',
+                    [DeletedUserController::class, 'destroy']
+                )->name('permanently-delete');
             });
         });
 

@@ -54,9 +54,11 @@ class UserEventListener
                     'email_verified_at' => $event->user->email_verified_at,
                 ],
                 'roles' => $event->user->roles->count() ? $event->user->roles->pluck('name')->implode(', ') : 'None',
-                'permissions' => $event->user->permissions ? $event->user->permissions->pluck('description')->implode(', ') : 'None',
-            ])
-            ->log(':causer.name created user :subject.name with roles: :properties.roles and permissions: :properties.permissions');
+                'permissions' => $event->user->permissions
+                    ? $event->user->permissions->pluck('description')->implode(', ')
+                    : 'None',
+                // phpcs:disable
+            ])->log(':causer.name created user :subject.name with roles: :properties.roles and permissions: :properties.permissions');
     }
 
     /**
@@ -73,9 +75,11 @@ class UserEventListener
                     'email' => $event->user->email,
                 ],
                 'roles' => $event->user->roles->count() ? $event->user->roles->pluck('name')->implode(', ') : 'None',
-                'permissions' => $event->user->permissions ? $event->user->permissions->pluck('description')->implode(', ') : 'None',
-            ])
-            ->log(':causer.name updated user :subject.name with roles: :properties.roles and permissions: :properties.permissions');
+                'permissions' => $event->user->permissions
+                    ? $event->user->permissions->pluck('description')->implode(', ')
+                    : 'None',
+                // phpcs:disable
+            ])->log(':causer.name updated user :subject.name with roles: :properties.roles and permissions: :properties.permissions');
     }
 
     /**

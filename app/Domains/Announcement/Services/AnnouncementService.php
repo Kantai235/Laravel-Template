@@ -71,7 +71,9 @@ class AnnouncementService extends BaseService
         DB::beginTransaction();
 
         try {
-            $starts_at = ($data['starts_at_date'] !== null) ? $data['starts_at_date'] . ' ' . $data['starts_at_time'] : null;
+            $starts_at = ($data['starts_at_date'] !== null)
+                ? $data['starts_at_date'] . ' ' . $data['starts_at_time']
+                : null;
             $ends_at = ($data['ends_at_date'] !== null) ? $data['ends_at_date'] . ' ' . $data['ends_at_time'] : null;
             $announcement = $this->createAnnouncement([
                 'type' => $data['type'],
@@ -106,7 +108,9 @@ class AnnouncementService extends BaseService
         DB::beginTransaction();
 
         try {
-            $starts_at = ($data['starts_at_date'] !== null) ? $data['starts_at_date'] . ' ' . $data['starts_at_time'] : null;
+            $starts_at = ($data['starts_at_date'] !== null)
+                ? $data['starts_at_date'] . ' ' . $data['starts_at_time']
+                : null;
             $ends_at = ($data['ends_at_date'] !== null) ? $data['ends_at_date'] . ' ' . $data['ends_at_time'] : null;
             $announcement->update([
                 'type' => $data['type'],
