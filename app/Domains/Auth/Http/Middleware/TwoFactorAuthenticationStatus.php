@@ -34,8 +34,11 @@ class TwoFactorAuthenticationStatus
                 ->route('frontend.auth.account.2fa.create')
                 ->withFlashDanger(
                     __(
+                        // phpcs:disable
                         'Two-factor Authentication must be :status to view this page.',
-                        ['status' => $status]
+                        [
+                            'status' => $status,
+                        ]
                     )
                 );
         }

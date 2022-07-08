@@ -37,7 +37,7 @@ class AnnouncementTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setTableWrapperAttributes([
             'default' => false,
-            'class' => 'table-responsive-xl'
+            'class' => 'table-responsive-xl',
         ]);
     }
 
@@ -74,8 +74,10 @@ class AnnouncementTable extends DataTableComponent
             $query = $query->where('enabled', true);
         }
 
-        return $query
-            ->when(null, fn ($query, $message) => $query->where('announcement.message', 'like', '%' . $message . '%'));
+        return $query->when(
+            null,
+            fn ($query, $message) => $query->where('announcement.message', 'like', '%' . $message . '%')
+        );
     }
 
     /**
@@ -157,49 +159,58 @@ class AnnouncementTable extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->format(
-                    fn ($value, $row, Column $column) =>
-                    '<div class="alert alert-' . $row->type . ' p-1 m-0" role="alert">' . $row->message . '</div>'
+                    fn ($value, $row, Column $column) => sprintf(
+                        '<div class="alert alert-%s p-1 m-0" role="alert">%s</div>',
+                        $row->type,
+                        $row->message,
+                    )
                 )
                 ->html(),
             Column::make(__('Area'), 'area')
                 ->sortable()
                 ->label(
-                    fn ($row, Column $column) =>
-                    view('backend.announcement.includes.area')->with('announcement', $row)->with('block', true)
+                    fn ($row, Column $column) => view('backend.announcement.includes.area')
+                        ->with('announcement', $row)
+                        ->with('block', true)
                 ),
             Column::make(__('Type'), 'type')
                 ->sortable()
                 ->format(
-                    fn ($value, $row, Column $column) =>
-                    '<span class="badge bg-' . $row->type . ' w-100">' . strtoupper($row->type) . '</span>'
+                    fn ($value, $row, Column $column) => sprintf(
+                        '<span class="badge bg-%s w-100">%s</span>',
+                        $row->type,
+                        strtoupper($row->type),
+                    )
                 )
                 ->html(),
             Column::make(__('Enabled Status'), 'enabled')
                 ->label(
-                    fn ($row, Column $column) =>
-                    view('backend.announcement.includes.status')->with('announcement', $row)->with('block', true)
+                    fn ($row, Column $column) => view('backend.announcement.includes.status')
+                        ->with('announcement', $row)
+                        ->with('block', true)
                 ),
             Column::make(__('Dismissable Status'), 'dismissable')
                 ->label(
-                    fn ($row, Column $column) =>
-                    view('backend.announcement.includes.dismissable')->with('announcement', $row)->with('block', true)
+                    fn ($row, Column $column) => view('backend.announcement.includes.dismissable')
+                        ->with('announcement', $row)
+                        ->with('block', true)
                 ),
             Column::make(__('Starts At'), 'starts_at')
                 ->sortable()
                 ->label(
-                    fn ($row, Column $column) =>
-                    view('backend.announcement.includes.starts')->with('announcement', $row)
+                    fn ($row, Column $column) => view('backend.announcement.includes.starts')
+                        ->with('announcement', $row)
                 ),
             Column::make(__('Ends At'), 'ends_at')
                 ->sortable()
                 ->label(
-                    fn ($row, Column $column) =>
-                    view('backend.announcement.includes.ends')->with('announcement', $row)
+                    fn ($row, Column $column) => view('backend.announcement.includes.ends')
+                        ->with('announcement', $row)
                 ),
             Column::make(__('Actions'))
                 ->label(
-                    fn ($row, Column $column) =>
-                    view('backend.announcement.includes.actions')->with('announcement', $row)
+                    fn ($row, Column $column) => view('backend.announcement.includes.actions')
+                        ->with('announcement', $row)
                 ),
         ];
     }

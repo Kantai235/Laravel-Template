@@ -10,9 +10,14 @@ if (!function_exists('activeClass')) {
      *
      * @return string
      */
-    function activeClass($condition, $activeClass = 'active', $inactiveClass = '')
-    {
-        return $condition ? $activeClass : $inactiveClass;
+    function activeClass(
+        $condition,
+        $activeClass = 'active',
+        $inactiveClass = ''
+    ) {
+        return $condition
+            ? $activeClass
+            : $inactiveClass;
     }
 }
 

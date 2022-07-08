@@ -38,7 +38,7 @@ class UsersTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setTableWrapperAttributes([
             'default' => false,
-            'class' => 'table-responsive-xl'
+            'class' => 'table-responsive-xl',
         ]);
     }
 
@@ -56,7 +56,8 @@ class UsersTable extends DataTableComponent
      */
     public function builder(): Builder
     {
-        $query = User::with('roles', 'twoFactorAuth')->withCount('twoFactorAuth');
+        $query = User::with('roles', 'twoFactorAuth')
+            ->withCount('twoFactorAuth');
 
         if ($this->status === 'deleted') {
             $query = $query->onlyTrashed();
@@ -133,15 +134,18 @@ class UsersTable extends DataTableComponent
                 ->searchable(),
             Column::make('Active')
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.status')->with('user', $row)
+                    fn($row, Column $column) => view('backend.auth.user.includes.status')
+                        ->with('user', $row)
                 ),
             Column::make('Verified')
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.verified')->with('user', $row)
+                    fn($row, Column $column) => view('backend.auth.user.includes.verified')
+                        ->with('user', $row)
                 ),
             Column::make(__('2FA'))
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.2fa')->with('user', $row)
+                    fn($row, Column $column) => view('backend.auth.user.includes.2fa')
+                        ->with('user', $row)
                 ),
             Column::make(__('Roles'))
                 ->label(
@@ -153,7 +157,8 @@ class UsersTable extends DataTableComponent
                 ),
             Column::make(__('Actions'))
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.actions')->with('user', $row)
+                    fn($row, Column $column) => view('backend.auth.user.includes.actions')
+                        ->with('user', $row)
                 ),
         ];
     }

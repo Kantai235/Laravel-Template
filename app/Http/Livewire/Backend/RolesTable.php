@@ -31,7 +31,7 @@ class RolesTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setTableWrapperAttributes([
             'default' => false,
-            'class' => 'table-responsive-xl'
+            'class' => 'table-responsive-xl',
         ]);
     }
 
@@ -54,7 +54,8 @@ class RolesTable extends DataTableComponent
             Column::make(__('Type'))
                 ->sortable()
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.role.includes.type')->with('model', $row)
+                    fn($row, Column $column) => view('backend.auth.role.includes.type')
+                        ->with('model', $row)
                 ),
             Column::make('Name')
                 ->sortable()
@@ -70,7 +71,8 @@ class RolesTable extends DataTableComponent
                 ),
             Column::make(__('Actions'))
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.role.includes.actions')->with('model', $row)
+                    fn($row, Column $column) => view('backend.auth.role.includes.actions')
+                        ->with('model', $row)
                 ),
         ];
     }
