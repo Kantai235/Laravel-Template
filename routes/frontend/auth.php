@@ -80,7 +80,9 @@ Route::group([
                             });
                     });
 
-                    Route::group(['middleware' => '2fa:enabled'], function () {
+                    Route::group([
+                        'middleware' => '2fa:enabled',
+                    ], function () {
                         Route::get('recovery', [TwoFactorAuthenticationController::class, 'show'])
                             ->name('show')
                             ->breadcrumbs(function (Trail $trail) {

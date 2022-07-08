@@ -51,7 +51,9 @@ Route::group([
             Route::post('/', [UserController::class, 'store'])
                 ->name('store');
 
-            Route::group(['prefix' => '{user}'], function () {
+            Route::group([
+                'prefix' => '{user}',
+            ], function () {
                 Route::get('edit', [UserController::class, 'edit'])
                     ->name('edit')
                     ->breadcrumbs(function (Trail $trail, User $user) {
@@ -201,7 +203,9 @@ Route::group([
         Route::post('/', [RoleController::class, 'store'])
             ->name('store');
 
-        Route::group(['prefix' => '{role}'], function () {
+        Route::group([
+            'prefix' => '{role}',
+        ], function () {
             Route::get('edit', [RoleController::class, 'edit'])
                 ->name('edit')
                 ->breadcrumbs(function (Trail $trail, Role $role) {
