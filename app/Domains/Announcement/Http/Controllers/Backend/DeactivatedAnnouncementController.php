@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class DeactivatedAnnouncementController.
- *
- * @extends Controller
  */
 class DeactivatedAnnouncementController extends Controller
 {
@@ -38,11 +36,11 @@ class DeactivatedAnnouncementController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Announcement $announcement
-     * @param $status
-     *
+     * @param  Request  $request
+     * @param  Announcement  $announcement
+     * @param  $status
      * @return mixed
+     *
      * @throws \App\Exceptions\GeneralException
      */
     public function update(Request $request, Announcement $announcement, $status)
@@ -50,9 +48,9 @@ class DeactivatedAnnouncementController extends Controller
         $this->service->mark($announcement, (int) $status);
 
         return redirect()->route(
-            (int) $status === 1 || ! $request->user()->can('admin.announcement.reactivate') ?
-                'admin.announcement.index' :
-                'admin.announcement.deactivated'
+            (int) $status === 1 || !$request->user()->can('admin.announcement.reactivate')
+                ? 'admin.announcement.index'
+                : 'admin.announcement.deactivated'
         )->withFlashSuccess(__('The announcement was successfully updated.'));
     }
 }

@@ -13,8 +13,10 @@ class BladeServiceProvider extends ServiceProvider
 {
     /**
      * Register bindings in the container.
+     *
+     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerCaptcha();
     }
@@ -23,6 +25,8 @@ class BladeServiceProvider extends ServiceProvider
      * Register the locale blade extensions.
      * See: App\Rules\Captcha for implementation
      * See LoginController/RegisterController for usage.
+     *
+     * @return void
      */
     protected function registerCaptcha(): void
     {
@@ -47,7 +51,8 @@ class BladeServiceProvider extends ServiceProvider
                 </div>');
             $html .= new HtmlString(sprintf(
                 '<script src="%s" async defer></script>',
-                $lang ? sprintf('https://www.google.com/recaptcha/api.js?hl=%s', $lang)
+                $lang
+                    ? sprintf('https://www.google.com/recaptcha/api.js?hl=%s', $lang)
                     : 'https://www.google.com/recaptcha/api.js'
             ));
             $html .= new HtmlString('<script>var _submitForm,_captchaForm,_captchaSubmit,_execute=true;</script>');
