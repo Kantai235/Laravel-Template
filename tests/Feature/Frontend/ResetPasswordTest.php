@@ -141,7 +141,10 @@ class ResetPasswordTest extends TestCase
 
         $response->assertSessionHasErrors();
         $errors = session('errors');
-        $this->assertSame($errors->get('password')[0], __('You can not set a password that you have previously used within the last 3 times.'));
+        $this->assertSame(
+            $errors->get('password')[0],
+            __('You can not set a password that you have previously used within the last 3 times.')
+        );
         $this->assertTrue(Hash::check(':ZqD~57}1t', $user->fresh()->password));
     }
 }

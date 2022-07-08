@@ -86,7 +86,10 @@ class UserAccountTest extends TestCase
             ])->assertRedirect('/email/verify');
 
         $response->assertSessionHas('resent');
-        $response->assertSessionHas('flash_info', __('You must confirm your new e-mail address before you can go any further.'));
+        $response->assertSessionHas(
+            'flash_info',
+            __('You must confirm your new e-mail address before you can go any further.')
+        );
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
