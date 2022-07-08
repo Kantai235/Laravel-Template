@@ -18,7 +18,7 @@ class CreateRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_admin_can_access_the_create_role_page()
+    public function anAdminCanAccessTheCreateRolePage()
     {
         $this->loginAsAdmin();
 
@@ -26,7 +26,7 @@ class CreateRoleTest extends TestCase
     }
 
     /** @test */
-    public function create_role_requires_validation()
+    public function createRoleRequiresValidation()
     {
         $this->loginAsAdmin();
 
@@ -36,7 +36,7 @@ class CreateRoleTest extends TestCase
     }
 
     /** @test */
-    public function the_name_must_be_unique()
+    public function theNameMustBeUnique()
     {
         $this->loginAsAdmin();
 
@@ -46,7 +46,7 @@ class CreateRoleTest extends TestCase
     }
 
     /** @test */
-    public function a_role_can_be_created()
+    public function aRoleCanBeCreated()
     {
         Event::fake();
 
@@ -74,7 +74,7 @@ class CreateRoleTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_create_roles()
+    public function onlyAdminCanCreateRoles()
     {
         $this->actingAs(User::factory()->admin()->create());
 

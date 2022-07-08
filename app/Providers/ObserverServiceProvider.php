@@ -13,16 +13,20 @@ class ObserverServiceProvider extends ServiceProvider
 {
     /**
      * Register bindings in the container.
+     *
+     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         User::observe(UserObserver::class);
     }
 
     /**
      * Register the service provider.
+     *
+     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

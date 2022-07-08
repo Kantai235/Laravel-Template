@@ -10,7 +10,7 @@ use Tests\TestCase;
 class HomeTest extends TestCase
 {
     /** @test */
-    public function the_home_page_exists()
+    public function theHomePageExists()
     {
         $this->get('/')->assertOk();
     }

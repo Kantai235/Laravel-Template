@@ -11,7 +11,7 @@ use Tests\TestCase;
 class UserAccountTest extends TestCase
 {
     /** @test */
-    public function only_authenticated_users_can_access_their_account()
+    public function onlyAuthenticatedUsersCanAccessTheirAccount()
     {
         $this->get('/account')->assertRedirect('/login');
 
@@ -21,7 +21,7 @@ class UserAccountTest extends TestCase
     }
 
     /** @test */
-    public function profile_update_requires_validation()
+    public function profileUpdateRequriesValidation()
     {
         $this->actingAs(User::factory()->create());
 
@@ -39,7 +39,7 @@ class UserAccountTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_their_profile()
+    public function aUserCanUpdateTheirProfile()
     {
         config(['template.access.user.change_email' => false]);
 
@@ -66,7 +66,7 @@ class UserAccountTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_their_email_address()
+    public function aUserCanUpdateTheirEmailAddress()
     {
         config(['template.access.user.change_email' => true]);
 
@@ -86,7 +86,10 @@ class UserAccountTest extends TestCase
             ])->assertRedirect('/email/verify');
 
         $response->assertSessionHas('resent');
-        $response->assertSessionHas('flash_info', __('You must confirm your new e-mail address before you can go any further.'));
+        $response->assertSessionHas(
+            'flash_info',
+            __('You must confirm your new e-mail address before you can go any further.')
+        );
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,

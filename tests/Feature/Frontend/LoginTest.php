@@ -14,13 +14,13 @@ use Tests\TestCase;
 class LoginTest extends TestCase
 {
     /** @test */
-    public function the_login_route_exists()
+    public function theLoginRouteExists()
     {
         $this->get('/login')->assertStatus(200);
     }
 
     /** @test */
-    public function login_requires_validation()
+    public function loginRequiresValidation()
     {
         $response = $this->post('/login');
 
@@ -28,7 +28,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_login_with_email_and_password()
+    public function aUserCanLoginWithEmailAndPassword()
     {
         Event::fake();
 
@@ -50,7 +50,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function inactive_users_cant_login()
+    public function inactiveUsersCantLogin()
     {
         User::factory()->inactive()->create([
             'email' => 'john@example.com',
@@ -67,7 +67,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function cant_login_with_invalid_credentials()
+    public function cantLoginWithInvalidCredentials()
     {
         $this->withoutExceptionHandling();
         $this->expectException(ValidationException::class);
@@ -82,7 +82,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_users_ip_and_login_time_is_updated_on_login()
+    public function aUsersIpAndLoginTimeIsUpdatedOnLogin()
     {
         $user = User::factory()->create([
             'email' => 'john@example.com',
@@ -104,7 +104,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_log_out()
+    public function aUserCanLogOut()
     {
         $user = User::factory()->create();
 

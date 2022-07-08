@@ -12,8 +12,6 @@ use App\Http\Controllers\Controller;
 
 /**
  * Class AnnouncementController.
- *
- * @extends Controller
  */
 class AnnouncementController extends Controller
 {
@@ -49,9 +47,9 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @param StoreAnnouncementRequest $request
-     *
+     * @param  StoreAnnouncementRequest  $request
      * @return mixed
+     *
      * @throws \App\Exceptions\GeneralException
      * @throws \Throwable
      */
@@ -75,9 +73,8 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @param EditAnnouncementRequest $request
-     * @param Announcement $announcement
-     *
+     * @param  EditAnnouncementRequest  $request
+     * @param  Announcement  $announcement
      * @return mixed
      */
     public function edit(EditAnnouncementRequest $request, Announcement $announcement)
@@ -87,10 +84,10 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @param UpdateAnnouncementRequest $request
-     * @param Announcement $announcement
-     *
+     * @param  UpdateAnnouncementRequest  $request
+     * @param  Announcement  $announcement
      * @return mixed
+     *
      * @throws \Throwable
      */
     public function update(UpdateAnnouncementRequest $request, Announcement $announcement)

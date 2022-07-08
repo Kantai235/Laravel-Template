@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
  * Api Routes
  * Namespaces indicate folder structure
  */
-Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
+Route::group([
+    'namespace' => 'Api',
+    'as' => 'api.',
+], function () {
     includeRouteFiles(__DIR__ . '/api/');
 });

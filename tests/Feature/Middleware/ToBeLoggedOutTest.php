@@ -11,7 +11,7 @@ use Tests\TestCase;
 class ToBeLoggedOutTest extends TestCase
 {
     /** @test */
-    public function the_user_can_be_forced_logged_out()
+    public function theUserCanBeForcedLoggedOut()
     {
         $user = User::factory()->user()->create(['to_be_logged_out' => false]);
 

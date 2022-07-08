@@ -17,7 +17,7 @@ class DeleteRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_role_can_be_deleted()
+    public function aRoleCanBeDeleted()
     {
         Event::fake();
 
@@ -35,13 +35,13 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function the_admin_role_can_not_be_deleted()
+    public function theAdminRoleCanNotBeDeleted()
     {
         $this->loginAsAdmin();
 
         $role = Role::whereName(config('template.access.role.admin'))->first();
 
-        $response = $this->delete('/admin/auth/role/'.$role->id);
+        $response = $this->delete('/admin/auth/role/' . $role->id);
 
         $response->assertSessionHas(['flash_danger' => __('You can not delete the Administrator role.')]);
 
@@ -49,7 +49,7 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function a_role_with_assigned_users_cant_be_deleted()
+    public function aRoleWithAssignedUsersCantBeDeleted()
     {
         $this->loginAsAdmin();
 
@@ -57,7 +57,7 @@ class DeleteRoleTest extends TestCase
         $user = User::factory()->create();
         $user->assignRole($role);
 
-        $response = $this->delete('/admin/auth/role/'.$role->id);
+        $response = $this->delete('/admin/auth/role/' . $role->id);
 
         $response->assertSessionHas(['flash_danger' => __('You can not delete a role with associated users.')]);
 
@@ -65,13 +65,13 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_delete_roles()
+    public function onlyAdminCanDeleteRoles()
     {
         $this->actingAs(User::factory()->admin()->create());
 
         $role = Role::factory()->create();
 
-        $response = $this->delete('/admin/auth/role/'.$role->id);
+        $response = $this->delete('/admin/auth/role/' . $role->id);
 
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
 

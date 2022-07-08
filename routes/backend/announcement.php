@@ -21,33 +21,51 @@ Route::group([
             ->name('deleted')
             ->breadcrumbs(function (Trail $trail) {
                 $trail->parent('admin.announcement.index')
-                    ->push(__('Deleted Announcements'), route('admin.announcement.deleted'));
+                    ->push(
+                        __('Deleted Announcements'),
+                        route('admin.announcement.deleted')
+                    );
             });
 
         Route::get('create', [AnnouncementController::class, 'create'])
             ->name('create')
             ->breadcrumbs(function (Trail $trail) {
                 $trail->parent('admin.announcement.index')
-                    ->push(__('Create Announcement'), route('admin.announcement.create'));
+                    ->push(
+                        __('Create Announcement'),
+                        route('admin.announcement.create')
+                    );
             });
 
-        Route::post('/', [AnnouncementController::class, 'store'])->name('store');
+        Route::post('/', [AnnouncementController::class, 'store'])
+            ->name('store');
 
-        Route::group(['prefix' => '{announcement}'], function () {
+        Route::group([
+            'prefix' => '{announcement}',
+        ], function () {
             Route::get('edit', [AnnouncementController::class, 'edit'])
                 ->name('edit')
                 ->breadcrumbs(function (Trail $trail, Announcement $announcement) {
                     $trail->parent('admin.announcement.index', $announcement)
-                        ->push(__('Edit'), route('admin.announcement.edit', $announcement));
+                        ->push(
+                            __('Edit'),
+                            route('admin.announcement.edit', $announcement)
+                        );
                 });
 
-            Route::patch('/', [AnnouncementController::class, 'update'])->name('update');
-            Route::delete('/', [AnnouncementController::class, 'destroy'])->name('destroy');
+            Route::patch('/', [AnnouncementController::class, 'update'])
+                ->name('update');
+            Route::delete('/', [AnnouncementController::class, 'destroy'])
+                ->name('destroy');
         });
 
-        Route::group(['prefix' => '{deletedUser}'], function () {
-            Route::patch('restore', [DeletedUserController::class, 'update'])->name('restore');
-            Route::delete('permanently-delete', [DeletedUserController::class, 'destroy'])->name('permanently-delete');
+        Route::group([
+            'prefix' => '{deletedUser}',
+        ], function () {
+            Route::patch('restore', [DeletedUserController::class, 'update'])
+                ->name('restore');
+            Route::delete('permanently-delete', [DeletedUserController::class, 'destroy'])
+                ->name('permanently-delete');
         });
     });
 
@@ -65,7 +83,10 @@ Route::group([
             ]))
             ->breadcrumbs(function (Trail $trail) {
                 $trail->parent('admin.announcement.index')
-                    ->push(__('Deactivated Announcements'), route('admin.announcement.deactivated'));
+                    ->push(
+                        __('Deactivated Announcements'),
+                        route('admin.announcement.deactivated')
+                    );
             });
 
         Route::get('/', [AnnouncementController::class, 'index'])
@@ -76,10 +97,15 @@ Route::group([
             ]))
             ->breadcrumbs(function (Trail $trail) {
                 $trail->parent('admin.dashboard')
-                    ->push(__('Announcement Management'), route('admin.announcement.index'));
+                    ->push(
+                        __('Announcement Management'),
+                        route('admin.announcement.index')
+                    );
             });
 
-        Route::group(['prefix' => '{announcement}'], function () {
+        Route::group([
+            'prefix' => '{announcement}',
+        ], function () {
             Route::get('/', [AnnouncementController::class, 'show'])
                 ->name('show')
                 ->middleware('permission:' . implode('|', [
@@ -87,7 +113,10 @@ Route::group([
                 ]))
                 ->breadcrumbs(function (Trail $trail, Announcement $announcement) {
                     $trail->parent('admin.announcement.index')
-                        ->push($announcement->message, route('admin.announcement.show', $announcement));
+                        ->push(
+                            $announcement->message,
+                            route('admin.announcement.show', $announcement)
+                        );
                 });
 
             Route::patch('mark/{status}', [DeactivatedAnnouncementController::class, 'update'])

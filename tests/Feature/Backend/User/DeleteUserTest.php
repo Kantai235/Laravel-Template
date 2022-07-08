@@ -17,7 +17,7 @@ class DeleteUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_admin_can_access_deleted_users_page()
+    public function anAdminCanAccessDeletedUsersPage()
     {
         $this->loginAsAdmin();
 
@@ -35,7 +35,7 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_be_deleted()
+    public function aUserCanBeDeleted()
     {
         Event::fake();
 
@@ -53,7 +53,7 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_be_permanently_deleted()
+    public function aUserCanBePermanentlyDeleted()
     {
         Event::fake();
 
@@ -75,7 +75,7 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cant_be_permanently_deleted_if_the_option_is_off()
+    public function aUserCantBePermanentlyDeletedIfTheOptionIsOff()
     {
         config(['template.access.user.permanently_delete' => false]);
 
@@ -91,7 +91,7 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_be_restored()
+    public function aUserCanBeRestored()
     {
         $this->loginAsAdmin();
 
@@ -107,14 +107,14 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function the_master_administrator_can_not_be_deleted()
+    public function theMasterAdministratorCanNotBeDeleted()
     {
         $admin = $this->getMasterAdmin();
         $user = User::factory()->admin()->create();
         $user->assignRole($this->getAdminRole());
         $this->actingAs($user);
 
-        $response = $this->delete('/admin/auth/user/'.$admin->id);
+        $response = $this->delete('/admin/auth/user/' . $admin->id);
 
         $response->assertSessionHas('flash_danger', __('You can not delete the master administrator.'));
 
@@ -122,13 +122,13 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_not_delete_themselves()
+    public function aUserCanNotDeleteThemselves()
     {
         $user = User::factory()->admin()->create();
         $user->assignRole($this->getAdminRole());
         $this->actingAs($user);
 
-        $response = $this->delete('/admin/auth/user/'.$user->id);
+        $response = $this->delete('/admin/auth/user/' . $user->id);
 
         $response->assertSessionHas('flash_danger', __('You can not delete yourself.'));
 
@@ -136,7 +136,7 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_delete_users()
+    public function onlyAdminCanDeleteUsers()
     {
         $this->actingAs(User::factory()->create());
 

@@ -11,7 +11,7 @@ use Tests\TestCase;
 class AnnouncementTest extends TestCase
 {
     /** @test */
-    public function announcement_is_only_visible_on_frontend()
+    public function announcementIsOnlyVisibleOnFrontend()
     {
         $announcement = Announcement::factory()->enabled()->frontend()->noDates()->create();
 
@@ -27,7 +27,7 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function announcement_is_only_visible_on_backend()
+    public function announcementIsOnlyVisibleOnBackend()
     {
         $announcement = Announcement::factory()->enabled()->backend()->noDates()->create();
 
@@ -43,7 +43,7 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function announcement_is_visible_globally()
+    public function announcementIsVisibleGlobally()
     {
         $announcement = Announcement::factory()->enabled()->global()->noDates()->create();
 
@@ -59,7 +59,7 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function a_disabled_announcement_does_not_show()
+    public function aDisabledAnnouncementDoesNotShow()
     {
         $announcement = Announcement::factory()->disabled()->global()->noDates()->create();
 
@@ -69,7 +69,7 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function an_announcement_inside_of_date_range_shows()
+    public function anAnnouncementInsideOfDateRangeShows()
     {
         $announcement = Announcement::factory()->enabled()->global()->insideDateRange()->create();
 
@@ -79,7 +79,7 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function an_announcement_outside_of_date_range_doesnt_show()
+    public function anAnnouncementOutsideOfDateRangeDoesntShow()
     {
         $announcement = Announcement::factory()->enabled()->global()->outsideDateRange()->create();
 

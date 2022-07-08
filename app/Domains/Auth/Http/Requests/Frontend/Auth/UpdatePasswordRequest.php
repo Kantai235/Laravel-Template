@@ -37,7 +37,9 @@ class UpdatePasswordRequest extends FormRequest
                 ],
                 PasswordRules::changePassword(
                     $this->email,
-                    config('template.access.user.password_history') ? 'current_password' : null
+                    config('template.access.user.password_history')
+                        ? 'current_password'
+                        : null
                 )
             ),
         ];

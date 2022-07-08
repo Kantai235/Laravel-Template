@@ -14,7 +14,7 @@ class ListRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function an_admin_can_access_the_role_index_page()
+    public function anAdminCanAccessTheRoleIndexPage()
     {
         $this->loginAsAdmin();
 
@@ -22,7 +22,7 @@ class ListRoleTest extends TestCase
     }
 
     /** @test */
-    public function only_admin_can_view_roles()
+    public function onlyAdminCanViewRoles()
     {
         $this->actingAs(User::factory()->admin()->create());
 

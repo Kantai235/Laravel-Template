@@ -11,7 +11,7 @@ use Tests\TestCase;
 class PasswordExpirationTest extends TestCase
 {
     /** @test */
-    public function a_user_can_access_the_password_expired()
+    public function aUserCanAccessThePasswordExpired()
     {
         config(['template.access.user.password_expires_days' => 30]);
 
@@ -23,7 +23,7 @@ class PasswordExpirationTest extends TestCase
     }
 
     /** @test */
-    public function a_user_with_an_expired_password_cannot_access_dashboard()
+    public function aUserWithAnExpiredPasswordCannotAccessDashboard()
     {
         $user = User::factory()->passwordExpired()->create();
 
@@ -31,13 +31,14 @@ class PasswordExpirationTest extends TestCase
 
         $response = $this->get('/dashboard')->assertRedirect('/password/expired');
 
+        // phpcs:disable
         $response->assertSessionHas('flash_warning', __('Your password has expired. We require you to change your password every :days days for security purposes.', [
             'days' => config('template.access.user.password_expires_days'),
         ]));
     }
 
     /** @test */
-    public function a_user_with_an_expired_password_cannot_access_account()
+    public function aUserWithAnExpiredPasswordCannotAccessAccount()
     {
         $user = User::factory()->passwordExpired()->create();
 
@@ -51,7 +52,7 @@ class PasswordExpirationTest extends TestCase
     }
 
     /** @test */
-    public function password_expiration_update_requires_validation()
+    public function passwordExpirationUpdateRequiresValidation()
     {
         $this->actingAs(User::factory()->create());
 
@@ -61,7 +62,7 @@ class PasswordExpirationTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_their_expired_password()
+    public function aUserCanUpdateTheirExpiredPassword()
     {
         $user = User::factory()->passwordExpired()->create();
 

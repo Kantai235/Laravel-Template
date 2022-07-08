@@ -18,9 +18,9 @@ trait UserAttribute
         // Note: Password Histories are logged from the \App\Domains\Auth\Observer\UserObserver class
         $this->attributes['password'] =
             (strlen($password) === 60 && preg_match('/^\$2y\$/', $password)) ||
-            (strlen($password) === 95 && preg_match('/^\$argon2i\$/', $password)) ?
-            $password :
-            Hash::make($password);
+            (strlen($password) === 95 && preg_match('/^\$argon2i\$/', $password))
+                ? $password
+                : Hash::make($password);
     }
 
     /**
