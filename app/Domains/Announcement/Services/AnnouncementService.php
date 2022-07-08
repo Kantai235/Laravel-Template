@@ -74,7 +74,9 @@ class AnnouncementService extends BaseService
             $starts_at = ($data['starts_at_date'] !== null)
                 ? $data['starts_at_date'] . ' ' . $data['starts_at_time']
                 : null;
-            $ends_at = ($data['ends_at_date'] !== null) ? $data['ends_at_date'] . ' ' . $data['ends_at_time'] : null;
+            $ends_at = ($data['ends_at_date'] !== null)
+                ? $data['ends_at_date'] . ' ' . $data['ends_at_time']
+                : null;
             $announcement = $this->createAnnouncement([
                 'type' => $data['type'],
                 'area' => $data['area'],
@@ -111,7 +113,9 @@ class AnnouncementService extends BaseService
             $starts_at = ($data['starts_at_date'] !== null)
                 ? $data['starts_at_date'] . ' ' . $data['starts_at_time']
                 : null;
-            $ends_at = ($data['ends_at_date'] !== null) ? $data['ends_at_date'] . ' ' . $data['ends_at_time'] : null;
+            $ends_at = ($data['ends_at_date'] !== null)
+                ? $data['ends_at_date'] . ' ' . $data['ends_at_time']
+                : null;
             $announcement->update([
                 'type' => $data['type'],
                 'area' => ($data['area'] !== 'all') ? $data['area'] : null,

@@ -53,7 +53,9 @@ class UserEventListener
                     'active' => $event->user->active,
                     'email_verified_at' => $event->user->email_verified_at,
                 ],
-                'roles' => $event->user->roles->count() ? $event->user->roles->pluck('name')->implode(', ') : 'None',
+                'roles' => $event->user->roles->count()
+                    ? $event->user->roles->pluck('name')->implode(', ')
+                    : 'None',
                 'permissions' => $event->user->permissions
                     ? $event->user->permissions->pluck('description')->implode(', ')
                     : 'None',
@@ -74,7 +76,9 @@ class UserEventListener
                     'name' => $event->user->name,
                     'email' => $event->user->email,
                 ],
-                'roles' => $event->user->roles->count() ? $event->user->roles->pluck('name')->implode(', ') : 'None',
+                'roles' => $event->user->roles->count()
+                    ? $event->user->roles->pluck('name')->implode(', ')
+                    : 'None',
                 'permissions' => $event->user->permissions
                     ? $event->user->permissions->pluck('description')->implode(', ')
                     : 'None',

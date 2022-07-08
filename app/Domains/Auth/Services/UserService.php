@@ -115,12 +115,16 @@ class UserService extends BaseService
         DB::beginTransaction();
 
         try {
+            $email_verified = isset($data['email_verified']) && $data['email_verified'] === '1'
+                ? now()
+                : null;
+
             $user = $this->createUser([
                 'type' => $data['type'],
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => $data['password'],
-                'email_verified_at' => isset($data['email_verified']) && $data['email_verified'] === '1' ? now() : null,
+                'email_verified_at' => $email_verified,
                 'active' => isset($data['active']) && $data['active'] === '1',
             ]);
 
@@ -161,7 +165,9 @@ class UserService extends BaseService
 
         try {
             $user->update([
-                'type' => $user->isMasterAdmin() ? User::TYPE_ADMIN : $data['type'] ?? $user->type,
+                'type' => $user->isMasterAdmin()
+                    ? User::TYPE_ADMIN
+                    : $data['type'] ?? $user->type,
                 'name' => $data['name'],
                 'email' => $data['email'],
             ]);

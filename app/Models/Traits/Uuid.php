@@ -24,7 +24,9 @@ trait Uuid
      */
     public function getUuidName(): string
     {
-        return property_exists($this, 'uuidName') ? $this->uuidName : 'uuid';
+        return property_exists($this, 'uuidName')
+            ? $this->uuidName
+            : 'uuid';
     }
 
     /**
