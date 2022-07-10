@@ -94,16 +94,27 @@ php artisan storage:link
 php artisan serve
 ```
 
-## 管理員
+### 管理員
 
 ```
 Account: admin@admin.com
 Password: secret
 ```
 
-## 使用者
+### 使用者
 
 ```
 Account: user@user.com
 Password: secret
+```
+
+## 單元測試、檢查程式碼標準
+### 單元測試
+```shell
+./vendor/bin/phpunit tests
+```
+
+### 檢查程式碼標準
+```shell
+./vendor/bin/phpcs --standard=phpcs.xml
 ```
