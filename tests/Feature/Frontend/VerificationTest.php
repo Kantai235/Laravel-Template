@@ -13,8 +13,9 @@ use Tests\TestCase;
 class VerificationTest extends TestCase
 {
     /** @test */
-    public function anUnverifiedUserCannotAccessDashboard()
+    public function an_unverified_user_cannot_access_dashboard()
     {
+        /** @var User */
         $user = User::factory()->unconfirmed()->create();
 
         $this->actingAs($user);
@@ -23,8 +24,9 @@ class VerificationTest extends TestCase
     }
 
     /** @test */
-    public function anUnverifiedUserCannotAccessAccount()
+    public function an_unverified_user_cannot_access_account()
     {
+        /** @var User */
         $user = User::factory()->unconfirmed()->create();
 
         $this->actingAs($user);
@@ -33,10 +35,11 @@ class VerificationTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanResendTheVerificationEmail()
+    public function a_user_can_resend_the_verification_email()
     {
         Notification::fake();
 
+        /** @var User */
         $user = User::factory()->unconfirmed()->create();
 
         $this->actingAs($user);

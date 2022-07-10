@@ -14,13 +14,13 @@ use Tests\TestCase;
 class ResetPasswordTest extends TestCase
 {
     /** @test */
-    public function thePasswordResetRouteExists()
+    public function the_password_reset_route_exists()
     {
         $this->get('password/reset')->assertOk();
     }
 
     /** @test */
-    public function passwordResetRequiresValidation()
+    public function password_reset_requires_validation()
     {
         $response = $this->post('/password/email');
 
@@ -28,10 +28,11 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function aNotificationGetsSentIfPasswordResetIsRequested()
+    public function a_notification_gets_sent_if_password_reset_is_requested()
     {
         Notification::fake();
 
+        /** @var User */
         $user = User::factory()->create(['email' => 'john@example.com']);
 
         $this->post('password/email', ['email' => 'john@example.com']);
@@ -40,7 +41,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function theResetPasswordFormHasRequiredFields()
+    public function the_reset_password_form_has_required_fields()
     {
         $response = $this->post('password/reset', [
             'token' => '',
@@ -53,8 +54,9 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function aPasswordCanBeReset()
+    public function a_password_can_be_reset()
     {
+        /** @var User */
         $user = User::factory()->create(['email' => 'john@example.com']);
 
         $token = $this->app->make('auth.password.broker')->createToken($user);
@@ -70,8 +72,9 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function thePasswordCanBeValidated()
+    public function the_password_can_be_validated()
     {
+        /** @var User */
         $user = User::factory()->create(['email' => 'john@example.com']);
 
         $token = $this->app->make('auth.password.broker')->createToken($user);
@@ -91,10 +94,11 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanUseTheSamePasswordWhenHistoryIsOffOnPasswordReset()
+    public function a_user_can_use_the_same_password_when_history_is_off_on_password_reset()
     {
         config(['template.access.user.password_history' => false]);
 
+        /** @var User */
         $user = User::factory()->create(['email' => 'john@example.com', 'password' => ']EqZL4}zBT']);
 
         $token = $this->app->make('auth.password.broker')->createToken($user);
@@ -112,10 +116,11 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanNotUseTheSamePasswordWhenHistoryIsOnOnPasswordReset()
+    public function a_user_can_not_use_the_same_password_when_history_is_on_on_password_reset()
     {
         config(['template.access.user.password_history' => 3]);
 
+        /** @var User */
         $user = User::factory()->create(['email' => 'john@example.com', 'password' => ']EqZL4}zBT']);
 
         // Change once

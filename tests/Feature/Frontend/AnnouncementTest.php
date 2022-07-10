@@ -11,8 +11,9 @@ use Tests\TestCase;
 class AnnouncementTest extends TestCase
 {
     /** @test */
-    public function announcementIsOnlyVisibleOnFrontend()
+    public function announcement_is_only_visible_on_frontend()
     {
+        /** @var Announcement */
         $announcement = Announcement::factory()->enabled()->frontend()->noDates()->create();
 
         $response = $this->get('login');
@@ -27,8 +28,9 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function announcementIsOnlyVisibleOnBackend()
+    public function announcement_is_only_visible_on_backend()
     {
+        /** @var Announcement */
         $announcement = Announcement::factory()->enabled()->backend()->noDates()->create();
 
         $response = $this->get('login');
@@ -43,8 +45,9 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function announcementIsVisibleGlobally()
+    public function announcement_is_visible_globally()
     {
+        /** @var Announcement */
         $announcement = Announcement::factory()->enabled()->global()->noDates()->create();
 
         $response = $this->get('login');
@@ -59,8 +62,9 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function aDisabledAnnouncementDoesNotShow()
+    public function a_disabled_announcement_does_not_show()
     {
+        /** @var Announcement */
         $announcement = Announcement::factory()->disabled()->global()->noDates()->create();
 
         $response = $this->get('login');
@@ -69,8 +73,9 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function anAnnouncementInsideOfDateRangeShows()
+    public function an_announcement_inside_of_date_range_shows()
     {
+        /** @var Announcement */
         $announcement = Announcement::factory()->enabled()->global()->insideDateRange()->create();
 
         $response = $this->get('login');
@@ -79,8 +84,9 @@ class AnnouncementTest extends TestCase
     }
 
     /** @test */
-    public function anAnnouncementOutsideOfDateRangeDoesntShow()
+    public function an_announcement_outside_of_date_range_doesnt_show()
     {
+        /** @var Announcement */
         $announcement = Announcement::factory()->enabled()->global()->outsideDateRange()->create();
 
         $response = $this->get('login');

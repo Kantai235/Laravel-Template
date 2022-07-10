@@ -14,13 +14,13 @@ use Tests\TestCase;
 class LoginTest extends TestCase
 {
     /** @test */
-    public function theLoginRouteExists()
+    public function the_login_route_exists()
     {
         $this->get('/login')->assertStatus(200);
     }
 
     /** @test */
-    public function loginRequiresValidation()
+    public function login_requires_validation()
     {
         $response = $this->post('/login');
 
@@ -28,10 +28,11 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanLoginWithEmailAndPassword()
+    public function a_user_can_login_with_email_and_password()
     {
         Event::fake();
 
+        /** @var User */
         $user = User::factory()->create([
             'email' => 'john@example.com',
             'password' => 'secret',
@@ -50,8 +51,9 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function inactiveUsersCantLogin()
+    public function inactive_users_cant_login()
     {
+        /** @var User */
         User::factory()->inactive()->create([
             'email' => 'john@example.com',
             'password' => 'secret',
@@ -67,7 +69,7 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function cantLoginWithInvalidCredentials()
+    public function cant_login_with_invalid_credentials()
     {
         $this->withoutExceptionHandling();
         $this->expectException(ValidationException::class);
@@ -82,8 +84,9 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function aUsersIpAndLoginTimeIsUpdatedOnLogin()
+    public function a_users_ip_and_login_time_is_updated_on_login()
     {
+        /** @var User */
         $user = User::factory()->create([
             'email' => 'john@example.com',
             'password' => 'secret',
@@ -104,8 +107,9 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanLogOut()
+    public function a_user_can_log_out()
     {
+        /** @var User */
         $user = User::factory()->create();
 
         $this->actingAs($user)

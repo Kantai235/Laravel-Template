@@ -17,7 +17,7 @@ class DeleteUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function anAdminCanAccessDeletedUsersPage()
+    public function an_admin_can_access_deleted_users_page()
     {
         $this->loginAsAdmin();
 
@@ -27,7 +27,10 @@ class DeleteUserTest extends TestCase
 
         $this->logout();
 
-        $this->actingAs(User::factory()->create());
+        /** @var User */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
 
         $response = $this->get('/admin/auth/user/deleted');
 
@@ -35,12 +38,13 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanBeDeleted()
+    public function a_user_can_be_deleted()
     {
         Event::fake();
 
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create();
 
         $response = $this->delete("/admin/auth/user/{$user->id}");
@@ -53,7 +57,7 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanBePermanentlyDeleted()
+    public function a_user_can_be_permanently_deleted()
     {
         Event::fake();
 
@@ -61,6 +65,7 @@ class DeleteUserTest extends TestCase
 
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->deleted()->create();
 
         $this->assertSoftDeleted('users', ['id' => $user->id]);
@@ -75,12 +80,13 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCantBePermanentlyDeletedIfTheOptionIsOff()
+    public function a_user_cant_be_permanently_deleted_if_the_option_is_off()
     {
         config(['template.access.user.permanently_delete' => false]);
 
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->deleted()->create();
 
         $this->assertSoftDeleted('users', ['id' => $user->id]);
@@ -91,10 +97,11 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanBeRestored()
+    public function a_user_can_be_restored()
     {
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->deleted()->create();
 
         $this->assertSoftDeleted('users', ['id' => $user->id]);
@@ -107,9 +114,12 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function theMasterAdministratorCanNotBeDeleted()
+    public function the_master_administrator_can_not_be_deleted()
     {
+        /** @var User */
         $admin = $this->getMasterAdmin();
+
+        /** @var User */
         $user = User::factory()->admin()->create();
         $user->assignRole($this->getAdminRole());
         $this->actingAs($user);
@@ -122,8 +132,9 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanNotDeleteThemselves()
+    public function a_user_can_not_delete_themselves()
     {
+        /** @var User */
         $user = User::factory()->admin()->create();
         $user->assignRole($this->getAdminRole());
         $this->actingAs($user);
@@ -136,13 +147,17 @@ class DeleteUserTest extends TestCase
     }
 
     /** @test */
-    public function onlyAdminCanDeleteUsers()
+    public function only_admin_can_delete_users()
     {
-        $this->actingAs(User::factory()->create());
-
+        /** @var User */
         $user = User::factory()->create();
 
-        $response = $this->delete("/admin/auth/user/{$user->id}");
+        $this->actingAs($user);
+
+        /** @var User */
+        $newUser = User::factory()->create();
+
+        $response = $this->delete("/admin/auth/user/{$newUser->id}");
 
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
     }

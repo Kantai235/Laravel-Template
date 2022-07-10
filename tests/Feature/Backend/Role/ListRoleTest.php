@@ -7,14 +7,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 /**
- * Class ReadRolesTest.
+ * Class ListRoleTest.
  */
 class ListRoleTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function anAdminCanAccessTheRoleIndexPage()
+    public function an_admin_can_access_the_role_index_page()
     {
         $this->loginAsAdmin();
 
@@ -22,9 +22,12 @@ class ListRoleTest extends TestCase
     }
 
     /** @test */
-    public function onlyAdminCanViewRoles()
+    public function only_admin_can_view_roles()
     {
-        $this->actingAs(User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $response = $this->get('/admin/auth/role');
 

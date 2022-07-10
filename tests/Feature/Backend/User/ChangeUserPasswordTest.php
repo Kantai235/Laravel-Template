@@ -15,12 +15,16 @@ class ChangeUserPasswordTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function onlyAUserWithCorrectPermissionsCanVisitTheChangeUserPasswordPage()
+    public function only_a_user_with_correct_permissions_can_visit_the_change_user_password_page()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.change-password']);
 
+        /** @var User */
         $newUser = User::factory()->create();
 
         $this->get('/admin/auth/user/' . $newUser->id . '/password/change')->assertOk();
@@ -33,12 +37,16 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function onlyAUserWithCorrectPermissionsCanChangeAUsersPassword()
+    public function only_a_user_with_correct_permissions_can_change_a_users_password()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.change-password']);
 
+        /** @var User */
         $newUser = User::factory()->create();
 
         $response = $this->patch('/admin/auth/user/' . $newUser->id . '/password/change', [
@@ -59,10 +67,11 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function thePasswordCanBeValidated()
+    public function the_password_can_be_validated()
     {
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create();
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
@@ -74,24 +83,28 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function thePasswordsMustMatch()
+    public function the_passwords_must_match()
     {
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create();
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
-            'password' => 'template',
-            'password_confirmation' => 'template01',
+            'password' => 'Template',
+            'password_confirmation' => 'Template01',
         ]);
 
         $response->assertSessionHasErrors('password');
     }
 
     /** @test */
-    public function onlyTheMasterAdminCanViewTheChangePasswordScreen()
+    public function only_the_master_admin_can_view_the_change_password_screen()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.change-password']);
 
@@ -109,9 +122,12 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function onlyTheMasterAdminCanChangeTheirPassword()
+    public function only_the_master_admin_can_change_their_password()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.change-password']);
 
@@ -138,12 +154,13 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function anAdminCanUseTheSamePasswordWhenHistoryIsOffOnBackendUserPasswordChange()
+    public function an_admin_can_use_the_same_password_when_history_is_off_on_backend_user_password_change()
     {
         config(['template.access.user.password_history' => false]);
 
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
@@ -156,12 +173,13 @@ class ChangeUserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function anAdminCanNotUseTheSamePasswordWhenHistoryIsOnOnBackendUserPasswordChange()
+    public function an_admin_can_not_use_the_same_password_when_history_is_on_on_backend_user_password_change()
     {
         config(['template.access.user.password_history' => 3]);
 
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         $this->patch("/admin/auth/user/{$user->id}/password/change", [

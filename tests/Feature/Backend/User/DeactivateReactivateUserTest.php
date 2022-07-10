@@ -16,9 +16,12 @@ class DeactivateReactivateUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function onlyAUserWithCorrectPermissionsCanVisitDeactivatedUsers()
+    public function only_a_user_with_correct_permissions_can_visit_deactivated_users()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.reactivate']);
 
@@ -32,14 +35,18 @@ class DeactivateReactivateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserWithTheCorrectPermissionsCanReactivateAUser()
+    public function a_user_with_the_correct_permissions_can_reactivate_a_user()
     {
         Event::fake();
 
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.reactivate']);
 
+        /** @var User */
         $deactivatedUser = User::factory()->inactive()->create();
 
         $this->assertDatabaseHas('users', [
@@ -58,10 +65,11 @@ class DeactivateReactivateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserWithoutTheCorrectPermissionsCanNotReactivateAUser()
+    public function a_user_without_the_correct_permissions_can_not_reactivate_a_user()
     {
         $this->actingAs(User::factory()->admin()->create());
 
+        /** @var User */
         $deactivatedUser = User::factory()->inactive()->create();
 
         $this->assertDatabaseHas('users', [
@@ -80,14 +88,18 @@ class DeactivateReactivateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserWithTheCorrectPermissionsCanDeactivateAUser()
+    public function a_user_with_the_correct_permissions_can_deactivate_a_user()
     {
         Event::fake();
 
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.deactivate']);
 
+        /** @var User */
         $activeUser = User::factory()->active()->create();
 
         $this->assertDatabaseHas('users', [
@@ -106,10 +118,14 @@ class DeactivateReactivateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserWithoutTheCorrectPermissionsCanNotDeactivateAUser()
+    public function a_user_without_the_correct_permissions_can_not_deactivate_a_user()
     {
-        $this->actingAs(User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
 
+        $this->actingAs($user);
+
+        /** @var User */
         $activeUser = User::factory()->active()->create();
 
         $this->assertDatabaseHas('users', [
@@ -128,9 +144,12 @@ class DeactivateReactivateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanNotDeactivateThemselves()
+    public function a_user_can_not_deactivate_themselves()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.deactivate']);
 
@@ -140,9 +159,12 @@ class DeactivateReactivateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanNotDeactivateTheMasterAdmin()
+    public function a_user_can_not_deactivate_the_master_admin()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.deactivate']);
 

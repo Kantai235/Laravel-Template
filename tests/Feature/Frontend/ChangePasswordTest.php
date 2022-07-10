@@ -12,9 +12,12 @@ use Tests\TestCase;
 class ChangePasswordTest extends TestCase
 {
     /** @test */
-    public function changePasswordRequiresValidation()
+    public function change_password_requires_validation()
     {
-        $this->actingAs(User::factory()->create());
+        /** @var User */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
 
         $response = $this->patch('/password/update');
 
@@ -22,8 +25,9 @@ class ChangePasswordTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanChangeTheirPassword()
+    public function a_user_can_change_their_password()
     {
+        /** @var User */
         $user = User::factory()->create(['password' => '1234']);
 
         $response = $this->actingAs($user)
@@ -39,10 +43,11 @@ class ChangePasswordTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanUseTheSamePasswordWhenHistoryIsOffOnAccountChangePassword()
+    public function a_user_can_use_the_same_password_when_history_is_off_on_account_change_password()
     {
         config(['template.access.user.password_history' => false]);
 
+        /** @var User */
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         $response = $this->actingAs($user)
@@ -57,10 +62,11 @@ class ChangePasswordTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanNotUseTheSamePasswordWhenHistoryIsOnOnAccountChangePassword()
+    public function a_user_can_not_use_the_same_password_when_history_is_on_on_account_change_password()
     {
         config(['template.access.user.password_history' => 3]);
 
+        /** @var User */
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         // Change once
@@ -91,10 +97,11 @@ class ChangePasswordTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanReuseAPasswordAfterItSurpassesTheLimit()
+    public function a_user_can_reuse_a_password_after_it_surpasses_the_limit()
     {
         config(['template.access.user.password_history' => 2]);
 
+        /** @var User */
         $user = User::factory()->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         // Change once

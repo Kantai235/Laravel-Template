@@ -11,9 +11,12 @@ use Tests\TestCase;
 class LogoutTest extends TestCase
 {
     /** @test */
-    public function theUserCanLogout()
+    public function the_user_can_logout()
     {
-        $this->actingAs($user = User::factory()->create());
+        /** @var User */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
 
         $this->assertAuthenticatedAs($user);
 

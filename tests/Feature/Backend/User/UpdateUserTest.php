@@ -17,10 +17,11 @@ class UpdateUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function anAdminCanAccessTheEditUserPage()
+    public function an_admin_can_access_the_edit_user_page()
     {
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create();
 
         $response = $this->get('/admin/auth/user/' . $user->id . '/edit');
@@ -29,12 +30,13 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanBeUpdated()
+    public function a_user_can_be_updated()
     {
         Event::fake();
 
         $this->loginAsAdmin();
 
+        /** @var User */
         $user = User::factory()->create();
 
         $this->assertDatabaseMissing('users', [
@@ -70,14 +72,16 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function onlyTheMasterAdminCanEditThemselves()
+    public function only_the_master_admin_can_edit_themselves()
     {
+        /** @var User */
         $admin = $this->loginAsAdmin();
 
         $this->get("/admin/auth/user/{$admin->id}/edit")->assertOk();
 
         $this->logout();
 
+        /** @var User */
         $otherAdmin = User::factory()->admin()->create();
         $otherAdmin->assignRole(config('template.access.role.admin'));
 
@@ -89,8 +93,9 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function onlyTheMasterAdminCanUpdateThemselves()
+    public function only_the_master_admin_can_update_themselves()
     {
+        /** @var User */
         $admin = $this->loginAsAdmin();
 
         $this->assertDatabaseMissing('users', [
@@ -114,6 +119,7 @@ class UpdateUserTest extends TestCase
 
         // Make sure other admins can not update the master admin
 
+        /** @var User */
         $otherAdmin = User::factory()->admin()->create();
         $otherAdmin->assignRole(config('template.access.role.admin'));
 
@@ -135,10 +141,11 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function theMasterAdminsAbilitiesCanNotBeModified()
+    public function the_master_admins_abilities_can_not_be_modified()
     {
         $admin = $this->loginAsAdmin();
 
+        /** @var Role */
         $role = Role::factory()->create();
 
         $this->assertDatabaseMissing('model_has_roles', [
@@ -161,13 +168,16 @@ class UpdateUserTest extends TestCase
     }
 
     /** @test */
-    public function onlyAdminCanUpdateRoles()
+    public function only_admin_can_update_roles()
     {
-        $this->actingAs(User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+        $this->actingAs($user);
 
-        $user = User::factory()->admin()->create(['name' => 'John Doe']);
+        /** @var User */
+        $otherUser = User::factory()->admin()->create(['name' => 'John Doe']);
 
-        $response = $this->patch("/admin/auth/user/{$user->id}", [
+        $response = $this->patch("/admin/auth/user/{$otherUser->id}", [
             'type' => User::TYPE_USER,
             'name' => 'Jane Doe',
         ]);
@@ -175,7 +185,7 @@ class UpdateUserTest extends TestCase
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
 
         $this->assertDatabaseHas('users', [
-            'id' => $user->id,
+            'id' => $otherUser->id,
             'type' => User::TYPE_ADMIN,
             'name' => 'John Doe',
         ]);

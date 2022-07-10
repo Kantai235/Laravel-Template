@@ -13,13 +13,13 @@ use Tests\TestCase;
 class RegistrationTest extends TestCase
 {
     /** @test */
-    public function theRegisterRouteExists()
+    public function the_register_route_exists()
     {
         $this->get('/register')->assertOk();
     }
 
     /** @test */
-    public function registrationRequiresValidation()
+    public function registration_requires_validation()
     {
         $response = $this->post('/register');
 
@@ -27,8 +27,9 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function emailMustBeUnique()
+    public function email_must_be_unique()
     {
+        /** @var User */
         User::factory()->create(['email' => 'john@example.com']);
 
         $response = $this->post('/register', [
@@ -42,7 +43,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function passwordMustBeConfirmed()
+    public function password_must_be_confirmed()
     {
         $response = $this->post('/register', [
             'name' => 'John Doe',
@@ -54,7 +55,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function passwordsMustBeEquivalent()
+    public function passwords_must_be_equivalent()
     {
         $response = $this->post('/register', [
             'name' => 'John Doe',
@@ -67,7 +68,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function userRegistrationCanBeDisabled()
+    public function user_registration_can_be_disabled()
     {
         config(['template.access.user.registration' => false]);
 
@@ -75,7 +76,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanRegisterAnAccount()
+    public function a_user_can_register_an_account()
     {
         $this->post('/register', [
             'name' => 'John Doe',
@@ -94,7 +95,7 @@ class RegistrationTest extends TestCase
     }
 
     /** @test */
-    public function aUserCantRegisterAnAccountIfTheyDontAcceptTheTerms()
+    public function a_user_cant_register_an_account_if_they_dont_accept_the_terms()
     {
         $response = $this->post('/register', [
             'name' => 'John Doe',

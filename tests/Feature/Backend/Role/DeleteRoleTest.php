@@ -17,10 +17,11 @@ class DeleteRoleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function aRoleCanBeDeleted()
+    public function a_role_can_be_deleted()
     {
         Event::fake();
 
+        /** @var Role */
         $role = Role::factory()->create();
 
         $this->loginAsAdmin();
@@ -35,10 +36,11 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function theAdminRoleCanNotBeDeleted()
+    public function the_admin_role_can_not_be_deleted()
     {
         $this->loginAsAdmin();
 
+        /** @var Role */
         $role = Role::whereName(config('template.access.role.admin'))->first();
 
         $response = $this->delete('/admin/auth/role/' . $role->id);
@@ -49,12 +51,16 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function aRoleWithAssignedUsersCantBeDeleted()
+    public function a_role_with_assigned_users_cant_be_deleted()
     {
         $this->loginAsAdmin();
 
+        /** @var Role */
         $role = Role::factory()->create();
+
+        /** @var User */
         $user = User::factory()->create();
+
         $user->assignRole($role);
 
         $response = $this->delete('/admin/auth/role/' . $role->id);
@@ -65,10 +71,14 @@ class DeleteRoleTest extends TestCase
     }
 
     /** @test */
-    public function onlyAdminCanDeleteRoles()
+    public function only_admin_can_delete_roles()
     {
-        $this->actingAs(User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
 
+        $this->actingAs($user);
+
+        /** @var Role */
         $role = Role::factory()->create();
 
         $response = $this->delete('/admin/auth/role/' . $role->id);

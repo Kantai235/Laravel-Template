@@ -14,15 +14,18 @@ class DashboardTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function unauthenticatedUsersCantAccessAdminDashboard()
+    public function unauthenticated_users_cant_access_admin_dashboard()
     {
         $this->get('/admin/dashboard')->assertRedirect('/login');
     }
 
     /** @test */
-    public function notAuthorizedUsersCantAccessAdminDashboard()
+    public function not_authorized_users_cant_access_admin_dashboard()
     {
-        $this->actingAs(User::factory()->user()->create());
+        /** @var User */
+        $user = User::factory()->user()->create();
+
+        $this->actingAs($user);
 
         $response = $this->get('/admin/dashboard');
 
@@ -32,7 +35,7 @@ class DashboardTest extends TestCase
     }
 
     /** @test */
-    public function adminCanAccessAdminDashboard()
+    public function admin_can_access_admin_dashboard()
     {
         $this->loginAsAdmin();
 

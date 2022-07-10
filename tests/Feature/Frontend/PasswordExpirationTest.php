@@ -11,10 +11,11 @@ use Tests\TestCase;
 class PasswordExpirationTest extends TestCase
 {
     /** @test */
-    public function aUserCanAccessThePasswordExpired()
+    public function a_user_can_access_the_password_expired()
     {
         config(['template.access.user.password_expires_days' => 30]);
 
+        /** @var User */
         $user = User::factory()->create();
 
         $this->actingAs($user);
@@ -23,8 +24,9 @@ class PasswordExpirationTest extends TestCase
     }
 
     /** @test */
-    public function aUserWithAnExpiredPasswordCannotAccessDashboard()
+    public function a_user_with_an_expired_password_cannot_access_dashboard()
     {
+        /** @var User */
         $user = User::factory()->passwordExpired()->create();
 
         $this->actingAs($user);
@@ -38,23 +40,28 @@ class PasswordExpirationTest extends TestCase
     }
 
     /** @test */
-    public function aUserWithAnExpiredPasswordCannotAccessAccount()
+    public function a_user_with_an_expired_password_cannot_access_account()
     {
+        /** @var User */
         $user = User::factory()->passwordExpired()->create();
 
         $this->actingAs($user);
 
         $response = $this->get('/account')->assertRedirect('/password/expired');
 
+        // phpcs:disable
         $response->assertSessionHas('flash_warning', __('Your password has expired. We require you to change your password every :days days for security purposes.', [
             'days' => config('template.access.user.password_expires_days'),
         ]));
     }
 
     /** @test */
-    public function passwordExpirationUpdateRequiresValidation()
+    public function password_expiration_update_requires_validation()
     {
-        $this->actingAs(User::factory()->create());
+        /** @var User */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
 
         $response = $this->patch('/password/expired');
 
@@ -62,8 +69,9 @@ class PasswordExpirationTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanUpdateTheirExpiredPassword()
+    public function a_user_can_update_their_expired_password()
     {
+        /** @var User */
         $user = User::factory()->passwordExpired()->create();
 
         $this->actingAs($user);

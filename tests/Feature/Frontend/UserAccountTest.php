@@ -11,19 +11,25 @@ use Tests\TestCase;
 class UserAccountTest extends TestCase
 {
     /** @test */
-    public function onlyAuthenticatedUsersCanAccessTheirAccount()
+    public function only_authenticated_users_can_access_their_account()
     {
         $this->get('/account')->assertRedirect('/login');
 
-        $this->actingAs(User::factory()->create());
+        /** @var User */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
 
         $this->get('/account')->assertOk();
     }
 
     /** @test */
-    public function profileUpdateRequriesValidation()
+    public function profile_update_requires_validation()
     {
-        $this->actingAs(User::factory()->create());
+        /** @var User */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
 
         config(['template.access.user.change_email' => true]);
 
@@ -39,10 +45,11 @@ class UserAccountTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanUpdateTheirProfile()
+    public function a_user_can_update_their_profile()
     {
         config(['template.access.user.change_email' => false]);
 
+        /** @var User */
         $user = User::factory()->create([
             'name' => 'Jane Doe',
         ]);
@@ -66,10 +73,11 @@ class UserAccountTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanUpdateTheirEmailAddress()
+    public function a_user_can_update_their_email_address()
     {
         config(['template.access.user.change_email' => true]);
 
+        /** @var User */
         $user = User::factory()->create([
             'email' => 'jane@doe.com',
         ]);

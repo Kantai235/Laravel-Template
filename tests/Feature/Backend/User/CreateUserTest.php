@@ -19,7 +19,7 @@ class CreateUserTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function anAdminCanAccessTheCreateUserPage()
+    public function an_admin_can_access_the_create_user_page()
     {
         $this->loginAsAdmin();
 
@@ -29,7 +29,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function createUserRequiresValidation()
+    public function create_user_requires_validation()
     {
         $this->loginAsAdmin();
 
@@ -39,10 +39,11 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function userEmailNeedsToBeUnique()
+    public function user_email_needs_to_be_unique()
     {
         $this->loginAsAdmin();
 
+        /** @var User */
         User::factory()->create(['email' => 'john@example.com']);
 
         $response = $this->post('/admin/auth/user', [
@@ -53,7 +54,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function adminCanCreateNewUser()
+    public function admin_can_create_new_user()
     {
         Event::fake();
 
@@ -93,7 +94,7 @@ class CreateUserTest extends TestCase
     }
 
     /** @test */
-    public function whenAnUnconfirmedUserIsCreatedANotificationWillBeSent()
+    public function when_an_unconfirmed_user_is_created_a_notification_will_be_sent()
     {
         Notification::fake();
 
@@ -113,15 +114,19 @@ class CreateUserTest extends TestCase
 
         $response->assertSessionHas(['flash_success' => __('The user was successfully created.')]);
 
+        /** @var User */
         $user = User::where('email', 'john@example.com')->first();
 
         Notification::assertSentTo($user, VerifyEmail::class);
     }
 
     /** @test */
-    public function onlyAdminCanCreateUsers()
+    public function only_admin_can_create_users()
     {
-        $this->actingAs(User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $response = $this->get('/admin/auth/user/create');
 

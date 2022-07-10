@@ -14,12 +14,16 @@ class ClearSessionTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function onlyAUserWithCorrectPermissionsCanClearUserSessions()
+    public function only_a_user_with_correct_permissions_can_clear_user_sessions()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.clear-session']);
 
+        /** @var User */
         $newUser = User::factory()->create();
 
         $response = $this->post('/admin/auth/user/' . $newUser->id . '/clear-session');
@@ -34,9 +38,12 @@ class ClearSessionTest extends TestCase
     }
 
     /** @test */
-    public function aUserCanNotClearTheirOwnSession()
+    public function a_user_can_not_clear_their_own_session()
     {
-        $this->actingAs($user = User::factory()->admin()->create());
+        /** @var User */
+        $user = User::factory()->admin()->create();
+
+        $this->actingAs($user);
 
         $user->syncPermissions(['admin.access.user.clear-session']);
 
