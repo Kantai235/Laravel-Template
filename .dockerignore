@@ -1,0 +1,8 @@
+.git
+.github
+.vagrant
+vendor
+laradock
+nginx.conf
+Procfile
+README.md
