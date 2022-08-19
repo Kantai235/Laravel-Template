@@ -118,3 +118,15 @@ Password: secret
 ```shell
 ./vendor/bin/phpcs --standard=phpcs.xml
 ```
+
+## Queues
+```
+# 它需要持續執行，但不要重複執行，死掉後還要懂得自己復活自己。
+php artisan queue:restart && php artisan queue:work database --sleep=3 --tries=3 --daemon
+```
+
+## Task Scheduling
+```
+# 它需要每分鐘執行一次。
+php artisan schedule:run
+```
