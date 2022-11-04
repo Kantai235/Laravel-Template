@@ -9,7 +9,9 @@ button {
         color: white;
         background-color: #274970;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #192f48;
         }
@@ -19,7 +21,9 @@ button {
         color: white;
         background-color: #3b5998;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #263961;
         }
@@ -29,7 +33,9 @@ button {
         color: white;
         background-color: #d34836;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #872e23;
         }
@@ -39,7 +45,9 @@ button {
         color: white;
         background-color: #464646;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #2d2d2d;
         }
@@ -49,7 +57,9 @@ button {
         color: white;
         background-color: #0077b5;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #004c74;
         }
@@ -59,7 +69,9 @@ button {
         color: white;
         background-color: #1dcaff;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #1381a3;
         }
@@ -69,7 +81,9 @@ button {
         color: white;
         background-color: #161612;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #131310;
         }
@@ -79,7 +93,9 @@ button {
         color: white;
         background-color: #ff4e47;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #a3322e;
         }
@@ -89,7 +105,9 @@ button {
         color: white;
         background-color: #34526f;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #294158;
         }
@@ -99,7 +117,9 @@ button {
         color: white;
         background-color: #0088cc;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #006ca3;
         }
@@ -109,9 +129,35 @@ button {
         color: white;
         background-color: #5866ef;
 
-        &:active {
+        &:hover,
+        &:active,
+        &:focus {
             color: darkgrey;
             background-color: #9b84ec;
+        }
+    }
+
+    &.btn-instagram {
+        color: white;
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: darkgrey;
+            background: linear-gradient(45deg, #e47e11 0%, #d94e1c 25%, #dc2743 50%, #c11f38 75%, #a21576 100%);
+        }
+    }
+
+    &.btn-line {
+        color: white;
+        background: #06c755;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: darkgrey;
+            background: #06b24d;
         }
     }
 }
