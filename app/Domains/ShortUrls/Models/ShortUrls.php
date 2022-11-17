@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\Urls\Models;
+namespace App\Domains\ShortUrls\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Url extends Model
+class ShortUrls extends Model
 {
     use HasFactory;
 
@@ -17,11 +17,11 @@ class Url extends Model
     protected $fillable = [
         'user_id',
         'keyword',
-        'is_custom',
-        'long_url',
-        'meta_title',
-        'clicks',
-        'ip',
+        'url',
+        'meta',
+        'enabled',
+        'password',
+        'remark',
     ];
 
     /**
@@ -30,7 +30,7 @@ class Url extends Model
      *@var array<string, string>
      */
     protected $casts = [
-        'user_id'   => 'int',
-        'is_custom' => 'boolean',
+        'meta' => 'json',
+        'enabled' => 'boolean',
     ];
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Domains\Urls\Models;
+namespace App\Domains\ShortUrls\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Visit.
+ * Class ShortVisits.
  */
-class Visit extends Model
+class ShortVisits extends Model
 {
     use HasFactory;
 
@@ -19,12 +19,7 @@ class Visit extends Model
      */
     protected $fillable = [
         'url_id',
-        'referer',
-        'ip',
-        'device',
-        'platform',
-        'platform_version',
-        'browser',
-        'browser_version',
+        'ip_address',
+        'user_agent',
     ];
 }
