@@ -24,6 +24,7 @@ class UserRoleSeeder extends Seeder
 
         User::find(1)->assignRole(config('template.access.role.admin'));
         User::find(1)->assignRole(config('template.access.role.announcement'));
+        User::find(1)->assignRole(config('template.access.role.shorturls'));
 
         $this->enableForeignKeys();
     }

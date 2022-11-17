@@ -95,10 +95,16 @@ return [
             'admin' => 'Administrator',
 
             /**
-             * The name of the announcement administrator role
+             * The name of the announcement manager role
              * It is not recommended to change
              */
-            'announcement' => 'Announcement',
+            'announcement' => 'Announcement Manager',
+
+            /**
+             * The name of the short urls manager role
+             * It is not recommended to change
+             */
+            'shorturls' => 'Short urls Manager',
         ],
     ],
 

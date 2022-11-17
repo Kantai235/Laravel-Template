@@ -37,6 +37,12 @@ class PermissionRoleSeeder extends Seeder
             'name' => config('template.access.role.announcement'),
         ]);
 
+        Role::create([
+            'id' => 3,
+            'type' => User::TYPE_ADMIN,
+            'name' => config('template.access.role.shorturls'),
+        ]);
+
         // Non Grouped Permissions
         //
 
@@ -109,6 +115,33 @@ class PermissionRoleSeeder extends Seeder
                 'type' => User::TYPE_ADMIN,
                 'name' => 'admin.announcement.reactivate',
                 'description' => 'Reactivate Announcements',
+                'sort' => 3,
+            ]),
+        ]);
+
+        // Shorturls category
+        $shorturls = Permission::create([
+            'type' => User::TYPE_ADMIN,
+            'name' => 'admin.shorturls',
+            'description' => 'All Shorturls Permissions',
+        ]);
+
+        $shorturls->children()->saveMany([
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.shorturls.list',
+                'description' => 'View Shorturls',
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.shorturls.deactivate',
+                'description' => 'Deactivate Shorturls',
+                'sort' => 2,
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.shorturls.reactivate',
+                'description' => 'Reactivate Shorturls',
                 'sort' => 3,
             ]),
         ]);
