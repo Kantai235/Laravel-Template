@@ -105,6 +105,24 @@
             </li><!--nav-item-->
         @endif
 
+        @if (
+            $logged_in_user->hasAllAccess() ||
+            (
+                $logged_in_user->can('admin.shorturl.list') ||
+                $logged_in_user->can('admin.shorturl.deactivate') ||
+                $logged_in_user->can('admin.shorturl.reactivate')
+            )
+        )
+            <li class="nav-item">
+                <x-utils.link
+                    class="nav-link"
+                    :href="route('admin.shorturls.index')"
+                    :active="activeClass(Route::is('admin.shorturls.*'), 'active')"
+                    icon="nav-icon cil-link"
+                    :text="__('Short Urls')" />
+            </li><!--nav-item-->
+        @endif
+
         @if ($logged_in_user->hasAllAccess())
             <li class="nav-group">
                 <x-utils.link
