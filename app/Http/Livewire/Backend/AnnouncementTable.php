@@ -63,7 +63,10 @@ class AnnouncementTable extends DataTableComponent
             'enabled',
             'dismissable',
             'starts_at',
-            'ends_at'
+            'ends_at',
+            'created_at',
+            'updated_at',
+            'deleted_at',
         );
 
         if ($this->status === 'deleted') {
@@ -185,14 +188,14 @@ class AnnouncementTable extends DataTableComponent
                 ->html(),
             Column::make(__('Enabled Status'), 'enabled')
                 ->label(
-                    fn ($row, Column $column) => view('backend.announcement.includes.status')
-                        ->with('announcement', $row)
+                    fn ($row, Column $column) => view('components.livewire.badges.status')
+                        ->with('status', $row->enabled)
                         ->with('block', true)
                 ),
             Column::make(__('Dismissable Status'), 'dismissable')
                 ->label(
-                    fn ($row, Column $column) => view('backend.announcement.includes.dismissable')
-                        ->with('announcement', $row)
+                    fn ($row, Column $column) => view('components.livewire.badges.status')
+                        ->with('status', $row->dismissable)
                         ->with('block', true)
                 ),
             Column::make(__('Starts At'), 'starts_at')

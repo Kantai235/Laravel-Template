@@ -20,7 +20,7 @@ class DeactivatedAnnouncementController extends Controller
     /**
      * DeactivatedAnnouncementController constructor.
      *
-     * @param AnnouncementService $service
+     * @param  AnnouncementService  $service
      */
     public function __construct(AnnouncementService $service)
     {
@@ -28,7 +28,7 @@ class DeactivatedAnnouncementController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function index()
     {

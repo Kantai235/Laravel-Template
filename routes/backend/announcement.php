@@ -60,11 +60,11 @@ Route::group([
         });
 
         Route::group([
-            'prefix' => '{deletedUser}',
+            'prefix' => '{deletedAnnouncement}',
         ], function () {
-            Route::patch('restore', [DeletedUserController::class, 'update'])
+            Route::patch('restore', [DeletedAnnouncementController::class, 'update'])
                 ->name('restore');
-            Route::delete('permanently-delete', [DeletedUserController::class, 'destroy'])
+            Route::delete('permanently-delete', [DeletedAnnouncementController::class, 'destroy'])
                 ->name('permanently-delete');
         });
     });

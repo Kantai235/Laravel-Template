@@ -2,8 +2,6 @@
 
 namespace App\Domains\Announcement\Http\Controllers\Backend;
 
-use App\Domains\Announcement\Http\Requests\Backend\DeleteAnnouncementRequest;
-use App\Domains\Announcement\Http\Requests\Backend\EditAnnouncementRequest;
 use App\Domains\Announcement\Http\Requests\Backend\StoreAnnouncementRequest;
 use App\Domains\Announcement\Http\Requests\Backend\UpdateAnnouncementRequest;
 use App\Domains\Announcement\Models\Announcement;
@@ -23,7 +21,7 @@ class AnnouncementController extends Controller
     /**
      * AnnouncementController constructor.
      *
-     * @param AnnouncementService $service
+     * @param  AnnouncementService  $service
      */
     public function __construct(AnnouncementService $service)
     {
@@ -39,7 +37,7 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -64,7 +62,7 @@ class AnnouncementController extends Controller
 
     /**
      * @param  Announcement  $announcement
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function show(Announcement $announcement)
     {
@@ -73,11 +71,10 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @param  EditAnnouncementRequest  $request
      * @param  Announcement  $announcement
-     * @return mixed
+     * @return \Illuminate\View\View
      */
-    public function edit(EditAnnouncementRequest $request, Announcement $announcement)
+    public function edit(Announcement $announcement)
     {
         return view('backend.announcement.edit')
             ->with('announcement', $announcement);
@@ -100,13 +97,12 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @param  DeleteAnnouncementRequest  $request
      * @param  Announcement  $announcement
      * @return mixed
      *
      * @throws \App\Exceptions\GeneralException
      */
-    public function destroy(DeleteAnnouncementRequest $request, Announcement $announcement)
+    public function destroy(Announcement $announcement)
     {
         $this->service->delete($announcement);
 
