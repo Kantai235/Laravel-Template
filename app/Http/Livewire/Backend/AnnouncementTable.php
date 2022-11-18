@@ -185,13 +185,13 @@ class AnnouncementTable extends DataTableComponent
                 ->html(),
             Column::make(__('Enabled Status'), 'enabled')
                 ->label(
-                    fn ($row, Column $column) => view('includes.livewire.status')
+                    fn ($row, Column $column) => view('components.livewire.badges.status')
                         ->with('status', $row->enabled)
                         ->with('block', true)
                 ),
             Column::make(__('Dismissable Status'), 'dismissable')
                 ->label(
-                    fn ($row, Column $column) => view('includes.livewire.status')
+                    fn ($row, Column $column) => view('components.livewire.badges.status')
                         ->with('status', $row->dismissable)
                         ->with('block', true)
                 ),

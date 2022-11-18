@@ -19,5 +19,5 @@ window.Coreui = require('@coreui/coreui');
  * Plugins at:
  * /resources/js/plugins.js
  */
- require('../bootstrap');
- require('../plugins');
+require('../bootstrap');
+require('../plugins');
