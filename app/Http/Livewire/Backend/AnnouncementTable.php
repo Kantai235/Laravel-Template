@@ -63,7 +63,10 @@ class AnnouncementTable extends DataTableComponent
             'enabled',
             'dismissable',
             'starts_at',
-            'ends_at'
+            'ends_at',
+            'created_at',
+            'updated_at',
+            'deleted_at',
         );
 
         if ($this->status === 'deleted') {

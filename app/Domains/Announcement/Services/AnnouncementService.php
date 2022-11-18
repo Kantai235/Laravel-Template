@@ -175,6 +175,40 @@ class AnnouncementService extends BaseService
     }
 
     /**
+     * @param  Announcement  $announcement
+     * @return Announcement
+     *
+     * @throws GeneralException
+     */
+    public function restore(Announcement $announcement): Announcement
+    {
+        if ($announcement->restore()) {
+            // event(new AnnouncementRestored($announcement));
+
+            return $announcement;
+        }
+
+        throw new GeneralException(__('There was a problem restoring this announcement. Please try again.'));
+    }
+
+    /**
+     * @param  Announcement  $announcement
+     * @return bool
+     *
+     * @throws GeneralException
+     */
+    public function destroy(Announcement $announcement): bool
+    {
+        if ($announcement->forceDelete()) {
+            // event(new AnnouncementDestroyed($announcement));
+
+            return true;
+        }
+
+        throw new GeneralException(__('There was a problem permanently deleting this announcement. Please try again.'));
+    }
+
+    /**
      * @param  array  $data
      * @return Announcement
      */

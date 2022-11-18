@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Domains\Announcement\Models\Announcement;
 use App\Domains\Auth\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -62,6 +63,11 @@ class RouteServiceProvider extends ServiceProvider
         // To be able to restore a user, since the default binding is a find and would result in a 404
         Route::bind('deletedUser', function ($id) {
             return User::onlyTrashed()->find($id);
+        });
+
+        // To be able to restore a announcement, since the default binding is a find and would result in a 404
+        Route::bind('deletedAnnouncement', function ($id) {
+            return Announcement::onlyTrashed()->find($id);
         });
     }
 
