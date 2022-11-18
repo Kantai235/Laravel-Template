@@ -53,6 +53,7 @@ class PermissionRoleSeeder extends Seeder
                 'type' => User::TYPE_ADMIN,
                 'name' => 'admin.access.user.list',
                 'description' => 'View Users',
+                'sort' => 1,
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
@@ -101,15 +102,21 @@ class PermissionRoleSeeder extends Seeder
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.announcement.deactivate',
-                'description' => 'Deactivate Announcements',
+                'name' => 'admin.announcement.edit',
+                'description' => 'Create and Edit Announcements',
                 'sort' => 2,
             ]),
             new Permission([
                 'type' => User::TYPE_ADMIN,
-                'name' => 'admin.announcement.reactivate',
-                'description' => 'Reactivate Announcements',
+                'name' => 'admin.announcement.deactivate',
+                'description' => 'Deactivate and Reactivate Announcements',
                 'sort' => 3,
+            ]),
+            new Permission([
+                'type' => User::TYPE_ADMIN,
+                'name' => 'admin.announcement.destore',
+                'description' => 'Destroy and Restore Announcements',
+                'sort' => 4,
             ]),
         ]);
 

@@ -22,30 +22,13 @@
             $logged_in_user->hasAllAccess() ||
             (
                 $logged_in_user->can('admin.access.user.list') ||
-                $logged_in_user->can('admin.access.user.deactivate') ||
-                $logged_in_user->can('admin.access.user.reactivate') ||
-                $logged_in_user->can('admin.access.user.clear-session') ||
-                $logged_in_user->can('admin.access.user.impersonate') ||
-                $logged_in_user->can('admin.access.user.change-password') ||
-                $logged_in_user->can('admin.announcement.list') ||
-                $logged_in_user->can('admin.announcement.deactivate') ||
-                $logged_in_user->can('admin.announcement.reactivate')
+                $logged_in_user->can('admin.announcement.list')
             )
         )
             <li class="nav-title">@lang('System')</li><!--nav-title-->
         @endif
 
-        @if (
-            $logged_in_user->hasAllAccess() ||
-            (
-                $logged_in_user->can('admin.access.user.list') ||
-                $logged_in_user->can('admin.access.user.deactivate') ||
-                $logged_in_user->can('admin.access.user.reactivate') ||
-                $logged_in_user->can('admin.access.user.clear-session') ||
-                $logged_in_user->can('admin.access.user.impersonate') ||
-                $logged_in_user->can('admin.access.user.change-password')
-            )
-        )
+        @if ($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.access.user.list'))
             <li class="nav-group {{ activeClass(Route::is('admin.auth.user.*') || Route::is('admin.auth.role.*'), 'open show') }}">
                 <x-utils.link
                     href="#"
@@ -54,25 +37,13 @@
                     :text="__('Access')" />
 
                 <ul class="nav-group-items">
-                    @if (
-                        $logged_in_user->hasAllAccess() ||
-                        (
-                            $logged_in_user->can('admin.access.user.list') ||
-                            $logged_in_user->can('admin.access.user.deactivate') ||
-                            $logged_in_user->can('admin.access.user.reactivate') ||
-                            $logged_in_user->can('admin.access.user.clear-session') ||
-                            $logged_in_user->can('admin.access.user.impersonate') ||
-                            $logged_in_user->can('admin.access.user.change-password')
-                        )
-                    )
-                        <li class="nav-item">
-                            <x-utils.link
-                                :href="route('admin.auth.user.index')"
-                                class="nav-link"
-                                :text="__('User Management')"
-                                :active="activeClass(Route::is('admin.auth.user.*'), 'active')" />
-                        </li><!--nav-item-->
-                    @endif
+                    <li class="nav-item">
+                        <x-utils.link
+                            :href="route('admin.auth.user.index')"
+                            class="nav-link"
+                            :text="__('User Management')"
+                            :active="activeClass(Route::is('admin.auth.user.*'), 'active')" />
+                    </li><!--nav-item-->
 
                     @if ($logged_in_user->hasAllAccess())
                         <li class="nav-item">
@@ -87,14 +58,7 @@
             </li><!--nav-group-->
         @endif
 
-        @if (
-            $logged_in_user->hasAllAccess() ||
-            (
-                $logged_in_user->can('admin.announcement.list') ||
-                $logged_in_user->can('admin.announcement.deactivate') ||
-                $logged_in_user->can('admin.announcement.reactivate')
-            )
-        )
+        @if ($logged_in_user->hasAllAccess() || $logged_in_user->can('admin.announcement.list'))
             <li class="nav-item">
                 <x-utils.link
                     class="nav-link"

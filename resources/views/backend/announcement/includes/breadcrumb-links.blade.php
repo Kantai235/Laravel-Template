@@ -3,7 +3,7 @@
         class="nav-link"
         :href="route('admin.announcement.deactivated')"
         :text="__('Deactivated Announcements')"
-        permission="admin.announcement.reactivate" />
+        permission="admin.announcement.deactivate" />
 </li>
 
 <li class="nav-item">
@@ -11,5 +11,5 @@
         class="nav-link"
         :href="route('admin.announcement.deleted')"
         :text="__('Deleted Announcements')"
-        permission="admin.announcement.reactivate" />
+        permission="admin.announcement.destore" />
 </li>

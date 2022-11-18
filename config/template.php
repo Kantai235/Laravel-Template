@@ -1,10 +1,9 @@
 <?php
 
-/*
+/**
  * All configuration options for Laravel Template at:
  * https://github.com/Kantai235/Laravel-Template/
  */
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -98,7 +97,7 @@ return [
              * The name of the announcement administrator role
              * It is not recommended to change
              */
-            'announcement' => 'Announcement',
+            'announcement' => 'Announcement Management',
         ],
     ],
 
