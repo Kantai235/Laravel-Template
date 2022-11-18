@@ -7,7 +7,7 @@
  * /resources/js/bootstrap.js
  *
  * Plugins at:
- * /resource/js/plugins.js
+ * /resources/js/plugins.js
  */
 
 require('../bootstrap');
