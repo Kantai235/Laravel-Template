@@ -31,6 +31,8 @@
     </div><!--app-->
 
     @stack('before-scripts')
+    @include('includes.partials.ga')
+    @include('includes.partials.ads')
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
     @livewireScripts()
