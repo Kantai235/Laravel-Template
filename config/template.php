@@ -1,10 +1,9 @@
 <?php
 
-/*
+/**
  * All configuration options for Laravel Template at:
  * https://github.com/Kantai235/Laravel-Template/
  */
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -132,6 +131,24 @@ return [
     | Note: Turning this off does not unregister the breadcrumbs in the routes file, it just hides the navbar
     */
     'frontend_breadcrumbs' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Google Analytics
+    |--------------------------------------------------------------------------
+    |
+    | Found in views/includes/partials/ga.blade.php
+    */
+    'google_analytics' => env('GOOGLE_ANALYTICS', 'UA-XXXXX-X'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Google AdSense
+    |--------------------------------------------------------------------------
+    |
+    | Found in views/includes/partials/ads.blade.php
+    */
+    'google_adsense' => env('GOOGLE_ADSENSE', 'ca-pub-0000000000000000'),
 
     /*
     |--------------------------------------------------------------------------
