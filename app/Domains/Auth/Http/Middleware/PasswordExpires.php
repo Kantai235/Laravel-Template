@@ -4,20 +4,11 @@ namespace App\Domains\Auth\Http\Middleware;
 
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Http\Request;
 
-/**
- * Class PasswordExpires.
- */
 class PasswordExpires
 {
-    /**
-     * @param  $request
-     * @param  Closure  $next
-     * @return \Illuminate\Http\RedirectResponse|mixed
-     *
-     * @throws \Exception
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if (is_numeric(config('template.access.user.password_expires_days'))) {
             $password_changed_at = new Carbon($request->user()->password_changed_at ?? $request->user()->created_at);

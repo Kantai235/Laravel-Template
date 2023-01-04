@@ -2,16 +2,17 @@
 
 namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
+use App\Domains\Auth\Models\User;
 use App\Domains\Auth\Services\UserService;
 use App\Rules\Captcha;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
-/**
- * Class RegisterController.
- */
 class RegisterController
 {
     /*
@@ -27,16 +28,8 @@ class RegisterController
 
     use RegistersUsers;
 
-    /**
-     * @var UserService
-     */
-    protected $userService;
+    protected UserService $userService;
 
-    /**
-     * RegisterController constructor.
-     *
-     * @param  UserService  $userService
-     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
@@ -44,20 +37,16 @@ class RegisterController
 
     /**
      * Where to redirect users after registration.
-     *
-     * @return string
      */
-    public function redirectPath()
+    public function redirectPath(): string
     {
         return route(homeRoute());
     }
 
     /**
      * Show the application registration form.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showRegistrationForm()
+    public function showRegistrationForm(): View|ViewFactory
     {
         abort_unless(config('template.access.user.registration'), 404);
 
@@ -66,11 +55,8 @@ class RegisterController
 
     /**
      * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): ValidationValidator
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:100'],
@@ -86,13 +72,8 @@ class RegisterController
 
     /**
      * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Domains\Auth\Models\User|mixed
-     *
-     * @throws \App\Domains\Auth\Exceptions\RegisterException
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
         abort_unless(config('template.access.user.registration'), 404);
 

@@ -5,42 +5,24 @@ namespace App\Domains\Announcement\Http\Controllers\Backend;
 use App\Domains\Announcement\Models\Announcement;
 use App\Domains\Announcement\Services\AnnouncementService;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class DeletedAnnouncementController.
- */
 class DeletedAnnouncementController extends Controller
 {
-    /**
-     * @var AnnouncementService
-     */
-    protected $service;
+    protected AnnouncementService $service;
 
-    /**
-     * DeletedAnnouncementController constructor.
-     *
-     * @param  AnnouncementService  $service
-     */
     public function __construct(AnnouncementService $service)
     {
         $this->service = $service;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
         return view('backend.announcement.deleted');
     }
 
-    /**
-     * @param  Announcement  $deletedAnnouncement
-     * @return mixed
-     *
-     * @throws \App\Exceptions\GeneralException
-     */
-    public function update(Announcement $deletedAnnouncement)
+    public function update(Announcement $deletedAnnouncement): Redirector
     {
         $this->service->restore($deletedAnnouncement);
 
@@ -49,13 +31,7 @@ class DeletedAnnouncementController extends Controller
             ->withFlashSuccess(__('The announcement was successfully restored.'));
     }
 
-    /**
-     * @param  Announcement  $deletedAnnouncement
-     * @return mixed
-     *
-     * @throws \App\Exceptions\GeneralException
-     */
-    public function destroy(Announcement $deletedAnnouncement)
+    public function destroy(Announcement $deletedAnnouncement): Redirector
     {
         $this->service->destroy($deletedAnnouncement);
 

@@ -3,19 +3,11 @@
 namespace App\Domains\Auth\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
-/**
- * Class TwoFactorAuthenticationStatus.
- */
 class TwoFactorAuthenticationStatus
 {
-    /**
-     * @param  $request
-     * @param  Closure  $next
-     * @param  string  $status
-     * @return mixed
-     */
-    public function handle($request, Closure $next, $status = 'enabled')
+    public function handle(Request $request, Closure $next, string $status = 'enabled')
     {
         if (!in_array($status, ['enabled', 'disabled'])) {
             abort(404);

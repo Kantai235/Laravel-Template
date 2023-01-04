@@ -3,19 +3,13 @@
 namespace App\Domains\Auth\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class UserTypeCheck.
- */
 class UserTypeCheck
 {
-    /**
-     * @param  $request
-     * @param  Closure  $next
-     * @param  $type
-     * @return mixed
-     */
-    public function handle($request, Closure $next, $type)
+    public function handle(Request $request, Closure $next, $type): Redirector|RedirectResponse
     {
         if ($request->user()) {
             if (strpos($type, '|') !== false) {

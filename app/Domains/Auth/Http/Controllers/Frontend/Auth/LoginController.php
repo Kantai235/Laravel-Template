@@ -4,14 +4,13 @@ namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
 use App\Domains\Auth\Events\User\UserLoggedIn;
 use App\Rules\Captcha;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
-/**
- * Class LoginController.
- */
 class LoginController
 {
     /*
@@ -29,33 +28,24 @@ class LoginController
 
     /**
      * Where to redirect users after login.
-     *
-     * @return string
      */
-    public function redirectPath()
+    public function redirectPath(): string
     {
         return route(homeRoute());
     }
 
     /**
      * Show the application's login form.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showLoginForm()
+    public function showLoginForm(): View|ViewFactory
     {
         return view('frontend.auth.login');
     }
 
     /**
      * Validate the user login request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
-    protected function validateLogin(Request $request)
+    protected function validateLogin(Request $request): void
     {
         $request->validate([
             $this->username() => ['required', 'max:255', 'string'],
@@ -71,11 +61,8 @@ class LoginController
      * https://github.com/Laragear/TwoFactor#logging-in
      *
      * Attempt to log the user into the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
      */
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin(Request $request): bool
     {
         try {
             return $this->guard()->attempt(
@@ -92,8 +79,6 @@ class LoginController
     /**
      * The user has been authenticated.
      *
-     * @param  Request  $request
-     * @param  $user
      * @return mixed
      */
     protected function authenticated(Request $request, $user)

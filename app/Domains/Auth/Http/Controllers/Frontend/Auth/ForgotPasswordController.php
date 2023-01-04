@@ -2,11 +2,10 @@
 
 namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-/**
- * Class ForgotPasswordController.
- */
 class ForgotPasswordController
 {
     /*
@@ -24,10 +23,8 @@ class ForgotPasswordController
 
     /**
      * Display the form to request a password reset link.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showLinkRequestForm()
+    public function showLinkRequestForm(): View|ViewFactory
     {
         return view('frontend.auth.passwords.email');
     }

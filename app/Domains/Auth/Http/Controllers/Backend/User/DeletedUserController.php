@@ -4,42 +4,26 @@ namespace App\Domains\Auth\Http\Controllers\Backend\User;
 
 use App\Domains\Auth\Models\User;
 use App\Domains\Auth\Services\UserService;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class DeletedUserController.
- */
 class DeletedUserController
 {
-    /**
-     * @var UserService
-     */
-    protected $userService;
+    protected UserService $userService;
 
-    /**
-     * DeletedUserController constructor.
-     *
-     * @param  UserService  $userService
-     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
+    public function index(): View|ViewFactory
     {
         return view('backend.auth.user.deleted');
     }
 
-    /**
-     * @param  User  $deletedUser
-     * @return mixed
-     *
-     * @throws \App\Exceptions\GeneralException
-     */
-    public function update(User $deletedUser)
+    public function update(User $deletedUser): Redirector|RedirectResponse
     {
         $this->userService->restore($deletedUser);
 
@@ -48,13 +32,7 @@ class DeletedUserController
             ->withFlashSuccess(__('The user was successfully restored.'));
     }
 
-    /**
-     * @param  User  $deletedUser
-     * @return mixed
-     *
-     * @throws \App\Exceptions\GeneralException
-     */
-    public function destroy(User $deletedUser)
+    public function destroy(User $deletedUser): Redirector|RedirectResponse
     {
         abort_unless(config('template.access.user.permanently_delete'), 404);
 

@@ -6,46 +6,27 @@ use App\Domains\Auth\Http\Requests\Backend\User\EditUserPasswordRequest;
 use App\Domains\Auth\Http\Requests\Backend\User\UpdateUserPasswordRequest;
 use App\Domains\Auth\Models\User;
 use App\Domains\Auth\Services\UserService;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class UserPasswordController.
- */
 class UserPasswordController
 {
-    /**
-     * @var UserService
-     */
-    protected $userService;
+    protected UserService $userService;
 
-    /**
-     * UserPasswordController constructor.
-     *
-     * @param  UserService  $userService
-     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    /**
-     * @param  EditUserPasswordRequest  $request
-     * @param  User  $user
-     * @return mixed
-     */
-    public function edit(EditUserPasswordRequest $request, User $user)
+    public function edit(EditUserPasswordRequest $request, User $user): View|ViewFactory
     {
         return view('backend.auth.user.change-password')
             ->with('user', $user);
     }
 
-    /**
-     * @param  UpdateUserPasswordRequest  $request
-     * @param  User  $user
-     * @return mixed
-     *
-     * @throws \Throwable
-     */
-    public function update(UpdateUserPasswordRequest $request, User $user)
+    public function update(UpdateUserPasswordRequest $request, User $user): Redirector|RedirectResponse
     {
         $this->userService->updatePassword($user, $request->validated());
 

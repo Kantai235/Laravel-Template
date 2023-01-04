@@ -4,13 +4,12 @@ namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
 use App\Domains\Auth\Rules\UnusedPassword;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
-/**
- * Class ResetPasswordController.
- */
 class ResetPasswordController
 {
     /*
@@ -28,25 +27,18 @@ class ResetPasswordController
 
     /**
      * Where to redirect users after resetting their password.
-     *
-     * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * @return string
-     */
-    public function redirectPath()
+    public function redirectPath(): string
     {
         return route(homeRoute());
     }
 
     /**
      * Get the password reset validation rules.
-     *
-     * @return array<string, array<int, string>>
      */
-    protected function rules()
+    protected function rules(): array
     {
         return [
             'token' => ['required'],
@@ -65,12 +57,8 @@ class ResetPasswordController
      * Display the password reset view for the given token.
      *
      * If no token is present, display the link request form.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $token
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showResetForm(Request $request, $token = null)
+    public function showResetForm(Request $request, $token = null): View|ViewFactory
     {
         return view('frontend.auth.passwords.reset')
             ->with('token', $token)

@@ -2,18 +2,15 @@
 
 namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class TwoFactorAuthenticationController.
- */
 class TwoFactorAuthenticationController
 {
-    /**
-     * @param  Request  $request
-     * @return mixed
-     */
-    public function create(Request $request)
+    public function create(Request $request): View|ViewFactory
     {
         $secret = $request->user()->createTwoFactorAuth();
 
@@ -22,21 +19,13 @@ class TwoFactorAuthenticationController
             ->with('secret', $secret->toString());
     }
 
-    /**
-     * @param  Request  $request
-     * @return mixed
-     */
-    public function show(Request $request)
+    public function show(Request $request): View|ViewFactory
     {
         return view('frontend.user.account.tabs.two-factor-authentication.recovery')
             ->with('recoveryCodes', $request->user()->getRecoveryCodes());
     }
 
-    /**
-     * @param  Request  $request
-     * @return mixed
-     */
-    public function update(Request $request)
+    public function update(Request $request): Redirector|RedirectResponse
     {
         $request->user()->generateRecoveryCodes();
 
