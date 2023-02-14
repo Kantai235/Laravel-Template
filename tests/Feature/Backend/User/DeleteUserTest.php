@@ -124,7 +124,7 @@ class DeleteUserTest extends TestCase
         $user->assignRole($this->getAdminRole());
         $this->actingAs($user);
 
-        $response = $this->delete('/admin/auth/user/' . $admin->id);
+        $response = $this->delete('/admin/auth/user/'.$admin->id);
 
         $response->assertSessionHas('flash_danger', __('You can not delete the master administrator.'));
 
@@ -139,7 +139,7 @@ class DeleteUserTest extends TestCase
         $user->assignRole($this->getAdminRole());
         $this->actingAs($user);
 
-        $response = $this->delete('/admin/auth/user/' . $user->id);
+        $response = $this->delete('/admin/auth/user/'.$user->id);
 
         $response->assertSessionHas('flash_danger', __('You can not delete yourself.'));
 

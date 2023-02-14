@@ -8,16 +8,16 @@ namespace App\Domains\Auth\Models\Traits\Scope;
 trait RoleScope
 {
     /**
-     * @param  $query
-     * @param  $term
+     * @param    $query
+     * @param    $term
      * @return mixed
      */
     public function scopeSearch($query, $term)
     {
         return $query->where(function ($query) use ($term) {
-            $query->where('name', 'like', '%' . $term . '%')
+            $query->where('name', 'like', '%'.$term.'%')
                 ->orWhereHas('permissions', function ($query) use ($term) {
-                    $query->where('description', 'like', '%' . $term . '%');
+                    $query->where('description', 'like', '%'.$term.'%');
                 });
         });
     }

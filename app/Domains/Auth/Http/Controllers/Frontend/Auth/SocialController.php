@@ -19,7 +19,7 @@ class SocialController
     {
         $user = $userService->registerProvider(Socialite::driver($provider)->user(), $provider);
 
-        if (!$user->isActive()) {
+        if (! $user->isActive()) {
             auth()->logout();
 
             return redirect()

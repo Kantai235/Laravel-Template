@@ -45,11 +45,11 @@ class ListUserTest extends TestCase
         /** @var User */
         $otherUser = User::factory()->create();
 
-        $this->get('/admin/auth/user/' . $otherUser->id)->assertOk();
+        $this->get('/admin/auth/user/'.$otherUser->id)->assertOk();
 
         $user->syncPermissions([]);
 
-        $response = $this->get('/admin/auth/user/' . $otherUser->id);
+        $response = $this->get('/admin/auth/user/'.$otherUser->id);
 
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
     }

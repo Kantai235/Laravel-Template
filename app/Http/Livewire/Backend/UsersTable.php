@@ -68,8 +68,8 @@ class UsersTable extends DataTableComponent
         }
 
         return $query
-            ->when(null, fn ($query, $name) => $query->where('users.name', 'like', '%' . $name . '%'))
-            ->when(null, fn ($query, $email) => $query->where('users.email', 'like', '%' . $email . '%'));
+            ->when(null, fn ($query, $name) => $query->where('users.name', 'like', '%'.$name.'%'))
+            ->when(null, fn ($query, $email) => $query->where('users.email', 'like', '%'.$email.'%'));
     }
 
     /**
@@ -134,30 +134,30 @@ class UsersTable extends DataTableComponent
                 ->searchable(),
             Column::make('Active')
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.status')
+                    fn ($row, Column $column) => view('backend.auth.user.includes.status')
                         ->with('user', $row)
                 ),
             Column::make('Verified')
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.verified')
+                    fn ($row, Column $column) => view('backend.auth.user.includes.verified')
                         ->with('user', $row)
                 ),
             Column::make(__('2FA'))
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.2fa')
+                    fn ($row, Column $column) => view('backend.auth.user.includes.2fa')
                         ->with('user', $row)
                 ),
             Column::make(__('Roles'))
                 ->label(
-                    fn($row, Column $column) => $row->roles_label
+                    fn ($row, Column $column) => $row->roles_label
                 ),
             Column::make(__('Additional Permissions'))
                 ->label(
-                    fn($row, Column $column) => $row->permissions_label
+                    fn ($row, Column $column) => $row->permissions_label
                 ),
             Column::make(__('Actions'))
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.user.includes.actions')
+                    fn ($row, Column $column) => view('backend.auth.user.includes.actions')
                         ->with('user', $row)
                 ),
         ];

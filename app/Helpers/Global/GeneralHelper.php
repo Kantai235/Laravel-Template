@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 
-if (!function_exists('appName')) {
+if (! function_exists('appName')) {
     /**
      * Helper to grab the application name.
      */
@@ -12,7 +12,7 @@ if (!function_exists('appName')) {
     }
 }
 
-if (!function_exists('appUrl')) {
+if (! function_exists('appUrl')) {
     /**
      * Helper to grab the application url.
      */
@@ -22,7 +22,7 @@ if (!function_exists('appUrl')) {
     }
 }
 
-if (!function_exists('carbon')) {
+if (! function_exists('carbon')) {
     /**
      * Create a new Carbon instance from a time.
      */
@@ -32,14 +32,14 @@ if (!function_exists('carbon')) {
     }
 }
 
-if (!function_exists('homeRoute')) {
+if (! function_exists('homeRoute')) {
     /**
      * Return the route to the "home" page depending on authentication/authorization status.
      */
     function homeRoute(): string
     {
         if (auth()->check()) {
-            /** @var \App\Domains\Auth\Models\User $user  */
+            /** @var \App\Domains\Auth\Models\User $user */
             $user = auth()->user();
             if ($user->isAdmin()) {
                 return 'admin.dashboard';

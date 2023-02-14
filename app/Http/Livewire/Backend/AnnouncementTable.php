@@ -79,7 +79,7 @@ class AnnouncementTable extends DataTableComponent
 
         return $query->when(
             null,
-            fn ($query, $message) => $query->where('announcement.message', 'like', '%' . $message . '%')
+            fn ($query, $message) => $query->where('announcement.message', 'like', '%'.$message.'%')
         );
     }
 

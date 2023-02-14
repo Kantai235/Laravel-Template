@@ -54,7 +54,7 @@ class RolesTable extends DataTableComponent
             Column::make(__('Type'))
                 ->sortable()
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.role.includes.type')
+                    fn ($row, Column $column) => view('backend.auth.role.includes.type')
                         ->with('model', $row)
                 ),
             Column::make('Name')
@@ -62,16 +62,16 @@ class RolesTable extends DataTableComponent
                 ->searchable(),
             Column::make(__('Permissions'))
                 ->label(
-                    fn($row, Column $column) => $row->permissions_label
+                    fn ($row, Column $column) => $row->permissions_label
                 ),
             Column::make(__('Number of Users'), 'users_count')
                 ->sortable()
                 ->label(
-                    fn($row, Column $column) => $row->users_count
+                    fn ($row, Column $column) => $row->users_count
                 ),
             Column::make(__('Actions'))
                 ->label(
-                    fn($row, Column $column) => view('backend.auth.role.includes.actions')
+                    fn ($row, Column $column) => view('backend.auth.role.includes.actions')
                         ->with('model', $row)
                 ),
         ];

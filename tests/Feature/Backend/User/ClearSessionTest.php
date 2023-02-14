@@ -26,13 +26,13 @@ class ClearSessionTest extends TestCase
         /** @var User */
         $newUser = User::factory()->create();
 
-        $response = $this->post('/admin/auth/user/' . $newUser->id . '/clear-session');
+        $response = $this->post('/admin/auth/user/'.$newUser->id.'/clear-session');
 
         $response->assertSessionHas('flash_success', __('The user\'s session was successfully cleared.'));
 
         $user->syncPermissions([]);
 
-        $response = $this->post('/admin/auth/user/' . $newUser->id . '/clear-session');
+        $response = $this->post('/admin/auth/user/'.$newUser->id.'/clear-session');
 
         $response->assertSessionHas('flash_danger', __('You do not have access to do that.'));
     }
@@ -47,7 +47,7 @@ class ClearSessionTest extends TestCase
 
         $user->syncPermissions(['admin.access.user.clear-session']);
 
-        $response = $this->post('/admin/auth/user/' . $user->id . '/clear-session');
+        $response = $this->post('/admin/auth/user/'.$user->id.'/clear-session');
 
         $response->assertSessionHas('flash_danger', __('You can not clear your own session.'));
     }

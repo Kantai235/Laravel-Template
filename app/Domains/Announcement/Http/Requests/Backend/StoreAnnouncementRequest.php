@@ -37,12 +37,12 @@ class StoreAnnouncementRequest extends FormRequest
                 Announcement::TYPE_WARNING,
                 Announcement::TYPE_INFO,
                 Announcement::TYPE_LIGHT,
-                Announcement::TYPE_DARK
+                Announcement::TYPE_DARK,
             ])],
             'area' => ['required', Rule::in([
                 'all',
                 Announcement::AREA_FRONTEND,
-                Announcement::AREA_BACKEND
+                Announcement::AREA_BACKEND,
             ])],
             'message' => ['required', 'string'],
             'starts_at_date' => ['nullable', 'date'],

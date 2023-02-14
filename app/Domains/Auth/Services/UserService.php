@@ -31,7 +31,7 @@ class UserService extends BaseService
     }
 
     /**
-     * @param  $type
+     * @param    $type
      * @param  bool|int  $perPage
      * @return mixed
      */
@@ -68,8 +68,8 @@ class UserService extends BaseService
     }
 
     /**
-     * @param  $info
-     * @param  $provider
+     * @param    $info
+     * @param    $provider
      * @return mixed
      *
      * @throws GeneralException
@@ -78,7 +78,7 @@ class UserService extends BaseService
     {
         $user = $this->model::where('provider_id', $info->id)->first();
 
-        if (!$user) {
+        if (! $user) {
             DB::beginTransaction();
 
             try {
@@ -93,7 +93,7 @@ class UserService extends BaseService
                 DB::rollBack();
 
                 throw new GeneralException(__('There was a problem connecting to :provider', [
-                    'provider' => $provider
+                    'provider' => $provider,
                 ]));
             }
 
@@ -130,7 +130,7 @@ class UserService extends BaseService
 
             $user->syncRoles($data['roles'] ?? []);
 
-            if (!config('template.access.user.only_roles')) {
+            if (! config('template.access.user.only_roles')) {
                 $user->syncPermissions($data['permissions'] ?? []);
             }
         } catch (Exception $e) {
@@ -145,7 +145,7 @@ class UserService extends BaseService
 
         // They didn't want to auto verify the email, but do they want to send the confirmation email to do so?
         // phpcs:disable
-        if (!isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
+        if (! isset($data['email_verified']) && isset($data['send_confirmation_email']) && $data['send_confirmation_email'] === '1') {
             $user->sendEmailVerificationNotification();
         }
 
@@ -172,11 +172,11 @@ class UserService extends BaseService
                 'email' => $data['email'],
             ]);
 
-            if (!$user->isMasterAdmin()) {
+            if (! $user->isMasterAdmin()) {
                 // Replace selected roles/permissions
                 $user->syncRoles($data['roles'] ?? []);
 
-                if (!config('template.access.user.only_roles')) {
+                if (! config('template.access.user.only_roles')) {
                     $user->syncPermissions($data['permissions'] ?? []);
                 }
             }
@@ -214,7 +214,7 @@ class UserService extends BaseService
 
     /**
      * @param  User  $user
-     * @param  $data
+     * @param    $data
      * @param  bool  $expired
      * @return User
      *
@@ -224,7 +224,7 @@ class UserService extends BaseService
     {
         if (isset($data['current_password'])) {
             throw_if(
-                !Hash::check($data['current_password'], $user->password),
+                ! Hash::check($data['current_password'], $user->password),
                 new GeneralException(__('That is not your old password.'))
             );
         }
@@ -241,7 +241,7 @@ class UserService extends BaseService
 
     /**
      * @param  User  $user
-     * @param  $status
+     * @param    $status
      * @return User
      *
      * @throws GeneralException

@@ -44,10 +44,10 @@ class BladeServiceProvider extends ServiceProvider
 
             $html .= new HtmlString('
                 <div class="g-recaptcha"
-                    data-sitekey="' . config('template.access.captcha.configs.site_key') . '"
+                    data-sitekey="'.config('template.access.captcha.configs.site_key').'"
                     data-size="invisible"
                     data-callback="_submitForm"
-                    data-badge="' . config('template.access.captcha.configs.options.location') . '">
+                    data-badge="'.config('template.access.captcha.configs.options.location').'">
                 </div>');
             $html .= new HtmlString(sprintf(
                 '<script src="%s" async defer></script>',

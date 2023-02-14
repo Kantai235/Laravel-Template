@@ -26,5 +26,5 @@ Route::group([
     'namespace' => 'Api',
     'as' => 'api.',
 ], function () {
-    includeRouteFiles(__DIR__ . '/api/');
+    includeRouteFiles(__DIR__.'/api/');
 });

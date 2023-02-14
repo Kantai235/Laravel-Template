@@ -58,11 +58,10 @@ class AnnouncementSeeder extends Seeder
             Announcement::create([
                 'area' => null,
                 'type' => Announcement::TYPE_DANGER,
-                'message' =>
-                'This announcement will be shown because the current time falls between the start and end dates.',
+                'message' => 'This announcement will be shown because the current time falls between the start and end dates.',
                 'enabled' => true,
                 'starts_at' => now()->subWeek(),
-                'ends_at' => now()->addWeek()
+                'ends_at' => now()->addWeek(),
             ]);
 
             Announcement::create([
@@ -77,7 +76,7 @@ class AnnouncementSeeder extends Seeder
                 'type' => Announcement::TYPE_DANGER,
                 'message' => 'This announcement will not be shown because the end date has passed.',
                 'enabled' => true,
-                'ends_at' => now()->subDay()
+                'ends_at' => now()->subDay(),
             ]);
 
             Announcement::create([
@@ -86,7 +85,7 @@ class AnnouncementSeeder extends Seeder
                 'message' => 'This announcement will not be shown because the current time does not fall between the start and end dates.',
                 'enabled' => true,
                 'starts_at' => now()->subWeek(),
-                'ends_at' => now()->subDay()
+                'ends_at' => now()->subDay(),
             ]);
         }
 

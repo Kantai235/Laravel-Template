@@ -24,7 +24,7 @@ class UpdateUserTest extends TestCase
         /** @var User */
         $user = User::factory()->create();
 
-        $response = $this->get('/admin/auth/user/' . $user->id . '/edit');
+        $response = $this->get('/admin/auth/user/'.$user->id.'/edit');
 
         $response->assertOk();
     }

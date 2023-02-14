@@ -28,7 +28,7 @@ class DeactivatedAnnouncementController extends Controller
         $this->service->mark($announcement, $status);
 
         return redirect()->route(
-            (int) $status === 1 || !$request->user()->can('admin.announcement.reactivate')
+            (int) $status === 1 || ! $request->user()->can('admin.announcement.reactivate')
                 ? 'admin.announcement.index'
                 : 'admin.announcement.deactivated'
         )->withFlashSuccess(__('The announcement was successfully updated.'));

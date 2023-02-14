@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Lang;
 class LocaleController
 {
     /**
-     * @param  $locale
+     * @param    $locale
      * @return \Illuminate\Http\RedirectResponse
      */
     public function change($locale)
@@ -23,7 +23,7 @@ class LocaleController
     }
 
     /**
-     * @param  $locale
+     * @param    $locale
      * @return \Illuminate\Http\JsonResponse
      */
     public function content($locale)
