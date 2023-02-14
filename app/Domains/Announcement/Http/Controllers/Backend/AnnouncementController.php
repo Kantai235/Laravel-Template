@@ -7,51 +7,29 @@ use App\Domains\Announcement\Http\Requests\Backend\UpdateAnnouncementRequest;
 use App\Domains\Announcement\Models\Announcement;
 use App\Domains\Announcement\Services\AnnouncementService;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class AnnouncementController.
- */
 class AnnouncementController extends Controller
 {
-    /**
-     * @var AnnouncementService
-     */
-    protected $service;
+    protected AnnouncementService $service;
 
-    /**
-     * AnnouncementController constructor.
-     *
-     * @param  AnnouncementService  $service
-     */
     public function __construct(AnnouncementService $service)
     {
         $this->service = $service;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
         return view('backend.announcement.index');
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): View
     {
         return view('backend.announcement.create');
     }
 
-    /**
-     * @param  StoreAnnouncementRequest  $request
-     * @return mixed
-     *
-     * @throws \App\Exceptions\GeneralException
-     * @throws \Throwable
-     */
-    public function store(StoreAnnouncementRequest $request)
+    public function store(StoreAnnouncementRequest $request): Redirector
     {
         $this->service->store($request->validated());
 
@@ -60,34 +38,19 @@ class AnnouncementController extends Controller
             ->withFlashSuccess(__('The announcement was successfully created.'));
     }
 
-    /**
-     * @param  Announcement  $announcement
-     * @return \Illuminate\View\View
-     */
-    public function show(Announcement $announcement)
+    public function show(Announcement $announcement): View
     {
         return view('backend.announcement.show')
             ->with('announcement', $announcement);
     }
 
-    /**
-     * @param  Announcement  $announcement
-     * @return \Illuminate\View\View
-     */
-    public function edit(Announcement $announcement)
+    public function edit(Announcement $announcement): View
     {
         return view('backend.announcement.edit')
             ->with('announcement', $announcement);
     }
 
-    /**
-     * @param  UpdateAnnouncementRequest  $request
-     * @param  Announcement  $announcement
-     * @return mixed
-     *
-     * @throws \Throwable
-     */
-    public function update(UpdateAnnouncementRequest $request, Announcement $announcement)
+    public function update(UpdateAnnouncementRequest $request, Announcement $announcement): Redirector
     {
         $this->service->update($announcement, $request->validated());
 
@@ -96,13 +59,7 @@ class AnnouncementController extends Controller
             ->withFlashSuccess(__('The announcement was successfully updated.'));
     }
 
-    /**
-     * @param  Announcement  $announcement
-     * @return mixed
-     *
-     * @throws \App\Exceptions\GeneralException
-     */
-    public function destroy(Announcement $announcement)
+    public function destroy(Announcement $announcement): Redirector
     {
         $this->service->delete($announcement);
 

@@ -4,34 +4,19 @@ namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
 use App\Domains\Auth\Http\Requests\Frontend\Auth\UpdatePasswordRequest;
 use App\Domains\Auth\Services\UserService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class UpdatePasswordController.
- */
 class UpdatePasswordController
 {
-    /**
-     * @var UserService
-     */
-    protected $userService;
+    protected UserService $userService;
 
-    /**
-     * UpdatePasswordController constructor.
-     *
-     * @param  UserService  $userService
-     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
-    /**
-     * @param  UpdatePasswordRequest  $request
-     * @return mixed
-     *
-     * @throws \Throwable
-     */
-    public function update(UpdatePasswordRequest $request)
+    public function update(UpdatePasswordRequest $request): Redirector|RedirectResponse
     {
         $this->userService->updatePassword($request->user(), $request->validated());
 

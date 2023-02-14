@@ -4,30 +4,21 @@ namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
 use App\Domains\Auth\Http\Requests\Frontend\Auth\UpdatePasswordRequest;
 use App\Domains\Auth\Services\UserService;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class PasswordExpiredController.
- */
 class PasswordExpiredController
 {
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function expired()
+    public function expired(): View|ViewFactory
     {
         abort_unless(config('template.access.user.password_expires_days'), 404);
 
         return view('frontend.auth.passwords.expired');
     }
 
-    /**
-     * @param  UpdatePasswordRequest  $request
-     * @param  UserService  $userService
-     * @return mixed
-     *
-     * @throws \Throwable
-     */
-    public function update(UpdatePasswordRequest $request, UserService $userService)
+    public function update(UpdatePasswordRequest $request, UserService $userService): Redirector|RedirectResponse
     {
         abort_unless(config('template.access.user.password_expires_days'), 404);
 

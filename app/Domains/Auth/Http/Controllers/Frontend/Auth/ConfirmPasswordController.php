@@ -3,11 +3,10 @@
 namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
-/**
- * Class ConfirmPasswordController.
- */
 class ConfirmPasswordController
 {
     /*
@@ -25,17 +24,13 @@ class ConfirmPasswordController
 
     /**
      * Where to redirect users when the intended url fails.
-     *
-     * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Display the password confirmation view.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showConfirmForm()
+    public function showConfirmForm(): View|ViewFactory
     {
         return view('frontend.auth.passwords.confirm');
     }

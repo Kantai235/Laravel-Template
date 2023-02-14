@@ -3,18 +3,11 @@
 namespace App\Domains\Auth\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
-/**
- * Class ToBeLoggedOut.
- */
 class ToBeLoggedOut
 {
-    /**
-     * @param  $request
-     * @param  Closure  $next
-     * @return \Illuminate\Http\RedirectResponse|mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // If the user is to be logged out
         if ($request->user() && $request->user()->to_be_logged_out) {

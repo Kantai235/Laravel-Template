@@ -5,10 +5,8 @@ use Carbon\Carbon;
 if (!function_exists('appName')) {
     /**
      * Helper to grab the application name.
-     *
-     * @return mixed
      */
-    function appName()
+    function appName(): string
     {
         return config('app.name', 'Laravel Template');
     }
@@ -17,10 +15,8 @@ if (!function_exists('appName')) {
 if (!function_exists('appUrl')) {
     /**
      * Helper to grab the application url.
-     *
-     * @return mixed
      */
-    function appUrl()
+    function appUrl(): string
     {
         return config('app.url', 'http://localhost');
     }
@@ -29,13 +25,8 @@ if (!function_exists('appUrl')) {
 if (!function_exists('carbon')) {
     /**
      * Create a new Carbon instance from a time.
-     *
-     * @param $time
-     *
-     * @return Carbon
-     * @throws Exception
      */
-    function carbon($time)
+    function carbon($time): DateTimeInterface|string|null
     {
         return new Carbon($time);
     }
@@ -44,17 +35,17 @@ if (!function_exists('carbon')) {
 if (!function_exists('homeRoute')) {
     /**
      * Return the route to the "home" page depending on authentication/authorization status.
-     *
-     * @return string
      */
-    function homeRoute()
+    function homeRoute(): string
     {
         if (auth()->check()) {
-            if (auth()->user()->isAdmin()) {
+            /** @var \App\Domains\Auth\Models\User $user  */
+            $user = auth()->user();
+            if ($user->isAdmin()) {
                 return 'admin.dashboard';
             }
 
-            if (auth()->user()->isUser()) {
+            if ($user->isUser()) {
                 return 'frontend.user.dashboard';
             }
         }

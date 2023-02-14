@@ -3,10 +3,7 @@
 use Carbon\Carbon;
 
 if (!function_exists('setAllLocale')) {
-    /**
-     * @param $locale
-     */
-    function setAllLocale($locale)
+    function setAllLocale(string $locale): void
     {
         setAppLocale($locale);
         setPHPLocale($locale);
@@ -16,40 +13,28 @@ if (!function_exists('setAllLocale')) {
 }
 
 if (!function_exists('setAppLocale')) {
-    /**
-     * @param $locale
-     */
-    function setAppLocale($locale)
+    function setAppLocale(string $locale): void
     {
         app()->setLocale($locale);
     }
 }
 
 if (!function_exists('setPHPLocale')) {
-    /**
-     * @param $locale
-     */
-    function setPHPLocale($locale)
+    function setPHPLocale(string $locale): void
     {
         setlocale(LC_TIME, $locale);
     }
 }
 
 if (!function_exists('setCarbonLocale')) {
-    /**
-     * @param $locale
-     */
-    function setCarbonLocale($locale)
+    function setCarbonLocale(string $locale): void
     {
         Carbon::setLocale($locale);
     }
 }
 
 if (!function_exists('setLocaleReadingDirection')) {
-    /**
-     * @param $locale
-     */
-    function setLocaleReadingDirection($locale)
+    function setLocaleReadingDirection(string $locale): void
     {
         /*
          * Set the session variable for whether or not the app is using RTL support
@@ -57,7 +42,9 @@ if (!function_exists('setLocaleReadingDirection')) {
          */
         if (!app()->runningInConsole()) {
             if (config('template.locale.languages')[$locale]['rtl']) {
-                session(['lang-rtl' => true]);
+                session([
+                    'lang-rtl' => true,
+                ]);
             } else {
                 session()->forget('lang-rtl');
             }
@@ -66,12 +53,7 @@ if (!function_exists('setLocaleReadingDirection')) {
 }
 
 if (!function_exists('getLocaleName')) {
-    /**
-     * @param $locale
-     *
-     * @return mixed
-     */
-    function getLocaleName($locale)
+    function getLocaleName(string $locale): string
     {
         return config('template.locale.languages')[$locale]['name'];
     }

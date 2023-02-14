@@ -2,12 +2,13 @@
 
 namespace App\Domains\Auth\Http\Controllers\Frontend\Auth;
 
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
-/**
- * Class VerificationController.
- */
 class VerificationController
 {
     /*
@@ -25,21 +26,16 @@ class VerificationController
 
     /**
      * Where to redirect users after login.
-     *
-     * @return string
      */
-    public function redirectPath()
+    public function redirectPath(): string
     {
         return route(homeRoute());
     }
 
     /**
      * Show the email verification notice.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request): View|ViewFactory|Redirector|RedirectResponse
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect($this->redirectPath())

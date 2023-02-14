@@ -3,18 +3,11 @@
 namespace App\Domains\Auth\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
-/**
- * Class SuperAdminCheck.
- */
 class SuperAdminCheck
 {
-    /**
-     * @param  $request
-     * @param  Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if ($request->user() && $request->user()->hasAllAccess()) {
             return $next($request);
