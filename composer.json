@@ -40,10 +40,8 @@
         "laravel/sail": "^1.16",
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^6.3",
-        "overtrue/phplint": "^5.3",
         "phpunit/phpunit": "^9.5",
-        "roave/security-advisories": "dev-latest",
-        "squizlabs/php_codesniffer": "^3.7"
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
@@ -103,8 +101,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "treeware/plant": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "treeware/plant": true
         }
     },
     "minimum-stability": "dev",
