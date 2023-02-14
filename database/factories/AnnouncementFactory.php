@@ -5,9 +5,6 @@ namespace Database\Factories;
 use App\Domains\Announcement\Models\Announcement;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * Class AnnouncementFactory.
- */
 class AnnouncementFactory extends Factory
 {
     /**
@@ -19,8 +16,6 @@ class AnnouncementFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array<string, mixed>
      */
     public function definition(): array
     {
@@ -46,9 +41,6 @@ class AnnouncementFactory extends Factory
         ];
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function enabled(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -58,9 +50,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function disabled(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -70,9 +59,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function frontend(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -82,9 +68,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function backend(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -94,9 +77,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function global(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -106,9 +86,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function noDates(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -119,9 +96,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function insideDateRange(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {
@@ -132,9 +106,6 @@ class AnnouncementFactory extends Factory
         });
     }
 
-    /**
-     * @return AnnouncementFactory
-     */
     public function outsideDateRange(): AnnouncementFactory
     {
         return $this->state(function (array $attributes) {

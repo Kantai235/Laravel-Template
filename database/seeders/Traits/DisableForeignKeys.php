@@ -4,9 +4,6 @@ namespace Database\Seeders\Traits;
 
 use Illuminate\Support\Facades\DB;
 
-/**
- * Trait DisablesForeignKeys.
- */
 trait DisableForeignKeys
 {
     /**
@@ -22,7 +19,6 @@ trait DisableForeignKeys
             'disable' => 'PRAGMA foreign_keys = OFF;',
         ],
         'sqlsrv' => [
-            // phpcs:disable
             'enable' => 'EXEC sp_msforeachtable @command1="print \'?\'", @command2="ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all";',
             'disable' => 'EXEC sp_msforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all";',
         ],
@@ -35,7 +31,7 @@ trait DisableForeignKeys
     /**
      * Disable foreign key checks for current db driver.
      */
-    protected function disableForeignKeys()
+    protected function disableForeignKeys(): void
     {
         DB::statement($this->getDisableStatement());
     }
@@ -43,17 +39,15 @@ trait DisableForeignKeys
     /**
      * Enable foreign key checks for current db driver.
      */
-    protected function enableForeignKeys()
+    protected function enableForeignKeys(): void
     {
         DB::statement($this->getEnableStatement());
     }
 
     /**
      * Return current driver enable command.
-     *
-     * @return mixed
      */
-    private function getEnableStatement()
+    private function getEnableStatement(): string
     {
         return $this->getDriverCommands()['enable'];
     }
@@ -63,17 +57,15 @@ trait DisableForeignKeys
      *
      * @return mixed
      */
-    private function getDisableStatement()
+    private function getDisableStatement(): string
     {
         return $this->getDriverCommands()['disable'];
     }
 
     /**
      * Returns command array for current db driver.
-     *
-     * @return mixed
      */
-    private function getDriverCommands()
+    private function getDriverCommands(): array
     {
         return $this->commands[DB::getDriverName()];
     }

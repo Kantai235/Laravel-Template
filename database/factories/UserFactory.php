@@ -6,9 +6,6 @@ use App\Domains\Auth\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-/**
- * Class UserFactory.
- */
 class UserFactory extends Factory
 {
     /**
@@ -20,8 +17,6 @@ class UserFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array<string, mixed>
      */
     public function definition(): array
     {
@@ -40,9 +35,6 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * @return UserFactory
-     */
     public function admin(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -52,9 +44,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function user(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -64,9 +53,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function active(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -76,9 +62,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function inactive(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -88,9 +71,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function confirmed(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -100,9 +80,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function unconfirmed(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -112,9 +89,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function passwordExpired(): UserFactory
     {
         return $this->state(function (array $attributes) {
@@ -124,9 +98,6 @@ class UserFactory extends Factory
         });
     }
 
-    /**
-     * @return UserFactory
-     */
     public function deleted(): UserFactory
     {
         return $this->state(function (array $attributes) {

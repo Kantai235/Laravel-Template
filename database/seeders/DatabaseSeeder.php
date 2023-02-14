@@ -6,17 +6,12 @@ use Database\Seeders\Traits\TruncateTable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
-/**
- * Class DatabaseSeeder.
- */
 class DatabaseSeeder extends Seeder
 {
     use TruncateTable;
 
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
     public function run(): void
     {

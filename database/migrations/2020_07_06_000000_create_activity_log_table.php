@@ -17,14 +17,22 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->string('subject_type')->nullable();
+            $table->string('event')->nullable();
             $table->unsignedBigInteger('causer_id')->nullable();
             $table->string('causer_type')->nullable();
             $table->json('properties')->nullable();
+            $table->uuid('batch_uuid')->nullable();
             $table->timestamps();
 
             $table->index('log_name');
-            $table->index(['subject_id', 'subject_type'], 'subject');
-            $table->index(['causer_id', 'causer_type'], 'causer');
+            $table->index([
+                'subject_id',
+                'subject_type',
+            ]);
+            $table->index([
+                'causer_id',
+                'causer_type',
+            ]);
         });
     }
 

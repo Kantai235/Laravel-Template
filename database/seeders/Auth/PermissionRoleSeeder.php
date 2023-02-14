@@ -8,17 +8,12 @@ use App\Domains\Auth\Models\User;
 use Database\Seeders\Traits\DisableForeignKeys;
 use Illuminate\Database\Seeder;
 
-/**
- * Class PermissionRoleSeeder.
- */
 class PermissionRoleSeeder extends Seeder
 {
     use DisableForeignKeys;
 
     /**
      * Run the database seed.
-     *
-     * @return void
      */
     public function run(): void
     {

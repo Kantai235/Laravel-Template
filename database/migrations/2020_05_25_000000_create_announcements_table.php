@@ -9,8 +9,6 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
@@ -29,7 +27,7 @@ return new class extends Migration
                 Announcement::TYPE_INFO,
                 Announcement::TYPE_LIGHT,
                 Announcement::TYPE_DARK,
-            ])->default('info');
+            ])->default(Announcement::TYPE_INFO);
             $table->text('message');
             $table->boolean('enabled')->default(true);
             $table->boolean('dismissable')->default(false);
@@ -42,8 +40,6 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {

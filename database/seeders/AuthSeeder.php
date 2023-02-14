@@ -11,17 +11,13 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\PermissionRegistrar;
 
-/**
- * Class AuthSeeder.
- */
 class AuthSeeder extends Seeder
 {
-    use DisableForeignKeys, TruncateTable;
+    use DisableForeignKeys,
+        TruncateTable;
 
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {

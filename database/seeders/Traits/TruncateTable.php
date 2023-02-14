@@ -4,16 +4,12 @@ namespace Database\Seeders\Traits;
 
 use Illuminate\Support\Facades\DB;
 
-/**
- * Trait TruncateTable.
- */
 trait TruncateTable
 {
     /**
      * @param $table
-     * @return bool
      */
-    protected function truncate($table)
+    protected function truncate($table): bool
     {
         switch (DB::getDriverName()) {
             case 'mysql':
@@ -30,10 +26,7 @@ trait TruncateTable
         return false;
     }
 
-    /**
-     * @param  array  $tables
-     */
-    protected function truncateMultiple(array $tables)
+    protected function truncateMultiple(array $tables): void
     {
         foreach ($tables as $table) {
             $this->truncate($table);
